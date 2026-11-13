@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import type { ReactNode } from "react";
 import { Archivo_Black, IBM_Plex_Mono, VT323 } from "next/font/google";
 import { parseHttpUrl } from "@/share/config";
 import "./globals.css";
@@ -40,7 +41,7 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${pixel.variable} ${mono.variable} ${display.variable}`}>
       <body>{children}</body>

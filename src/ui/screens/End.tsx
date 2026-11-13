@@ -110,7 +110,7 @@ export function RunEnd() {
   const { s, dispatch } = useGame();
   const run = s.run!;
   const share = useMemo(() => runShare(run, s.unlockedThisRun, s.profile), [run, s.unlockedThisRun, s.profile]);
-  const { outcome, rank, vars, card, templates } = share;
+  const { outcome, rank, vars, card, templates, artKey } = share;
   const headline = pickHeadline(outcome, run.stats, rng01(run.stats.seed, "headline"));
   const spy = fatalCase(run);
   const lost = run.stats.startingMarketCap - run.stats.marketCap;
@@ -190,7 +190,7 @@ export function RunEnd() {
           </section>
         )}
         <div className="flex justify-center">
-          <SharePanel card={card} templates={templates} vars={vars} outcome={outcome} />
+          <SharePanel card={card} templates={templates} vars={vars} outcome={outcome} artKey={artKey} />
         </div>
         <div className="flex flex-wrap justify-center gap-3">
           <Btn

@@ -58,7 +58,7 @@ export function Review() {
                 </div>
                 <div>
                   <p className="hud-label">Stability</p>
-                  <p className={`font-pixel text-2xl ${d.stabilityDelta < 0 ? "text-[var(--red)]" : "text-[var(--acid)]"}`}>{signed(d.stabilityDelta)}</p>
+                  <p className={`font-pixel text-2xl ${d.stabilityDelta < 0 ? "text-[var(--red)]" : d.stabilityDelta > 0 ? "text-[var(--acid)]" : ""}`}>{signed(d.stabilityDelta)}</p>
                 </div>
               </div>
               <JensenBox />
@@ -101,7 +101,7 @@ export function Review() {
               </ul>
             </section>
           )}
-          <div className="sticky bottom-0 flex justify-end bg-linear-to-t from-[var(--ink)] to-transparent py-3">
+          <div className="sticky-actions">
             <Btn
               variant={fatal ? "danger" : "primary"}
               className="btn-xl"

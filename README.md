@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HONEYPOT, PLEASE
 
-## Getting Started
+> The world's most valuable man. The world's least reliable dating pool.
 
-First, run the development server:
+A browser game of document inspection and romantic paranoia. You staff Romantic Perimeter Checkpoint 7 during GTC week. Applicants arrive one at a time. Inspect their documents, compare facts, interrogate them, search the security database, spend a scan, then stamp ACCEPT or REJECT.
+
+- Accept one spy and the run ends: **HONEYPOTTED**.
+- Reject too many genuine people and Romantic Stability hits zero: **romantically bankrupt**.
+- Survive five days to win.
+
+A work of parody. Every applicant is fictional. Not affiliated with or endorsed by NVIDIA or any real person.
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev          # http://localhost:3000
+pnpm test         # vitest: rules, content validation, share text, card layout
+pnpm build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+No login, no database, no required environment variables. Progress, achievements and settings live in `localStorage`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy to Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Import the repository in Vercel and deploy. Framework preset: Next.js. Nothing else is required.
 
-## Learn More
+Optional environment variables (see `.env.example`):
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Purpose |
+|---|---|
+| `NEXT_PUBLIC_GAME_URL` | Public URL used in share posts and cards. Inferred from the browser origin when unset. |
+| `NEXT_PUBLIC_LAUNCH_TWEET_URL` | When set, share posts link to the launch tweet instead of the game URL. |
+| `MEME_ART_API_KEY`, `MEME_ART_BASE_URL`, `MEME_ART_MODEL` | OpenAI-images-compatible provider for stylized card art. |
+| `MEME_ART_RUNTIME=1` | Enables the runtime `/api/meme-art` route ("Enhance art" button). Off by default so a public deploy cannot spend credits. |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Share cards
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Cards are drawn on a canvas in the browser (1200×675 and 1080×1080) in five styles: security report, tabloid, classified dossier, board memo, propaganda poster. Art comes from the first source that answers:
 
-## Deploy on Vercel
+1. **Static art** in `public/art/` (already generated and committed). Regenerate with `pnpm art` after putting `MEME_ART_API_KEY` in `.env.local`. Prompts live in `src/share/art/prompts.json`. The script skips keys that already have a file.
+2. **Runtime provider** at `/api/meme-art`, only when `MEME_ART_RUNTIME=1`. It accepts a fixed set of art keys, never free text.
+3. **Built-in** procedural illustration from the pixel portraits. Always works.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Sharing uses the X web intent, copy to clipboard, image download, and the native share sheet where supported. Nothing posts automatically.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Layout of the code
+
+| Path | What lives there |
+|---|---|
+| `src/game/types.ts` | The domain model: cases, documents, facts, discrepancies, events, achievements. |
+| `src/game/engine/` | Pure reducer and selectors. Lineup draw, verdicts, discrepancy tool, database search, scan, suspicion, easter eggs. |
+| `src/game/config.ts` | Every balance number in one table. |
+| `src/game/cases/day1..day5/` | 28 applicants, one file each, plus the day's briefing and directives. |
+| `src/game/validate.ts` | Structural rules every case must pass (clues, red herrings, resolvable references). |
+| `src/game/content/` | Achievements, ranks, Jensen's lines, headlines, global records and easter eggs. |
+| `src/game/achievements/`, `src/game/persistence.ts` | Unlock evaluation and `localStorage`. |
+| `src/share/` | Share text templates, X intent, card layout and canvas renderer, art pipeline, share panel. |
+| `src/art/` | Procedural pixel art: portraits, Jensen, desk props. |
+| `src/ui/`, `src/app/` | The game screens and the Next.js shell. |
+
+## Writing a new case
+
+Add a file exporting a `CaseDef` and list it in the day's `index.ts`. `pnpm test` runs `validateDays`, which rejects a case with fewer than three clues, no red herring, unresolved fact references, or a spy with no contradiction to find. Any pair of facts not listed in `discrepancies` prints "no conflict", so list every pair a sharp player would try.

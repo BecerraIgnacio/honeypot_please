@@ -26,6 +26,7 @@
   letter-spacing: 0.01em;
 }
 
+@layer base {
 html,
 body {
   background: var(--ink);
@@ -55,6 +56,8 @@ button:disabled {
   color: var(--ink);
 }
 
+}
+
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -73,6 +76,7 @@ html[data-reduce-motion="true"] *::after {
   transition-duration: 0.001ms !important;
 }
 
+@layer components {
 /* ---------- shell ---------- */
 .app {
   position: relative;
@@ -254,6 +258,26 @@ html[data-reduce-motion="true"] *::after {
     opacity: 0;
     transform: translateY(40px) rotate(-3deg);
   }
+}
+.typed {
+  position: relative;
+  display: block;
+}
+.typed-ghost {
+  visibility: hidden;
+}
+.typed-live {
+  position: absolute;
+  inset: 0;
+}
+.sticky-actions {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 -1rem;
+  padding: 1.5rem 1rem 0.9rem;
+  background: linear-gradient(180deg, transparent, var(--ink) 45%);
 }
 .caret {
   display: inline-block;
@@ -1648,7 +1672,11 @@ html[data-reduce-motion="true"] *::after {
     font-size: 24px;
   }
   .verdict-icon {
-    display: none;
+    display: none !important;
+  }
+  .readout {
+    max-height: 30dvh;
+    overflow-y: auto;
   }
 }
 
@@ -1728,12 +1756,12 @@ html[data-reduce-motion="true"] *::after {
 }
 .toasts {
   position: fixed;
-  right: 0.75rem;
-  top: 0.75rem;
+  left: 0.75rem;
+  bottom: 0.75rem;
+  flex-direction: column-reverse;
   z-index: 80;
   display: flex;
   width: min(360px, calc(100vw - 1.5rem));
-  flex-direction: column;
   gap: 0.5rem;
   pointer-events: none;
 }
@@ -1754,7 +1782,7 @@ html[data-reduce-motion="true"] *::after {
 @keyframes toast-in {
   from {
     opacity: 0;
-    transform: translateX(40px) scale(0.96);
+    transform: translateY(24px) scale(0.96);
   }
 }
 .egg-mark {
@@ -1873,10 +1901,9 @@ html[data-reduce-motion="true"] *::after {
   position: relative;
   margin: 0;
   font-family: var(--font-display), Impact, sans-serif;
-  font-size: clamp(2.6rem, 11vw, 9rem);
+  font-size: clamp(1.8rem, 9vw, 9rem);
   line-height: 0.9;
   text-align: center;
-  overflow-wrap: anywhere;
 }
 .ending-faces {
   display: flex;
@@ -2100,4 +2127,32 @@ html[data-reduce-motion="true"] *::after {
   border-color: var(--acid);
   background: var(--acid);
   color: var(--ink);
+}
+
+
+.app[data-screen="case"] .toasts {
+  top: auto;
+  right: auto;
+  left: 50%;
+  bottom: 0.6rem;
+  translate: -50% 0;
+  flex-direction: column-reverse;
+}
+@media (max-width: 1099px) {
+  .toasts {
+    bottom: auto;
+    top: 0.5rem;
+    flex-direction: column;
+  }
+  .app[data-screen="ended"] .toasts {
+    top: auto;
+    bottom: 0.75rem;
+    flex-direction: column-reverse;
+  }
+  .app[data-screen="case"] .toasts {
+    top: auto;
+    bottom: 150px;
+    flex-direction: column-reverse;
+  }
+}
 }

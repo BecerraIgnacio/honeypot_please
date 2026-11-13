@@ -166,7 +166,7 @@ export function Toasts() {
   const { s, dispatch } = useGame();
   return (
     <div className="toasts" aria-live="polite">
-      {s.toasts.map((t) => {
+      {s.toasts.slice(0, 2).map((t) => {
         if (t.kind === "achievement") {
           const a = ACHIEVEMENTS.find((x) => x.id === t.achievementId);
           if (!a) return null;
@@ -226,9 +226,14 @@ export function Typed({ text, speed = 12, className = "" }: { text: string; spee
   }, [text, speed, reduced]);
   const done = reduced || n >= text.length;
   return (
-    <span className={className} aria-label={text}>
-      <span aria-hidden>{done ? text : text.slice(0, n)}</span>
-      {!done && <span className="caret" aria-hidden />}
+    <span className={`typed ${className}`} aria-label={text}>
+      <span aria-hidden className="typed-ghost">
+        {text}
+      </span>
+      <span aria-hidden className="typed-live">
+        {done ? text : text.slice(0, n)}
+        {!done && <span className="caret" />}
+      </span>
     </span>
   );
 }

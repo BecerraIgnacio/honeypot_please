@@ -32,7 +32,7 @@ export function Title() {
     sfx("stamp");
     setSlam((n) => n + 1);
     const now = performance.now();
-    hits.current = [...hits.current.filter((t) => now - t < 1500), now];
+    hits.current = [...hits.current.filter((t) => now - t < 2000), now];
     setMarks((m) => [...m.slice(-7), { id: now, x: 10 + Math.random() * 80, y: 10 + Math.random() * 80, r: Math.random() * 50 - 25 }]);
     if (hits.current.length >= 5) {
       hits.current = [];

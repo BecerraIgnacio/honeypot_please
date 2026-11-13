@@ -241,7 +241,7 @@ function Sheet({ c, doc, open, bounds, draggable }: { c: CaseDef; doc: GameDocum
       aria-label={doc.title}
     >
       <div className="sheet-bar">
-        <span className="hud-label truncate">{KIND_LABEL[doc.kind]} · drag to move</span>
+        <span className="hud-label truncate">{KIND_LABEL[doc.kind]}{draggable ? " · drag to move" : ""}</span>
         <button type="button" className="sheet-x" aria-label={`Put ${doc.title} back on the pile`} onClick={() => dispatch({ type: "closeDoc", id: doc.id })}>
           ×
         </button>

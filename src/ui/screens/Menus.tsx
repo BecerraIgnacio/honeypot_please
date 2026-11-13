@@ -71,7 +71,7 @@ export function Achievements() {
           <h2 className="font-display text-3xl leading-tight">{open.title}</h2>
           <p className="text-sm">{open.description}</p>
           <p className="mb-4 text-xs italic opacity-70">{open.flavor}</p>
-          <SharePanel card={share.card} templates={open.shareTemplates} vars={share.vars} />
+          <SharePanel card={share.card} templates={open.shareTemplates} vars={share.vars} artKey={share.artKey} />
         </Modal>
       )}
     </Shell>

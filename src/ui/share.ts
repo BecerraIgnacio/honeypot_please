@@ -59,16 +59,36 @@ export function runShare(run: GameState, unlocked: string[], profile: PlayerProf
     caseFileNo: `RPC7-${String(run.stats.seed % 100000).padStart(5, "0")}`,
   };
   const templates = achievement?.shareTemplates ?? [];
-  return { outcome, rank, achievement, vars, card, templates };
+  return { outcome, rank, achievement, vars, card, templates, artKey: OUTCOME_ART[outcome] };
 }
 
-export function achievementShare(a: Achievement, profile: PlayerProfile): { card: CardData; vars: ShareVars } {
+const OUTCOME_ART: Record<EndOutcome, string> = { honeypotted: "honeypotted", "romantically-bankrupt": "bankrupt", victory: "victory" };
+
+/** Achievements with art of their own in public/art; the rest fall back to their card style key. */
+const ACHIEVEMENT_ART: Record<string, string> = {
+  "leather-jacket-supremacy": "jacket",
+  "signed-the-jacket": "jacket",
+  "the-jacket-is-sentient": "jacket",
+  "the-jacket-trusts-you": "jacket",
+  "alone-with-the-jacket": "jacket",
+  "thats-a-5090-in-a-wig": "gpu-wig",
+  "three-gpus-in-a-trenchcoat": "trenchcoat",
+  "till-deprecation": "h100-wedding",
+  "it-runs-doom": "doom",
+  "doom-in-the-database": "doom",
+  "you-got-honeypotted": "honeypotted",
+  "the-incel-protocol": "bankrupt",
+  "survived-gtc": "victory",
+};
+
+export function achievementShare(a: Achievement, profile: PlayerProfile): { card: CardData; vars: ShareVars; artKey: string } {
   const stats = { ...createRun(0, CONTENT).stats, spiesCaught: profile.totalSpiesCaught };
   const rank = pickRank(stats);
   const vars = buildShareVars(stats, rank, a, resolveShareUrls());
   const mood = a.rarity === "cursed" ? "devastated" : a.rarity === "legendary" ? "triumphant" : a.rarity === "epic" ? "unhinged" : "wary";
   return {
     vars,
+    artKey: ACHIEVEMENT_ART[a.id] ?? a.cardStyle,
     card: {
       style: a.cardStyle,
       title: a.title,

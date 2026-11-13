@@ -59,7 +59,7 @@ function recordTitle(c: CaseDef, id: string): string | undefined {
 
 /** Human label for a progress token, for the review screen. */
 export function tokenLabel(c: CaseDef, token: Token): { verb: string; text: string } {
-  const [kind, id = ""] = token.split(/:(.*)/s);
+  const [kind, id = ""] = token.split(/:(.*)/);
   switch (kind) {
     case "doc":
       return { verb: "Read", text: c.documents.find((d) => d.id === id)?.title ?? id };
