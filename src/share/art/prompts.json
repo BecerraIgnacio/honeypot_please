@@ -1,0 +1,66 @@
+{
+  "size": "1536x1024",
+  "styles": {
+    "comic-book-poster": "Bold comic-book poster illustration, thick ink outlines, Ben-Day halftone dots, dramatic foreshortening, flat saturated colors.",
+    "glitch-propaganda": "Retro constructivist propaganda poster, radiating sunburst rays, limited palette of warning red, charcoal black and acid green, misregistered screen print, digital glitch slices.",
+    "tabloid-cover": "Sensational tabloid scandal photo-illustration, harsh flash lighting, paparazzi grain, cheap print halftone, torn paper edges.",
+    "vaporwave-crisis": "Vaporwave corporate-crisis illustration, glossy boardroom gradients, chrome and neon amber, falling stock-chart shapes, 1990s CGI sheen.",
+    "cinematic-key-art": "Cinematic movie key art, moody rim lighting, volumetric haze, anamorphic lens flare, painterly digital illustration.",
+    "surveillance-poster": "Surveillance-state poster, CCTV screen glow, acid green scanlines on charcoal, target reticles, cold fluorescent light."
+  },
+  "suffix": "Wide 16:9 composition with the main subject centered and generous margins, so the image survives tight square and portrait crops; calm negative space at the top and bottom for overlaid labels. No text, letters, numbers, logos, watermarks or signatures anywhere in the image. Any CEO figure is a faceless silhouette seen from behind or in deep shadow; no recognizable real person. Palette accents: charcoal #0d0f0e, acid green #b6ff00, cream #f1e9d2, warning red #e5322d, amber #ffb000.",
+  "keys": {
+    "security-report": {
+      "style": "surveillance-poster",
+      "prompt": "A corporate lobby security desk at night seen through a security camera: a wall of CCTV monitors, an empty visitor chair, a glowing badge scanner, a single graphics card sealed in an evidence bag on the desk under a desk lamp."
+    },
+    "tabloid": {
+      "style": "tabloid-cover",
+      "prompt": "Paparazzi ambush outside a glass tech headquarters: camera flashes exploding, a mysterious figure in a trench coat and sunglasses hurrying away clutching a glowing graphics card, a black leather jacket left behind on a bench."
+    },
+    "classified": {
+      "style": "cinematic-key-art",
+      "prompt": "A spy dossier spread across a dark desk: manila folders, surveillance photos of generic illustrated strangers, a magnolia flower pressed between pages, red string connecting chip diagrams, a single wilted rose."
+    },
+    "board-memo": {
+      "style": "vaporwave-crisis",
+      "prompt": "An enormous empty boardroom above the clouds, a long glossy table with twelve identical chairs, a giant stock chart crashing off the edge of a wall screen, a black leather jacket draped over the head chair like a throne."
+    },
+    "propaganda": {
+      "style": "glitch-propaganda",
+      "prompt": "A heroic faceless silhouette in a black leather jacket seen from behind on a podium, arm raised, holding a giant glowing graphics chip toward the sky above a crowd of tiny identical security guards."
+    },
+    "honeypotted": {
+      "style": "comic-book-poster",
+      "prompt": "A giant honey pot dripping golden honey over a glowing server rack, a tiny faceless silhouette in a black leather jacket stuck in the honey, sticky stolen chip blueprints floating away, a magnolia flower on the lid."
+    },
+    "bankrupt": {
+      "style": "vaporwave-crisis",
+      "prompt": "A lonely faceless silhouette in a black leather jacket seen from behind at a candlelit dinner table set for two, the opposite chair empty, a heart-shaped balloon deflating, a broken heart made of circuit board on the plate."
+    },
+    "victory": {
+      "style": "cinematic-key-art",
+      "prompt": "A faceless silhouette in a black leather jacket seen from behind on a keynote stage under a massive spotlight, a wall of glowing GPUs behind, confetti falling, a security checkpoint gate standing triumphantly closed."
+    },
+    "jacket": {
+      "style": "cinematic-key-art",
+      "prompt": "A black leather jacket floating alone in a museum display case, lit like a sacred relic, faint green energy crackling along its seams as if it were alive, velvet ropes and reverent spotlights around it."
+    },
+    "gpu-wig": {
+      "style": "comic-book-poster",
+      "prompt": "An absurd disguise on a mannequin head: a wig built entirely from stacked graphics cards with cooling fans spinning, cheap sunglasses and a fake mustache, standing at a security checkpoint as if waiting in line."
+    },
+    "trenchcoat": {
+      "style": "tabloid-cover",
+      "prompt": "Three graphics cards stacked on each other inside one long beige trench coat and fedora, pretending to be a single person, standing at a visitor desk holding a forged conference pass."
+    },
+    "h100-wedding": {
+      "style": "vaporwave-crisis",
+      "prompt": "A wedding altar in a datacenter: a single graphics card in a tiny white veil on a velvet cushion, rows of server racks as the guests, a floral arch of fiber-optic cables, rose petals on the raised floor tiles."
+    },
+    "doom": {
+      "style": "glitch-propaganda",
+      "prompt": "A colossal glowing stock chart collapsing like a skyscraper in an earthquake, a tidal wave of shattered red chart bars, a tiny faceless silhouette in a black leather jacket seen from behind watching from a rooftop."
+    }
+  }
+}
