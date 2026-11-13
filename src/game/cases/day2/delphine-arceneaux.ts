@@ -8,8 +8,8 @@ export const delphineArceneaux: CaseDef = {
     name: "Delphine Arceneaux",
     nationality: "Belgian",
     occupation: "Freelance stage choreographer",
-    statedReason: "Mr. Huang invited me, in writing, to watch the keynote from the wings. I have the letter. The letter is very thorough.",
-    bio: "Brussels-trained stage choreographer in a black turtleneck and Radeon-red earrings. Speaks in counts of eight and walks as if a spotlight is tracking her, which, in this lobby, it is. Says she was hired to block the keynote's 'emotional beats' and was then invited by Jensen personally to watch from the wings. Her invitation is eleven pages long. Invitations are usually one.",
+    statedReason: "Mr. Huang invited me to watch the keynote from the wings. In writing.",
+    bio: "Choreographer in Radeon-red earrings. Says Jensen invited her to the keynote wings. Her invitation is eleven pages. Invitations are usually one.",
     portrait: {
       kind: "human",
       skin: 3,
@@ -26,7 +26,7 @@ export const delphineArceneaux: CaseDef = {
     { id: "da-name", label: "Name", value: "Delphine Arceneaux" },
     { id: "da-employer", label: "Employer", value: "Self-employed" },
     { id: "da-role", label: "Occupation", value: "Freelance stage choreographer" },
-    { id: "da-invited-by", label: "Invited to the keynote wings by", value: "Jensen Huang, personally, by letter" },
+    { id: "da-invited-by", label: "Invited to the wings by", value: "Jensen Huang, personally, by letter" },
   ],
   documents: [
     {
@@ -35,11 +35,11 @@ export const delphineArceneaux: CaseDef = {
       title: "Letter of Invitation (11 pages)",
       issuer: "NVIDIA Corporation",
       facts: [
-        { id: "da-inv-docno", label: "Document no. (every page footer)", value: "NV-LEGAL-EULA-CUDA-12.8" },
+        { id: "da-inv-docno", label: "Document no.", value: "NV-LEGAL-EULA-CUDA-12.8" },
         { id: "da-inv-keynote", label: "Keynote, per the letter", value: "9:00 AM, San Jose McEnery Convention Center" },
         { id: "da-inv-signatory", label: "Signed", value: "Jensen Huang, Licensor" },
       ],
-      body: "Dear Ms. Arceneaux, NVIDIA is delighted to invite you to the GTC 2027 keynote, 9:00 AM at the San Jose McEnery Convention Center, as a guest in the wings.\n\n1. GRANT OF LICENSE. Subject to the terms of this Agreement, NVIDIA grants you a non-exclusive, non-transferable, non-sublicensable right to attend.\n2. RESTRICTIONS. You may not reverse engineer, decompile, or disassemble the keynote. You may not run the keynote on non-NVIDIA hardware.\n3. EXPORT. The keynote is subject to U.S. export control laws and may not be enjoyed in embargoed jurisdictions.\n4. TERMINATION. This invitation terminates automatically if you fail to comply with any term.\n...\n14. GOVERNING LAW. Delaware.\n\nBY OPENING THIS ENVELOPE YOU ACCEPT THESE TERMS.",
+      body: "Dear Ms. Arceneaux, please watch the keynote from the wings.\n1. GRANT OF LICENSE. NVIDIA grants you a non-exclusive right to attend.\n2. You may not decompile the keynote.\n4. TERMINATION. Automatic.",
       footer: "NV-LEGAL-EULA-CUDA-12.8 · Page 1 of 11",
     },
     {
@@ -63,7 +63,7 @@ export const delphineArceneaux: CaseDef = {
         { id: "da-port-move", label: "Signature move", value: "'The Ramp': arms rise like a revenue chart" },
         { id: "da-port-rate", label: "Day rate", value: "EUR 4,000 per eight-count" },
       ],
-      body: "Selected work: a perfume launch, two weddings, a product reveal where the product was a fridge. Testimonial: 'She made our quarterly earnings call feel like Swan Lake.' Client names withheld under NDA.",
+      body: "Selected work: a perfume launch, two weddings, a product reveal where the product was a fridge. 'She made our earnings call feel like Swan Lake.'",
     },
   ],
   questions: [
@@ -76,12 +76,6 @@ export const delphineArceneaux: CaseDef = {
       jensen: "Rhymes with 'and video'. That's us. I did not hire a choreographer. I am the choreography.",
     },
     {
-      id: "da-q-letter",
-      prompt: "How did the letter reach you?",
-      answer: "FedEx, Saturday. Very heavy paper. It said 'by opening this envelope you accept these terms', so of course I opened it immediately. I'm not a monster. I didn't read the rest. Who reads the rest?",
-      suspicion: 3,
-    },
-    {
       id: "da-q-amd",
       prompt: "Your earrings are Radeon red.",
       answer: "They are red, mon chou. Red is a color. You think I'm ROCm? I wish I were ROCm. Nobody would ever find me.",
@@ -92,23 +86,16 @@ export const delphineArceneaux: CaseDef = {
       id: "da-q-tessellate",
       prompt: "Have you ever worked with Tessellate Semiconductor?",
       answer: "Tessellate? Is that a tile shop? I don't do tiles. I do bodies in space.",
-      facts: [{ id: "da-q-never", label: "Tessellate Semiconductor, per her", value: "Never heard of them" }],
+      facts: [{ id: "da-q-never", label: "Tessellate, per her", value: "Never heard of them" }],
       suspicion: -2,
     },
     {
       id: "da-q-booth",
-      prompt: "Your GTC registration was filed and paid for by Tessellate Semiconductor. Booth 1211.",
+      prompt: "Tessellate Semiconductor paid for your GTC registration. Booth 1211.",
       requires: ["rec:da-rec-attendee"],
-      answer: "Ah. That Tessellate. Their booth has a dance. Every booth has a dance this year, it's the meta. When I said I'd never heard of them, I meant emotionally.",
+      answer: "Ah. That Tessellate. Every booth has a dance this year, it's the meta. When I said I'd never heard of them, I meant emotionally.",
       suspicion: 12,
-      jensen: "Tessellate's booth has a dance. Of course it does. They have no chip, so they have choreography.",
-    },
-    {
-      id: "da-q-wings",
-      prompt: "Why the wings, specifically?",
-      answer: "The wings are where the magic is! The clicker, the laptop with the speaker notes, the confidence monitor with the next three years of slides on it. Artistically. I would be looking at it artistically.",
-      suspicion: 10,
-      jensen: "Nobody stands by the confidence monitor for artistic reasons. The confidence monitor has the roadmap on it.",
+      jensen: "Tessellate's booth has a dance. They have no chip, so they have choreography.",
     },
     {
       id: "da-q-eula",
@@ -116,7 +103,7 @@ export const delphineArceneaux: CaseDef = {
       requires: ["d:da-d-eula"],
       answer: "Is it bad that I accepted it without reading it? Everyone does that. So I'm like everyone. That's a good sign, no?",
       suspicion: 5,
-      jensen: "Millions of developers have accepted that agreement without reading it. She is the first to bring it to a date.",
+      jensen: "Millions of developers accepted that agreement unread. She is the first to bring it to a date.",
     },
   ],
   records: [
@@ -128,7 +115,7 @@ export const delphineArceneaux: CaseDef = {
       facts: [
         { id: "da-legal-docno", label: "NV-LEGAL-EULA-CUDA-12.8 is", value: "The CUDA Toolkit End User License Agreement, 11 pages" },
       ],
-      body: "Legal reports forged 'invitations' assembled from NVIDIA's most widely distributed signed document. Forgers paste a salutation over Section 1 and hope. Legal notes, with some bitterness, that the forgeries are the first copies of the EULA anyone has read past page one.",
+      body: "Forgers paste a salutation over Section 1 of NVIDIA's most widely signed document. Legal notes, bitterly, that these are the first copies anyone has read past page one.",
     },
     {
       id: "da-rec-stageops",
@@ -137,9 +124,9 @@ export const delphineArceneaux: CaseDef = {
       keywords: ["stage ops", "stage operations", "wings", "wing access", "wristband", "backstage", "choreographer", "keynote crew", "crew", "sap center", "confidence monitor"],
       facts: [
         { id: "da-ops-wings", label: "Wing access", value: "Stage Ops wristband only" },
-        { id: "da-ops-crew", label: "Choreographer on keynote crew", value: "None. Mr. Huang 'does his own blocking'" },
+        { id: "da-ops-crew", label: "Keynote choreographer", value: "None. Mr. Huang 'does his own blocking'" },
       ],
-      body: "Wing access is controlled by wristband. There are no guest invitations to the wings from anyone, including the CEO, who has asked. The confidence monitor is stage left and is guarded by a man named Phil.",
+      body: "Nobody invites guests to the wings, including the CEO, who has asked. The confidence monitor is stage left, guarded by a man named Phil.",
     },
     {
       id: "da-rec-attendee",
@@ -147,9 +134,9 @@ export const delphineArceneaux: CaseDef = {
       title: "GTC27 Attendee GTC27-448120: Arceneaux, Delphine",
       keywords: ["delphine arceneaux", "arceneaux", "delphine", "gtc27-448120", "448120", "tessellate", "tessellate semiconductor", "booth 1211"],
       facts: [
-        { id: "da-att-org", label: "Registered under", value: "Tessellate Semiconductor, booth 1211 staff (paid by Tessellate corporate card)" },
+        { id: "da-att-org", label: "Registered under", value: "Tessellate Semiconductor, booth 1211 staff" },
       ],
-      body: "Badge printed Monday 7:02 AM. Tessellate's booth 1211 staff list: four engineers and one 'brand movement consultant'. Tessellate Semiconductor is on the competitive watchlist for roadmap collection at industry events.",
+      body: "Paid on a Tessellate corporate card. Booth 1211 staff: four engineers and one 'brand movement consultant'. Tessellate is watchlisted for roadmap collection at events.",
     },
   ],
   discrepancies: [
@@ -157,7 +144,7 @@ export const delphineArceneaux: CaseDef = {
       id: "da-d-eula",
       facts: ["da-inv-docno", "da-legal-docno"],
       kind: "contradiction",
-      note: "The invitation's document number belongs to the CUDA Toolkit End User License Agreement. Someone pasted 'Dear Ms. Arceneaux' over Section 1 and kept the other ten pages.",
+      note: "That number belongs to the CUDA Toolkit EULA. Someone pasted 'Dear Ms. Arceneaux' over Section 1 and kept the other ten pages.",
       suspicion: 25,
       jensen: "She brought the EULA. Nobody has read the EULA. Not even Legal. Especially not Legal.",
     },
@@ -165,7 +152,7 @@ export const delphineArceneaux: CaseDef = {
       id: "da-d-keynote",
       facts: ["da-inv-keynote", "g.d2.keynote"],
       kind: "contradiction",
-      note: "The letter puts the keynote at 9:00 AM at McEnery Convention Center. The keynote is at 10:00 AM at SAP Center. NVIDIA knows where its own keynote is.",
+      note: "The letter says 9:00 AM at McEnery. The keynote is 10:00 AM at SAP Center. NVIDIA knows where its own keynote is.",
       suspicion: 15,
       jensen: "Wrong building, wrong hour. I have done this keynote for years. I always know which building I'm in.",
     },
@@ -209,7 +196,7 @@ export const delphineArceneaux: CaseDef = {
       id: "da-d-employer",
       facts: ["da-employer", "da-att-org"],
       kind: "explained",
-      note: "Self-employed and registered as Tessellate booth staff. Freelancers work booths all week, so that alone proves nothing. What she said about Tessellate is another matter.",
+      note: "Self-employed, registered as Tessellate booth staff. Freelancers work booths, so this alone proves nothing. Her 'never heard of them' does.",
       suspicion: 0,
     },
     {
@@ -224,7 +211,7 @@ export const delphineArceneaux: CaseDef = {
       id: "da-d-scanfile",
       facts: ["da-scan-printed", "da-invited-by"],
       kind: "contradiction",
-      note: "She says Jensen wrote her a letter. The letter was printed from an edited copy of the CUDA EULA on a printer registered to Tessellate's Sunnyvale office.",
+      note: "Jensen 'wrote' her a letter. It came off a printer in Tessellate's Sunnyvale office, from an edited CUDA EULA.",
       suspicion: 20,
     },
     {
@@ -240,15 +227,15 @@ export const delphineArceneaux: CaseDef = {
       id: "da-scan-file",
       kind: "forged-metadata",
       title: "Letter: print metadata",
-      description: "Microdots on every page trace to a printer registered as 'tessellate-snv-print-07'. The source file name is preserved in the printer log.",
-      facts: [{ id: "da-scan-printed", label: "Printed from", value: "CUDA_Toolkit_EULA_v12.8_invite_FINAL_EDIT2.pdf, on tessellate-snv-print-07" }],
+      description: "Microdots trace every page to a Tessellate office printer. Source file: CUDA_Toolkit_EULA_v12.8_invite_FINAL_EDIT2.pdf",
+      facts: [{ id: "da-scan-printed", label: "Printed on", value: "tessellate-snv-print-07" }],
       suspicion: 20,
     },
     {
       id: "da-scan-bag",
       kind: "bag-contents",
       title: "Tote bag",
-      description: "A printed SAP Center backstage plan with the confidence monitor circled three times, a phone with the camera app open and the lens polished to a mirror, and dance shoes. The dance shoes are the only innocent thing in the bag.",
+      description: "A backstage plan with the confidence monitor circled three times, a phone with a polished lens, and dance shoes. Only the shoes are innocent.",
       suspicion: 15,
     },
   ],
@@ -263,18 +250,18 @@ export const delphineArceneaux: CaseDef = {
     },
   ],
   truth: "spy",
-  hiddenTruth: "Delphine is a real choreographer under contract to Tessellate Semiconductor, which hired her for its booth and then for something else. Tessellate built her invitation from the only NVIDIA-signed document it could find in bulk on the internet, the CUDA Toolkit EULA, with a salutation pasted over Section 1. The goal was the wings at SAP Center, where the confidence monitor shows the speaker notes and the unannounced roadmap slides.",
+  hiddenTruth: "A real choreographer on Tessellate's payroll, sent to the wings with a forged CUDA EULA to read the roadmap off the confidence monitor.",
   solution: {
     clues: ["d:da-d-eula", "d:da-d-keynote", "d:da-d-wings", "d:da-d-never", "d:da-d-org", "rec:da-rec-attendee", "scan:da-scan-file"],
     redHerrings: ["q:da-q-amd", "d:da-d-signatory", "d:da-d-employer"],
-    explanation: "The invitation is the case. Its own text drifts from 'Dear Ms. Arceneaux' into a grant of license, and its footer number, searched, is the CUDA Toolkit EULA. It also puts the keynote at the wrong hour in the wrong building, which Directive 2-B would catch even if you skipped the fine print. Stage Ops shows no wing invitations exist and no choreographer is on the crew. Her pass says 'Independent', but her registration was filed and paid for by Tessellate Semiconductor, the company she claimed never to have heard of. The scan only confirms the print trail. The Radeon earrings mean nothing, and the 'Jensen Huang' signature matches only because forgers can spell.",
+    explanation: "The invitation is the case. It drifts from 'Dear Ms. Arceneaux' into a license grant, and its document number, searched, is the CUDA EULA. It puts the keynote at the wrong hour in the wrong building. Stage Ops has no wing guests and no choreographer. Tessellate, the company she never heard of, paid for her registration. The red earrings mean nothing.",
   },
   onAccept: {
     headline: "HONEYPOTTED: SHE READ THE ROADMAP",
-    text: "Delphine watched the keynote from the wings, mouthing along to the confidence monitor. By Wednesday, Tessellate's investor deck had a slide titled 'Our Vision' that was our vision, and she choreographed the reveal.",
+    text: "Delphine watched from the wings, mouthing along to the confidence monitor. By Wednesday, Tessellate's deck had a slide called 'Our Vision'. It was ours.",
   },
   onReject: {
     headline: "LICENSE TERMINATED",
-    text: "Per Section 4, her invitation terminated automatically. She left the lobby in a perfect eight-count, and Legal framed the letter as the only fully read copy of the EULA in company history.",
+    text: "Per Section 4, her invitation terminated automatically. She left in a perfect eight-count. Legal framed the only fully read EULA in company history.",
   },
 };

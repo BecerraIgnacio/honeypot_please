@@ -8,9 +8,8 @@ export const ingridSolvang: CaseDef = {
     name: "Ingrid Solvang",
     nationality: "Norwegian",
     occupation: "Fact-checker, Northlight Tech Review",
-    statedReason:
-      "A ten-minute follow-up interview. Says Jensen invited her back for Wednesday when they met backstage yesterday.",
-    bio: "Six years debunking tech rumors for a reader-funded newsletter out of Bergen. Arrives with coffee, a tabloid she says she is here to destroy, and a photo she says proves the invitation.",
+    statedReason: "A follow-up interview. Jensen invited her back yesterday, backstage, she says.",
+    bio: "Debunks tech rumors for a reader-funded newsletter in Bergen. Brought a tabloid to destroy and a photo that proves the invitation.",
     portrait: {
       kind: "human",
       skin: 1,
@@ -28,7 +27,7 @@ export const ingridSolvang: CaseDef = {
     { id: "c-employer", label: "Employer", value: "Northlight Tech Review (independent, reader-funded)" },
     { id: "c-met", label: "Prior contact", value: "Met Jensen backstage at SAP Center on March 16" },
     { id: "c-invite", label: "Invitation", value: "Jensen invited her back for a Wednesday interview" },
-    { id: "c-purpose", label: "Purpose", value: "Get a quote debunking The Silicon Enquirer's H100 wedding story" },
+    { id: "c-purpose", label: "Purpose", value: "Debunk The Silicon Enquirer's H100 wedding story" },
   ],
   documents: [
     {
@@ -41,7 +40,7 @@ export const ingridSolvang: CaseDef = {
         { id: "pass-outlet", label: "Outlet", value: "Northlight Tech Review" },
         { id: "pass-access", label: "Access", value: "Press areas only. No backstage." },
       ],
-      footer: "Press credentials do not grant access to the stage, the green room, or the jacket.",
+      footer: "Press passes do not open the stage, the green room, or the jacket.",
     },
     {
       id: "photo",
@@ -51,7 +50,7 @@ export const ingridSolvang: CaseDef = {
         { id: "photo-hash", label: "Provenance hash", value: "EPR-270316-0447" },
         { id: "photo-caption", label: "Handwritten on back", value: "Backstage, 11:15. He said: come Wednesday." },
       ],
-      body: "Jensen mid-sentence, one hand raised as if holding an invisible wafer. Ingrid in the foreground, smiling. Behind them, slightly out of focus: rows of seated people wearing lanyards.",
+      body: "Jensen mid-sentence, one hand raised as if holding an invisible wafer. Ingrid in front, smiling. Behind them, out of focus: rows of seated people in lanyards.",
     },
     {
       id: "tabloid",
@@ -62,17 +61,16 @@ export const ingridSolvang: CaseDef = {
         { id: "tab-headline", label: "Headline", value: "JENSEN WEDS H100 IN SECRET LIQUID-COOLED CEREMONY" },
         { id: "tab-publisher", label: "Publisher (masthead)", value: "Quorum Media Partners, LLC" },
       ],
-      body: "'Sources close to the jacket confirm the couple exchanged vows in a Santa Clara server room before a small crowd of DGX nodes. The bride wore 80 GB of HBM3. The groom wore what he always wears. Guests were asked to bring their own cooling. The more you buy, the more you say I do.' Inset: an AI image of Jensen kissing a heatsink.",
+      body: "'Sources close to the jacket confirm the couple wed in a Santa Clara server room before a crowd of DGX nodes. The bride wore 80 GB of HBM3. The more you buy, the more you say I do.'",
       stamp: "EXCLUSIVE",
-      footer: "The Silicon Enquirer is a Quorum Media Partners publication. All photos illustrative. All feelings real.",
+      footer: "All photos illustrative. All feelings real.",
     },
   ],
   questions: [
     {
       id: "q-backstage",
       prompt: "How did you get backstage on a press pass?",
-      answer:
-        "Someone held a door. I'm very good at looking like I belong somewhere. It's ninety percent posture and ten percent lanyard.",
+      answer: "Someone held a door. Looking like you belong is ninety percent posture and ten percent lanyard.",
       facts: [{ id: "ans-door", label: "How she got backstage", value: "A staffer held a door" }],
       suspicion: 0,
       jensen: "There is no door. There is only the stage. I was on it.",
@@ -80,9 +78,8 @@ export const ingridSolvang: CaseDef = {
     {
       id: "q-time",
       prompt: "What time was this, exactly?",
-      answer:
-        "11:15. I checked my phone right after. I remember because it was during the break, when you stepped off for a minute.",
-      facts: [{ id: "ans-time", label: "Time of the invitation (her account)", value: "11:15 PT, during a keynote break" }],
+      answer: "11:15. I checked my phone. It was during the break, when you stepped off for a minute.",
+      facts: [{ id: "ans-time", label: "Invitation time (hers)", value: "11:15 PT, during a keynote break" }],
       suspicion: -2,
       jensen: "I do not take breaks. I take questions. At 12:30.",
     },
@@ -90,44 +87,25 @@ export const ingridSolvang: CaseDef = {
       id: "q-who",
       prompt: "Who else was there when he invited you?",
       answer: "Nobody. Just us. It was very quiet. Honestly, he seemed a little lonely.",
-      facts: [{ id: "ans-alone", label: "Witnesses to the invitation", value: "None. They were alone." }],
+      facts: [{ id: "ans-alone", label: "Witnesses (her account)", value: "None. They were alone." }],
       suspicion: -3,
       jensen: "I am never alone. I have a jacket. And yesterday I had thirty-one reporters.",
     },
     {
-      id: "q-tabloid",
-      prompt: "Why bring a tabloid?",
-      answer:
-        "Because it's garbage and I want a quote saying so. 'Jensen Huang denies marrying a GPU.' That's a headline people click. Read. People read it.",
-      suspicion: 3,
-      jensen: "I did not marry an H100. We are close. That is all. We are just close.",
-    },
-    {
       id: "q-funding",
       prompt: "Who funds Northlight?",
-      answer:
-        "Readers. Eleven thousand of them. Mostly retired engineers in Bergen who think Intel should go back to 2006 and try again.",
-      facts: [{ id: "ans-funding", label: "Northlight funding (her account)", value: "11,000 paying readers, no corporate owner" }],
+      answer: "Readers. Eleven thousand of them. Mostly retired engineers in Bergen who think Intel should go back to 2006 and try again.",
+      facts: [{ id: "ans-funding", label: "Funding (her account)", value: "11,000 paying readers, no corporate owner" }],
       suspicion: -3,
     },
     {
       id: "q-quorum",
       prompt: "Your pass was registered by Quorum Media Partners.",
-      answer:
-        "Quorum gives us a travel grant. A media grant. Lots of outlets take grants. It doesn't mean anything. It's like a scholarship, but for flights.",
-      facts: [{ id: "ans-grant", label: "Her explanation for Quorum", value: "Quorum Media Partners pays a 'media travel grant'" }],
+      answer: "Quorum gives us a media travel grant. Lots of outlets take grants. It's like a scholarship, but for flights.",
+      facts: [{ id: "ans-grant", label: "Her explanation for Quorum", value: "A 'media travel grant' from Quorum" }],
       suspicion: 10,
       requires: ["rec:ingrid-attendee"],
-      jensen: "A grant. From the people who own the tabloid. That says I married a GPU. To ask me if I married a GPU.",
-    },
-    {
-      id: "q-capture",
-      prompt: "The registry puts this photo at 12:44 in Media Room B, not backstage at 11:15.",
-      answer:
-        "Then the registry is wrong. Or I am. Does it matter which room? He's in the picture. The picture is real. You checked the hash yourself.",
-      suspicion: 12,
-      requires: ["rec:ingrid-registry"],
-      jensen: "It matters which room. Rooms are important. Yesterday at 12:44 my room was full.",
+      jensen: "A grant from the tabloid that says I married a GPU. To ask me if I married a GPU.",
     },
   ],
   records: [
@@ -138,10 +116,10 @@ export const ingridSolvang: CaseDef = {
       keywords: ["epr-270316-0447", "270316", "0447", "photo registry", "registry", "solvang", "ingrid solvang", "media room b"],
       facts: [
         { id: "reg-capture", label: "Capture", value: "March 16, 2027, 12:44 PT" },
-        { id: "reg-location", label: "Location", value: "SAP Center Media Room B (post-keynote press Q&A)" },
+        { id: "reg-location", label: "Location", value: "SAP Center Media Room B, press Q&A" },
         { id: "reg-present", label: "Persons present", value: "31 press, 4 NVIDIA communications staff" },
       ],
-      body: "Registered by NVIDIA Communications. Frame shows a reporter in the second row standing to ask a question about HBM supply. Jensen's answer ran four minutes and included the phrase 'CoWoS is a love language'.",
+      body: "Registered by NVIDIA Communications. A reporter in the second row is asking about HBM supply. Jensen's answer included 'CoWoS is a love language'.",
     },
     {
       id: "ingrid-attendee",
@@ -153,7 +131,7 @@ export const ingridSolvang: CaseDef = {
         { id: "att-employer", label: "Employer of record", value: "Quorum Media Partners, LLC" },
         { id: "att-registered", label: "Registered by", value: "Corporate account QMP-0091, March 2, 2027" },
       ],
-      body: "Outlet field: Northlight Tech Review. Billing contact and employer of record: Quorum Media Partners, LLC.",
+      body: "Outlet field: Northlight Tech Review. Billing contact: Quorum Media Partners.",
     },
     {
       id: "ingrid-watchlist",
@@ -162,9 +140,9 @@ export const ingridSolvang: CaseDef = {
       keywords: ["quorum", "quorum short fund", "quorum media partners", "qmp", "qmp-0091", "silicon enquirer", "the silicon enquirer", "enquirer"],
       facts: [
         { id: "wl-position", label: "Position in NVDA", value: "Short, approximately $4.1B" },
-        { id: "wl-sub", label: "Media subsidiary", value: "Quorum Media Partners, LLC (owns The Silicon Enquirer; acquired Northlight Tech Review, January 2027)" },
+        { id: "wl-sub", label: "Media subsidiary", value: "Quorum Media Partners, LLC" },
       ],
-      body: "Pattern: places reporters near executives to manufacture 'proximity' photos, then publishes the speculation through owned outlets ahead of options expiry. Friday is options expiry.",
+      body: "QMP owns The Silicon Enquirer and, since January 2027, Northlight Tech Review. Pattern: 'proximity' photos of executives, published before options expiry. Friday is expiry.",
     },
   ],
   discrepancies: [
@@ -172,7 +150,7 @@ export const ingridSolvang: CaseDef = {
       id: "d-keynote",
       facts: ["ans-time", "g.d3.keynote-window"],
       kind: "contradiction",
-      note: "She places the invitation at 11:15 PT, during a 'break'. There was no break. Jensen was on stage from 10:00 to 12:07 PT without leaving.",
+      note: "11:15 PT, 'during a break'. There was no break. Jensen was on stage from 10:00 to 12:07 PT.",
       suspicion: 20,
       jensen: "At 11:15 I was explaining NVLink to eighteen thousand people. With my hands.",
     },
@@ -180,15 +158,8 @@ export const ingridSolvang: CaseDef = {
       id: "d-caption-keynote",
       facts: ["photo-caption", "g.d3.keynote-window"],
       kind: "contradiction",
-      note: "The caption says 'Backstage, 11:15'. At 11:15 Jensen was on stage. Nobody was backstage with him because he was not backstage.",
+      note: "'Backstage, 11:15.' At 11:15 Jensen was on stage, not backstage.",
       suspicion: 15,
-    },
-    {
-      id: "d-answer-capture",
-      facts: ["ans-time", "reg-capture"],
-      kind: "contradiction",
-      note: "She says 11:15. The registry logs the photo at 12:44 PT, after the keynote ended.",
-      suspicion: 12,
     },
     {
       id: "d-met-place",
@@ -206,17 +177,10 @@ export const ingridSolvang: CaseDef = {
       jensen: "The picture is true. The sentence under the picture is fiction. This is the new journalism.",
     },
     {
-      id: "d-capture-place",
-      facts: ["photo-caption", "reg-location"],
-      kind: "contradiction",
-      note: "Caption says backstage. The registry says Media Room B, during the press Q&A.",
-      suspicion: 10,
-    },
-    {
       id: "d-alone",
       facts: ["ans-alone", "reg-present"],
       kind: "contradiction",
-      note: "She says they were alone. The registry logs 35 people in the room when the photo was taken. The blurry lanyards in the background agree.",
+      note: "She says they were alone. The registry logs 35 people in the room. So do the blurry lanyards.",
       suspicion: 15,
     },
     {
@@ -245,7 +209,7 @@ export const ingridSolvang: CaseDef = {
       id: "d-grant",
       facts: ["ans-grant", "wl-sub"],
       kind: "contradiction",
-      note: "Not a grant. Quorum Media Partners acquired Northlight in January. Its parent is short roughly $4.1B of NVDA.",
+      note: "Not a grant. Quorum Media Partners owns Northlight, and its parent is short about $4.1B of NVDA.",
       suspicion: 15,
     },
     {
@@ -270,13 +234,6 @@ export const ingridSolvang: CaseDef = {
       suspicion: 0,
     },
     {
-      id: "d-hash-format",
-      facts: ["photo-hash", "g.d3.epr-format"],
-      kind: "match",
-      note: "Valid EPR format: capture date 2027-03-16, serial 0447.",
-      suspicion: -2,
-    },
-    {
       id: "d-hash-rule",
       facts: ["photo-hash", "g.d3.epr-rule"],
       kind: "match",
@@ -297,14 +254,13 @@ export const ingridSolvang: CaseDef = {
       id: "sleeve-note",
       kind: "hidden-note",
       title: "Note tucked behind the press pass",
-      description:
-        "A yellow sticky note folded into the badge sleeve: 'Need: JH + woman, alone, Wed. Lobby counts. Run Thurs before expiry. Bring the H100 thing as cover. —R.K., QMP'.",
-      facts: [{ id: "scan-note", label: "Hidden note", value: "Requests a photo of Jensen 'alone' with a woman, signed 'R.K., QMP'" }],
+      description: "A sticky note in the badge sleeve: 'Need JH + woman, alone, Wed. Lobby counts. Run Thurs before expiry. H100 thing as cover. —R.K., QMP'.",
+      facts: [{ id: "scan-note", label: "Hidden note", value: "Photo of JH 'alone' with a woman. H100 story as cover." }],
       suspicion: 25,
     },
   ],
   baseSuspicion: 15,
-  jensenIntro: "She has a real photo of us. I remember her. She asked about HBM. It was a good question. I do not remember inviting her anywhere.",
+  jensenIntro: "A real photo of us. I remember her. She asked about HBM. I do not remember inviting her anywhere.",
   eggs: [
     {
       id: "h100-wedding",
@@ -315,19 +271,19 @@ export const ingridSolvang: CaseDef = {
   ],
   truth: "spy",
   hiddenTruth:
-    "Ingrid is real, Norwegian, and a fact-checker at Northlight Tech Review, which Quorum Media Partners quietly bought in January. The photo is genuine: a communications staffer took it at 12:44 while she asked Jensen about HBM supply at the press Q&A. Everything written on the back is invented. Her assignment from Quorum Short Fund: one photo of Jensen 'alone' with a woman, for Thursday's Silicon Enquirer, timed to Friday's options expiry.",
+    "Quorum bought her outlet in January. The photo is real, from the 12:44 press Q&A. The story on its back was written for Friday's options expiry.",
   solution: {
     clues: ["d:d-keynote", "d:d-capture-time", "d:d-alone", "d:d-employer", "d:d-tabloid-owner", "rec:ingrid-registry", "rec:ingrid-attendee"],
     redHerrings: ["d:d-hash-rule", "d:d-outlet", "q:q-funding"],
     explanation:
-      "The photo passes Directive 3-A, and that is the trap: the hash proves an event happened, not that her story about it did. The time lives on the back of the photo and in her answer: 11:15, 'during a break', which collides with Directive 3-B (Jensen was on stage 10:00-12:07 with no break). A careless caption alone could be a mistake, so keep going. Search the hash and the registry puts the photo at 12:44 in Media Room B with 35 people present, which also breaks her 'just us' answer. Her pass number leads to an employer of record, Quorum Media Partners, the same company that publishes the tabloid she came to 'debunk'. Real photo, false story.",
+      "The photo passes Directive 3-A. That is the trap: the hash proves an event, not the caption. 'Backstage, 11:15' collides with Directive 3-B: Jensen was on stage until 12:07. The registry puts the photo at 12:44 in Media Room B with 35 people, not 'just us'. Her registration names Quorum Media Partners, publisher of the tabloid she came to debunk. Real photo, false story.",
   },
   onAccept: {
-    headline: "HONEYPOTTED: THE SILICON ENQUIRER EXCLUSIVE",
-    text: "Ingrid gets her ten minutes and a photo of Jensen standing alone with her in the lobby. Thursday's Silicon Enquirer runs it under 'JENSEN'S SECRET WEDNESDAY: IS THE H100 HEARTBROKEN?' Quorum covers its short by lunch.",
+    headline: "HONEYPOTTED: ENQUIRER EXCLUSIVE",
+    text: "Ingrid gets her photo: Jensen, alone, with her. Thursday's Enquirer runs 'JENSEN'S SECRET WEDNESDAY: IS THE H100 HEARTBROKEN?' Quorum covers its short by lunch.",
   },
   onReject: {
     headline: "RUMOR DIES IN LOBBY",
-    text: "Ingrid leaves smiling, which is worse. Security forwards her pass registration and the registry entry to Legal, and Thursday's Enquirer runs a horoscope instead. The H100 is reportedly relieved.",
+    text: "Ingrid leaves smiling, which is worse. Her registration goes to Legal, and Thursday's Enquirer runs a horoscope instead. The H100 is reportedly relieved.",
   },
 };

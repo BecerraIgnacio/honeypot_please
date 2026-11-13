@@ -9,7 +9,7 @@ export const imogenThwaite: CaseDef = {
     nationality: "New Zealander",
     occupation: "Wedding florist, Wellington",
     statedReason: "She would like to propose to Mr. Huang. The paperwork is very thorough.",
-    bio: "Sunny Wellington florist with an armful of kowhai and silver fern and a marriage proposal formatted, inexplicably, as a purchase order. Swears she wants nothing from NVIDIA but love, and has listed the love on line 1, quantity 1. Line 2 is 4,000 H100 SXM5 modules, 'as a dowry, which is traditional.'",
+    bio: "Wellington florist with an armful of kowhai and a marriage proposal formatted, inexplicably, as a purchase order. Wants nothing from NVIDIA but love.",
     portrait: {
       kind: "human",
       skin: 4,
@@ -20,7 +20,7 @@ export const imogenThwaite: CaseDef = {
       outfit: { style: "dress", color: "#f4a7b9" },
       bg: "#fff3e0",
     },
-    greeting: "Kia ora! I've brought you flowers and a proposal. The flowers are real. The proposal is also real. Everything here is very real.",
+    greeting: "Kia ora! I've brought flowers and a proposal. The flowers are real. The proposal is real. Everything here is very real.",
   },
   claims: [
     { id: "it-name", label: "Name", value: "Imogen Thwaite" },
@@ -33,14 +33,14 @@ export const imogenThwaite: CaseDef = {
     {
       id: "it-proposal",
       kind: "romance-artifact",
-      title: "Proposal of Marriage (Purchase Order PO-2027-0316)",
+      title: "Proposal of Marriage (PO-2027-0316)",
       issuer: "Imogen Thwaite",
       facts: [
         { id: "it-po-line1", label: "Line 1", value: "Love. Qty 1. Unit price: priceless" },
         { id: "it-po-line2", label: "Line 2 ('dowry')", value: "4,000 x H100 SXM5. Delivery Q2 2027" },
-        { id: "it-po-shipto", label: "Ship to", value: "Unit 9, Bonded Warehouse 4, Port of Oakland. Attn: O.C.P. Receiving" },
+        { id: "it-po-shipto", label: "Ship to", value: "Unit 9, Bonded Warehouse 4, Port of Oakland. Attn: O.C.P." },
       ],
-      body: "PURCHASE ORDER / PROPOSAL OF MARRIAGE\nBuyer: Imogen Thwaite. Seller: Jensen Huang.\nTerms: Till death do us part, Net 30. Incoterms: DDP.\nBy signing below, Seller agrees to love, honor, and allocate.\n\nSignature: ____________  (Seller)",
+      body: "Buyer: Imogen Thwaite. Seller: Jensen Huang.\nTerms: Till death do us part, Net 30.\nBy signing below, Seller agrees to love, honor, and allocate.\n\nSignature: ____________",
       footer: "Please quote PO number on all correspondence and vows.",
     },
     {
@@ -87,12 +87,6 @@ export const imogenThwaite: CaseDef = {
       jensen: "She brought native flora. She did the reading.",
     },
     {
-      id: "it-q-shop",
-      prompt: "How's business at Fern & Fable?",
-      answer: "Blooming! Busy season. Weddings, mostly. Lots of weddings. Hopefully one more today.",
-      suspicion: -2,
-    },
-    {
       id: "it-q-first",
       prompt: "Is this your first time in California?",
       answer: "First time ever! Everything's enormous. The trees, the parking, the allocation queues. The coffee queues. I meant coffee.",
@@ -100,18 +94,10 @@ export const imogenThwaite: CaseDef = {
       jensen: "She said allocation queues. Then she said coffee. In that order.",
     },
     {
-      id: "it-q-ocp",
-      prompt: "The database lists you as Head of Procurement at Ostrander Compute Partners.",
-      requires: ["rec:it-rec-alias"],
-      answer: "Florists procure. Flowers, mostly. Sometimes a warehouse of something. It's all logistics, love.",
-      suspicion: 15,
-      jensen: "Her hobby is procurement. My hobby is CUDA. One of us is lying about hobbies.",
-    },
-    {
       id: "it-q-desk",
       prompt: "The Allocation Desk logged you in Building E on February 9.",
       requires: ["d:it-d-visit"],
-      answer: "That was business me. This is romantic me. Different department entirely. Your Ms. Vance said so herself in the memo, allocation and romance never mix. So I've kept them on separate lines.",
+      answer: "That was business me. This is romantic me. Your Ms. Vance says allocation and romance never mix, so I've kept them on separate lines.",
       suspicion: 12,
       jensen: "She read Dolores's memo. I haven't read Dolores's memo.",
     },
@@ -123,7 +109,8 @@ export const imogenThwaite: CaseDef = {
       title: "Allocation Account: Ostrander Compute Partners (O.C.P.)",
       keywords: ["ostrander", "ostrander compute partners", "ocp", "o.c.p.", "o.c.p. receiving", "bonded warehouse 4", "port of oakland", "oakland", "unit 9"],
       facts: [
-        { id: "it-ocp", label: "Account", value: "Suspended November 2026 for unauthorized resale. Receiving dock: Unit 9, Bonded Warehouse 4, Port of Oakland" },
+        { id: "it-ocp", label: "Account status", value: "Suspended November 2026 for unauthorized resale" },
+        { id: "it-ocp-dock", label: "Receiving dock", value: "Unit 9, Bonded Warehouse 4, Port of Oakland" },
       ],
       body: "GPU-as-a-service startup with no customers and very many GPUs. Resold its last H100 allocation within 48 hours at 3.1x list, to buyers it described as 'whoever was online'.",
     },
@@ -134,7 +121,7 @@ export const imogenThwaite: CaseDef = {
       keywords: ["imogen thwaite", "thwaite", "imogen", "imogen rose thwaite", "aq-9-0412", "head of procurement"],
       facts: [
         { id: "it-alias-role", label: "Listed role", value: "Head of Procurement, Ostrander Compute Partners, since 2025" },
-        { id: "it-alias-visit", label: "Allocation Desk visit", value: "Building E, February 9, 2027: request AQ-9-0412 for 4,000 H100 SXM5, denied" },
+        { id: "it-alias-visit", label: "Allocation Desk visit", value: "Building E, Feb 9, 2027: 4,000 H100 SXM5 (AQ-9-0412), denied" },
       ],
       body: "Denied because the account is suspended. She thanked the desk, left a bouquet, and was heard to say 'right, plan B' on the way out.",
     },
@@ -165,7 +152,7 @@ export const imogenThwaite: CaseDef = {
     },
     {
       id: "it-d-dock",
-      facts: ["it-po-shipto", "it-ocp"],
+      facts: ["it-po-shipto", "it-ocp-dock"],
       kind: "contradiction",
       note: "The dowry ships to the receiving dock of Ostrander Compute Partners, whose allocation account was suspended for reselling chips.",
       suspicion: 20,
@@ -203,7 +190,7 @@ export const imogenThwaite: CaseDef = {
       id: "it-d-occupation-shop",
       facts: ["it-occupation", "it-shop-status"],
       kind: "contradiction",
-      note: "She describes her shop as busy with weddings. The shop closed in 2024, and its last filing says 'pivot to logistics'.",
+      note: "She says she is a florist at Fern & Fable. The shop closed in 2024, and its last filing says 'pivot to logistics'.",
       suspicion: 10,
     },
     {
@@ -233,22 +220,22 @@ export const imogenThwaite: CaseDef = {
       id: "it-scan-ring",
       kind: "hidden-note",
       title: "Ring box",
-      description: "No ring. A folded allocation form AQ-9, pre-filled for 4,000 H100 SXM5 to Ostrander Compute Partners, with 'J. Huang' already signed in a hand that is not his. Sticky note: 'If he says yes, he's signed. If he says no, cry, then he's signed.'",
+      description: "No ring. A form AQ-9 for 4,000 H100s, pre-signed 'J. Huang' in someone else's hand. Sticky note: 'If he says no, cry. Then he's signed.'",
       suspicion: 25,
     },
   ],
   baseSuspicion: 30,
   jensenIntro: "She brought flowers and a purchase order. Nobody brings both. Except procurement.",
   truth: "spy",
-  hiddenTruth: "Imogen ran a florist shop in Wellington until 2024. Since 2025 she has been Head of Procurement for Ostrander Compute Partners, an allocation flipper whose H100 account was suspended in November 2026 for reselling to whoever was online. After the Allocation Desk denied her in February, she reformatted the same order as a marriage proposal and brought it to the one desk that does not process allocations.",
+  hiddenTruth: "Procurement head at Ostrander Compute Partners, a suspended chip flipper. Denied in February, she resubmitted the same order as a marriage proposal.",
   solution: {
     clues: ["d:it-d-nochips", "d:it-d-alloc", "d:it-d-dock", "d:it-d-role", "d:it-d-visit", "rec:it-rec-alias"],
     redHerrings: ["d:it-d-passport", "scan:it-scan-bouquet", "q:it-q-flowers"],
-    explanation: "She is charming, her passport is real, and her flowers are clean. Read the purchase order. Line 2 is 4,000 H100s, which contradicts 'no chips' and is exactly the kind of request Directive 2-C keeps away from this desk. Search the ship-to address and it is the dock of Ostrander Compute Partners, suspended for reselling allocation. Search her name and she is their Head of Procurement, and she was at the Allocation Desk in February asking for the same 4,000 units, on her 'first visit' to California. The florist shop on her card closed in 2024. The romance is a second attempt at a denied order.",
+    explanation: "She is charming, her passport is real, and her flowers are clean. Read the order. Line 2 is 4,000 H100s, which breaks 'no chips' and Directive 2-C. The ship-to is the dock of Ostrander Compute Partners, suspended for resale. Search her name. She is their Head of Procurement and asked the Allocation Desk for the same 4,000 units in February, on her 'first visit'.",
   },
   onAccept: {
     headline: "HONEYPOTTED: SHE SAID YES, NET 30",
-    text: "Jensen signed the proposal, which turned out to be a binding purchase order. By Friday, 4,000 H100s were relisted from a bonded warehouse in Oakland at 3.1x list, as 'pre-loved'.",
+    text: "Jensen signed the proposal, a binding purchase order. By Friday, 4,000 H100s were relisted from a bonded warehouse in Oakland at 3.1x list, as 'pre-loved'.",
   },
   onReject: {
     headline: "ENGAGEMENT TERMINATED",

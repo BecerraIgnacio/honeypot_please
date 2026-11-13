@@ -8,8 +8,8 @@ export const adaezeNwosu: CaseDef = {
     name: "Dr. Adaeze Nwosu",
     nationality: "Nigerian",
     occupation: "HPC researcher, Lekki Institute of Computation",
-    statedReason: "A date, structured as a 90-minute workshop on why NVIDIA should adopt ROCm. Followed by jollof.",
-    bio: "Ports climate models for a living. Has opinions about open source that she delivers at the volume of a datacenter fan. Speaking at GTC on Thursday. Brought 41 slides to a romantic proposal.",
+    statedReason: "A date: a 90-minute workshop on why NVIDIA should adopt ROCm. Then jollof.",
+    bio: "Ports climate models for a living. Speaks about open source at the volume of a datacenter fan. Brought 41 slides to a romantic proposal.",
     portrait: {
       kind: "human",
       skin: 5,
@@ -58,11 +58,11 @@ export const adaezeNwosu: CaseDef = {
       title: "Proposal for a Date, Rev. 3",
       issuer: "Office of Dr. A. Nwosu",
       facts: [
-        { id: "prop-lines", label: "Line items", value: "1 dinner (jollof), 1 honest talk about vendor lock-in, 1 phased CUDA-to-ROCm migration plan (18 months)" },
+        { id: "prop-lines", label: "Line items", value: "Jollof, one honest talk, 18-month CUDA-to-ROCm migration" },
         { id: "prop-rubin", label: "Appendix B, cited spec", value: "Rubin Ultra: 48 GB VRAM" },
       ],
-      body: "Formatted as a purchase order. Payment terms: net 30 minutes of eye contact. Appendix B argues that 'at only 48 GB, Rubin Ultra proves the moat is software, not memory.' Slide 31 is a picture of a wall with a hammer emoji.",
-      footer: "Rev. 1 and Rev. 2 were rejected by her own lab for being 'too nice to AMD'.",
+      body: "Formatted as a purchase order. Payment terms: net 30 minutes of eye contact. Appendix B: 'at only 48 GB, Rubin Ultra proves the moat is software.'",
+      footer: "Rev. 1 and 2 were rejected by her own lab as 'too nice to AMD'.",
     },
   ],
   questions: [
@@ -70,15 +70,15 @@ export const adaezeNwosu: CaseDef = {
       id: "q-rocm",
       prompt: "What exactly do you want from him?",
       answer:
-        "I want you to switch to ROCm. Not for AMD. For humanity. CUDA is a beautiful walled garden and I would like to knock down one (1) wall. You can keep the garden. You can keep the jacket. I would never touch the jacket.",
+        "Switch to ROCm. Not for AMD. For humanity. CUDA is a beautiful walled garden and I would like to knock down one (1) wall. You can keep the jacket. I would never touch the jacket.",
       suspicion: 12,
-      jensen: "She asked me to switch to ROCm. To my face. In my lobby. Security, this is either love or a war crime.",
+      jensen: "She asked me to switch to ROCm. In my lobby. Security, this is either love or a war crime.",
     },
     {
       id: "q-cuda",
       prompt: "Do you actually use CUDA?",
       answer:
-        "Every day. Our cluster is 64 H100s. I write CUDA kernels at 3 AM and angry blog posts about them at 4 AM. It's a relationship. It's complicated. It's on my profile.",
+        "Every day. Our cluster is 64 H100s. I write CUDA kernels at 3 AM and angry blog posts about them at 4 AM. It's complicated.",
       facts: [{ id: "ans-cluster", label: "Her lab's hardware", value: "64 x H100, used daily" }],
       suspicion: -5,
       jensen: "She uses CUDA every day and resents it. That is not espionage. That is a customer.",
@@ -86,9 +86,8 @@ export const adaezeNwosu: CaseDef = {
     {
       id: "q-vram",
       prompt: "Rubin Ultra has 48 GB of VRAM?",
-      answer:
-        "Is that wrong? I got it from a forum. A forum with very confident people. ...It's a terabyte? Per package? That changes slide 31. That changes everything. Give me a minute, I need to rewrite Appendix B on my phone.",
-      facts: [{ id: "ans-vram", label: "Source of her Rubin Ultra figure", value: "An internet forum" }],
+      answer: "Is that wrong? I got it from a forum. A very confident forum. ...A terabyte? Per package? Give me a minute, I need to rewrite Appendix B.",
+      facts: [{ id: "ans-vram", label: "Source of her VRAM figure", value: "An internet forum" }],
       suspicion: -6,
       requires: ["doc:proposal"],
       jensen: "She is off by 976 gigabytes. She is not a spy. A spy would have done the homework.",
@@ -98,7 +97,7 @@ export const adaezeNwosu: CaseDef = {
       prompt: "What do you know about Feynman?",
       answer:
         "The name. You said it yesterday and then walked off like a man who left the stove on. I assume it's a GPU. It could be a dog. If it's a dog, I support it.",
-      facts: [{ id: "ans-feynman", label: "What she knows about Feynman", value: "The name only" }],
+      facts: [{ id: "ans-feynman", label: "Her Feynman knowledge", value: "The name only" }],
       suspicion: -5,
     },
     {
@@ -109,15 +108,6 @@ export const adaezeNwosu: CaseDef = {
       facts: [{ id: "ans-salary", label: "Her funding", value: "Climate research grant. No chip vendor." }],
       suspicion: 5,
       jensen: "Security. She said AMD with affection. And then with contempt. I am confused.",
-    },
-    {
-      id: "q-incident",
-      prompt: "You were flagged at GTC 2025 for shouting during the keynote.",
-      answer:
-        "I shouted 'OPEN THE STACK.' Once. Politely. In a supportive register. You said 'we'll take that under advisement' and I have been waiting for the advisement for two years. That is why there's a Rev. 3.",
-      suspicion: -3,
-      requires: ["rec:adaeze-incident"],
-      jensen: "I did say that. I advised nothing. She has been waiting. That is the most patient anyone has been with me.",
     },
   ],
   records: [
@@ -138,7 +128,7 @@ export const adaezeNwosu: CaseDef = {
       title: "Allocation: Lekki Institute of Computation",
       keywords: ["lekki", "lekki institute", "lekki institute of computation", "nwosu", "adaeze nwosu", "h100"],
       facts: [
-        { id: "alloc-units", label: "Allocation", value: "64 x H100, delivered August 2024, paid in full" },
+        { id: "alloc-units", label: "Allocation", value: "64 x H100, paid in full" },
         { id: "alloc-contact", label: "Technical contact", value: "Dr. A. Nwosu" },
       ],
       body: "Account in good standing. Support tickets filed: 347. Tone of support tickets: 'passionate'. Ticket #188 is titled 'I love this and I hate that I love this'.",
@@ -150,7 +140,7 @@ export const adaezeNwosu: CaseDef = {
       keywords: ["ir-2025-1182", "open the stack", "rocm", "nwosu", "adaeze nwosu", "adaeze"],
       facts: [
         { id: "inc-event", label: "Event", value: "Attendee shouted 'OPEN THE STACK' during GTC 2025 keynote Q&A" },
-        { id: "inc-outcome", label: "Assessment", value: "No threat. Enthusiasm only. Applauded by about 40% of the room." },
+        { id: "inc-outcome", label: "Assessment", value: "No threat. Enthusiasm only. Applauded by 40% of the room." },
       ],
     },
   ],
@@ -183,7 +173,7 @@ export const adaezeNwosu: CaseDef = {
       kind: "match",
       note: "64 H100s, as recorded in the allocation database. She is a paying customer in good standing.",
       suspicion: -8,
-      jensen: "She paid for 64 H100s and wants me to switch to ROCm. That is the most loyal complaint I have ever received.",
+      jensen: "She paid for 64 H100s and wants me to switch. The most loyal complaint I have ever received.",
     },
     {
       id: "d-rocm-customer",
@@ -203,7 +193,7 @@ export const adaezeNwosu: CaseDef = {
       id: "d-radeon",
       facts: ["ans-salary", "scan-radeon"],
       kind: "explained",
-      note: "Owning a Radeon is not being paid by AMD. The card carries an 'emotional support GPU' sticker and no storage or radios.",
+      note: "Owning a Radeon is not being paid by AMD. No storage, no radios. Just emotional support.",
       suspicion: -3,
     },
     {
@@ -234,7 +224,7 @@ export const adaezeNwosu: CaseDef = {
       kind: "bag-contents",
       title: "Competitor hardware in bag",
       description:
-        "One Radeon card wrapped in an NVIDIA CUDA t-shirt, like a cat in a dog costume. Also: 41 printed slides (double-sided), an AMD hoodie, and a tupperware of jollof. No storage, no transmitters. The card has a sticker reading 'emotional support GPU'.",
+        "A Radeon wrapped in a CUDA t-shirt, like a cat in a dog costume. Sticker: 'emotional support GPU'. Also 41 slides and jollof. No storage, no radios.",
       facts: [{ id: "scan-radeon", label: "Bag contents", value: "One Radeon card wrapped in a CUDA t-shirt" }],
       suspicion: 15,
     },
@@ -251,19 +241,19 @@ export const adaezeNwosu: CaseDef = {
   ],
   truth: "innocent",
   hiddenTruth:
-    "Exactly who she says she is: a climate HPC researcher whose lab owns 64 H100s, who writes CUDA every night, and who believes with her whole chest that the world would be better on ROCm. She is a paying customer with 347 support tickets. Her only secret is that she got the Rubin Ultra VRAM figure from a forum.",
+    "Exactly who she says: a climate researcher whose lab owns 64 H100s and who wants the world on ROCm. Her only secret is a VRAM figure from a forum.",
   solution: {
     clues: ["rec:adaeze-allocation", "d:d-cluster", "d:d-feynman", "d:d-vram", "d:d-session"],
     redHerrings: ["q:q-rocm", "scan:bag", "rec:adaeze-incident", "q:q-amd"],
     explanation:
-      "Everything about her reads hot: AMD red, a Radeon in her bag, a prior incident, and an earnest request to abandon CUDA. None of it is evidence. The allocation database shows her lab bought 64 H100s and she is the technical contact. Her speaker session is on record. On technical knowledge she errs low, not high: she knows Feynman only by name and is wrong by 976 GB about Rubin Ultra. Directive 3-C flags people who know too much. She knows too little, loudly.",
+      "Everything reads hot: AMD red, a Radeon in her bag, a prior incident, a plea to abandon CUDA. None of it is evidence. The allocation database shows her lab bought 64 H100s, with her as technical contact. Her session is on record. Directive 3-C flags people who know too much. She knows Feynman by name only and is 976 GB wrong about Rubin Ultra: too little, loudly.",
   },
   onAccept: {
     headline: "OPEN STACK, OPEN HEART",
-    text: "Adaeze delivers 41 slides over jollof. Jensen rejects the migration plan 41 times and books a second date to reject Rev. 4. One forum is quietly corrected about Rubin Ultra VRAM.",
+    text: "Adaeze delivers 41 slides over jollof. Jensen rejects the migration plan 41 times and books a second date to reject Rev. 4.",
   },
   onReject: {
     headline: "WALLED GARDEN HOLDS",
-    text: "Adaeze leaves Rev. 3 on the counter with a sticky note: 'Under advisement, I assume.' She gives her Thursday talk anyway and gets a standing ovation from a room full of people who also use CUDA angrily.",
+    text: "Adaeze leaves Rev. 3 on the counter. Her Thursday talk gets a standing ovation from a room full of people who also use CUDA angrily.",
   },
 };

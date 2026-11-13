@@ -5,7 +5,6 @@ import { ACHIEVEMENTS } from "../../game/content/achievements";
 import { reviewView } from "../../game/engine";
 import { Btn, Paper } from "../common";
 import { CONTENT, RARITY, signed, signedMoney, tokenLabel } from "../content";
-import { JensenBox } from "../desk/Applicant";
 import { useGame } from "../GameProvider";
 import { sfx } from "../sound";
 import { TopBar } from "./Desk";
@@ -30,77 +29,77 @@ export function Review() {
     <div className="desk-screen">
       <TopBar />
       <main className={`screen-scroll ${tone}`}>
-        <div className="mx-auto flex w-full max-w-4xl flex-col gap-5 px-4 py-6">
+        <div className="mx-auto flex w-full max-w-3xl flex-col gap-3 px-4 py-4 md:py-6">
           {fatal && <div className="alarm-strip" aria-hidden>BREACH · BREACH · BREACH · BREACH · BREACH · BREACH · BREACH · BREACH</div>}
-          <div className="flex flex-col gap-4 md:flex-row md:items-start">
-            <Paper className="review-file relative flex-1">
-              <div className="flex items-start gap-4">
-                <Portrait spec={v.case.applicant.portrait} size={110} className="doc-photo shrink-0" label={v.case.applicant.name} />
-                <div className="min-w-0">
-                  <p className="hud-label text-[#6b604a]">Case file · {v.case.applicant.name}</p>
-                  <h1 className="review-headline">{v.outcome.headline}</h1>
-                </div>
+          <Paper className="review-file relative">
+            <div className="flex items-start gap-3">
+              <Portrait spec={v.case.applicant.portrait} size={64} className="doc-photo shrink-0" label={v.case.applicant.name} />
+              <div className="min-w-0">
+                <p className="hud-label text-[#6b604a]">Case file · {v.case.applicant.name}</p>
+                <h1 className="review-headline">{v.outcome.headline}</h1>
               </div>
-              <p className="mt-3 text-sm leading-relaxed">{v.outcome.text}</p>
-              <span className={`stamp-ink review-stamp ${d.verdict === "accept" ? "stamp-green" : "stamp-red"}`}>
-                {d.verdict === "accept" ? "Accepted" : "Rejected"}
-              </span>
-            </Paper>
-            <div className="flex flex-col gap-3 md:w-72">
-              <div className={`verdict-card ${d.correct ? "verdict-card-right" : "verdict-card-wrong"}`}>
-                <p className="font-display text-2xl leading-none">{d.correct ? "RIGHT CALL" : fatal ? "HONEYPOTTED" : "WRONG CALL"}</p>
-                <p className="mt-1 text-xs">She was {v.truth === "spy" ? "a spy" : "innocent"}.</p>
+            </div>
+            <p className="mt-2 text-sm leading-snug">{v.outcome.text}</p>
+            <span className={`stamp-ink review-stamp ${d.verdict === "accept" ? "stamp-green" : "stamp-red"}`}>
+              {d.verdict === "accept" ? "Accepted" : "Rejected"}
+            </span>
+          </Paper>
+          <div className="grid grid-cols-[1.2fr_1fr] gap-2">
+            <div className={`verdict-card ${d.correct ? "verdict-card-right" : "verdict-card-wrong"}`}>
+              <p className="font-display text-xl leading-none md:text-2xl">{d.correct ? "RIGHT CALL" : fatal ? "HONEYPOTTED" : "WRONG CALL"}</p>
+              <p className="mt-1 text-xs">She was {v.truth === "spy" ? "a spy" : "innocent"}.</p>
+            </div>
+            <div className="panel grid grid-cols-2 gap-1 !p-2">
+              <div>
+                <p className="hud-label">NVDA</p>
+                <p className={`font-pixel text-2xl leading-none ${d.marketCapDelta < 0 ? "text-[var(--red)]" : "text-[var(--acid)]"}`}>{signedMoney(d.marketCapDelta)}</p>
               </div>
-              <div className="panel grid grid-cols-2 gap-2">
-                <div>
-                  <p className="hud-label">Market cap</p>
-                  <p className={`font-pixel text-2xl ${d.marketCapDelta < 0 ? "text-[var(--red)]" : "text-[var(--acid)]"}`}>{signedMoney(d.marketCapDelta)}</p>
-                </div>
-                <div>
-                  <p className="hud-label">Stability</p>
-                  <p className={`font-pixel text-2xl ${d.stabilityDelta < 0 ? "text-[var(--red)]" : d.stabilityDelta > 0 ? "text-[var(--acid)]" : ""}`}>{signed(d.stabilityDelta)}</p>
-                </div>
+              <div>
+                <p className="hud-label">Stab.</p>
+                <p className={`font-pixel text-2xl leading-none ${d.stabilityDelta < 0 ? "text-[var(--red)]" : d.stabilityDelta > 0 ? "text-[var(--acid)]" : ""}`}>{signed(d.stabilityDelta)}</p>
               </div>
-              <JensenBox />
             </div>
           </div>
-
-          <section className="panel">
-            <h2 className="panel-title">Who she really was</h2>
-            <p className="text-sm leading-relaxed">{v.hiddenTruth}</p>
-          </section>
-          <section className="panel">
-            <h2 className="panel-title">How to read it</h2>
-            <p className="text-sm leading-relaxed text-[var(--cream-dim)]">{v.explanation}</p>
-          </section>
-          <section className="grid gap-4 md:grid-cols-2">
-            <div className="panel">
-              <h2 className="panel-title text-[var(--acid)]">Clues you found · {v.cluesFound.length}</h2>
-              <ClueList c={v.case} tokens={v.cluesFound} empty="None. Vibes only." />
+          <p className="text-sm leading-snug">
+            <span className="hud-label mr-2 text-[var(--amber)]">Who she really was</span>
+            {v.hiddenTruth}
+          </p>
+          <details className="panel review-more">
+            <summary className="panel-title cursor-pointer !mb-0">
+              How to read it · clues {v.cluesFound.length}/{v.cluesFound.length + v.cluesMissed.length}
+            </summary>
+            <div className="mt-3 flex flex-col gap-4">
+              <p className="text-sm leading-relaxed text-[var(--cream-dim)]">{v.explanation}</p>
+              <div className="grid gap-4 md:grid-cols-2">
+                <div>
+                  <h2 className="panel-title text-[var(--acid)]">Clues you found · {v.cluesFound.length}</h2>
+                  <ClueList c={v.case} tokens={v.cluesFound} empty="None. Vibes only." />
+                </div>
+                <div>
+                  <h2 className="panel-title text-[var(--red)]">Clues you missed · {v.cluesMissed.length}</h2>
+                  <ClueList c={v.case} tokens={v.cluesMissed} empty="Nothing. Clean work." />
+                </div>
+              </div>
+              {v.redHerringsFound.length > 0 && (
+                <div>
+                  <h2 className="panel-title text-[var(--amber)]">Red herrings you chased</h2>
+                  <ClueList c={v.case} tokens={v.redHerringsFound} empty="" />
+                </div>
+              )}
+              {caseUnlocks.length > 0 && (
+                <div>
+                  <h2 className="panel-title">Unlocked</h2>
+                  <ul className="flex flex-wrap gap-2">
+                    {caseUnlocks.map((a) => (
+                      <li key={a.id} className="ach-chip" style={{ borderColor: RARITY[a.rarity].color, color: RARITY[a.rarity].color }}>
+                        {a.title}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
-            <div className="panel">
-              <h2 className="panel-title text-[var(--red)]">Clues you missed · {v.cluesMissed.length}</h2>
-              <ClueList c={v.case} tokens={v.cluesMissed} empty="Nothing. Clean work." />
-            </div>
-          </section>
-          {v.redHerringsFound.length > 0 && (
-            <section className="panel">
-              <h2 className="panel-title text-[var(--amber)]">Red herrings you chased</h2>
-              <ClueList c={v.case} tokens={v.redHerringsFound} empty="" />
-            </section>
-          )}
-          {caseUnlocks.length > 0 && (
-            <section className="panel">
-              <h2 className="panel-title">Unlocked</h2>
-              <ul className="flex flex-wrap gap-2">
-                {caseUnlocks.map((a) => (
-                  <li key={a.id} className="ach-chip" style={{ borderColor: RARITY[a.rarity].color, color: RARITY[a.rarity].color }}>
-                    {a.title}
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
+          </details>
           <div className="sticky-actions">
             <Btn
               variant={fatal ? "danger" : "primary"}

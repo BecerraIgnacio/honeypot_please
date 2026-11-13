@@ -3,14 +3,13 @@
 import { useEffect, useMemo } from "react";
 import { JensenFace, Pixel } from "../../art/PixelArt";
 import { portraitSvg } from "../../art/portrait";
-import { ACHIEVEMENTS } from "../../game/content/achievements";
-import { BOARD_STATEMENTS, dayEndLines, pickHeadline } from "../../game/content/headlines";
+import { dayEndLines, pickHeadline } from "../../game/content/headlines";
 import { vulnerabilityLine } from "../../game/content/ranks";
 import { daySummary } from "../../game/engine";
 import { renderTemplate } from "../../share/text";
 import { SharePanel } from "../../share/ui/SharePanel";
 import { Btn, Paper } from "../common";
-import { CONTENT, RARITY, fatalCase, money, rng01, signed, signedMoney } from "../content";
+import { fatalCase, money, rng01, signed, signedMoney } from "../content";
 import { useGame } from "../GameProvider";
 import { runShare } from "../share";
 import { sfx } from "../sound";
@@ -22,7 +21,6 @@ export function DayEnd() {
   const sum = daySummary(run);
   const r = rng01(run.stats.seed, "day", sum.day);
   const line = dayEndLines[sum.day][Math.floor(r * dayEndLines[sum.day].length)];
-  const board = BOARD_STATEMENTS[Math.floor(rng01(run.stats.seed, "board", sum.day) * BOARD_STATEMENTS.length)];
   const last = run.stats.day === 5;
 
   return (
@@ -72,15 +70,6 @@ export function DayEnd() {
               Filed
             </span>
           </Paper>
-          <section className="panel flex items-start gap-3">
-            <span className="board-seal" aria-hidden>
-              B
-            </span>
-            <div>
-              <p className="hud-label">Statement from the Board</p>
-              <p className="text-sm leading-relaxed">{board}</p>
-            </div>
-          </section>
           <div className="flex justify-end">
             <Btn
               variant="primary"
@@ -114,7 +103,6 @@ export function RunEnd() {
   const headline = pickHeadline(outcome, run.stats, rng01(run.stats.seed, "headline"));
   const spy = fatalCase(run);
   const lost = run.stats.startingMarketCap - run.stats.marketCap;
-  const unlocks = ACHIEVEMENTS.filter((a) => s.unlockedThisRun.includes(a.id));
 
   useEffect(() => {
     document.documentElement.dataset.ending = outcome;
@@ -139,15 +127,13 @@ export function RunEnd() {
         <Paper className="tabloid-front">
           <p className="tabloid-mast">THE SANTA CLARA LEDGER · EXTRA</p>
           <p className="tabloid-head">{renderTemplate(headline.headline, vars)}</p>
-          <p className="text-sm leading-relaxed">{renderTemplate(headline.subhead, vars)}</p>
           <p className="mt-2 border-t border-[#0d0f0e]/30 pt-2 text-xs italic">{renderTemplate(headline.boardStatement, vars)}</p>
         </Paper>
         <section className="grid gap-4 md:grid-cols-[1fr_1.2fr]">
           <div className="panel">
             <p className="hud-label">Your rank</p>
             <p className="font-display text-2xl leading-tight text-[var(--amber)]">{rank.title}</p>
-            <p className="mt-1 text-sm text-[var(--cream-dim)]">{rank.blurb}</p>
-            <p className="mt-3 text-xs leading-relaxed">{vulnerabilityLine(run.stats)}</p>
+            <p className="mt-2 text-xs leading-snug text-[var(--cream-dim)]">{vulnerabilityLine(run.stats)}</p>
           </div>
           <div className="panel">
             <table className="stats w-full">
@@ -167,28 +153,6 @@ export function RunEnd() {
             </table>
           </div>
         </section>
-        {unlocks.length > 0 && (
-          <section className="panel">
-            <h2 className="panel-title">Achievements this run · {unlocks.length}</h2>
-            <ul className="flex flex-wrap gap-2">
-              {unlocks.map((a) => (
-                <li key={a.id}>
-                  <button
-                    type="button"
-                    className="ach-chip"
-                    style={{ borderColor: RARITY[a.rarity].color, color: RARITY[a.rarity].color }}
-                    onClick={() => {
-                      dispatch({ type: "navigate", screen: "achievements" });
-                      dispatch({ type: "detail", id: a.id });
-                    }}
-                  >
-                    {a.title}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
         <div className="flex justify-center">
           <SharePanel card={card} templates={templates} vars={vars} outcome={outcome} artKey={artKey} />
         </div>

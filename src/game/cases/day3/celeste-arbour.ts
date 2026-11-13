@@ -8,9 +8,8 @@ export const celesteArbour: CaseDef = {
     name: "Celeste Arbour",
     nationality: "Canadian",
     occupation: "Performance engineer (between roles)",
-    statedReason:
-      "Reconnect with Jensen, who she says mentored her during a 2019 NVIDIA internship, and pitch herself for the Feynman team.",
-    bio: "Says she interned at NVIDIA's Toronto office in summer 2019 and has the farewell photo to prove it. Lifelong fan. Watched yesterday's keynote from the front row. Is wearing a leather jacket she keeps calling 'the coat'.",
+    statedReason: "Reconnect with Jensen, her 2019 intern mentor, and join the Feynman team.",
+    bio: "Says she interned at NVIDIA Toronto in 2019 and has the photo to prove it. Front row at yesterday's keynote. Calls her leather jacket 'the coat'.",
     portrait: {
       kind: "human",
       skin: 2,
@@ -34,12 +33,12 @@ export const celesteArbour: CaseDef = {
     {
       id: "photo",
       kind: "photo",
-      title: "Farewell photo: 'Celeste & Jensen, Toronto 2019'",
+      title: "Farewell photo: 'Toronto 2019'",
       facts: [
         { id: "photo-hash", label: "Provenance hash", value: "EPR-190823-0113" },
-        { id: "photo-date", label: "Caption", value: "Intern farewell, August 23, 2019" },
+        { id: "photo-date", label: "Caption date", value: "August 23, 2019" },
       ],
-      body: "Jensen with an arm around her shoulder in front of a sheet cake. Through the window behind them, the Toronto skyline. The lighting is perfect. Everything is perfect. Suspiciously, everything is perfect.",
+      body: "Jensen with an arm around her in front of a sheet cake, the Toronto skyline in the window. The lighting is perfect. Suspiciously, everything is perfect.",
     },
     {
       id: "certificate",
@@ -71,17 +70,17 @@ export const celesteArbour: CaseDef = {
       id: "q-toronto",
       prompt: "What did you work on in Toronto?",
       answer:
-        "Driver QA. Mostly. I tested the drivers. For the GPUs. In Toronto. It was a very formative summer. You came by and said 'the more you intern, the more you save.' Everyone clapped.",
+        "Driver QA. Mostly. I tested the drivers. For the GPUs. In Toronto. It was a very formative summer.",
       facts: [{ id: "ans-team", label: "Her internship work", value: "Driver QA, Toronto, summer 2019" }],
       suspicion: 4,
-      jensen: "I have never said 'the more you intern, the more you save'. I would remember. It is good. I would have trademarked it.",
+      jensen: "I never said 'the more you intern, the more you save'. It is good. I would have trademarked it.",
     },
     {
       id: "q-keynote",
       prompt: "Favorite moment from yesterday's keynote?",
       answer:
         "Easy. The Feynman slide. FY-210, two terabytes of HBM5, tape-out in Q3. Chills. From the front row I could read the whole spec table.",
-      facts: [{ id: "ans-fy210", label: "What she says the keynote showed", value: "Feynman FY-210, 2 TB HBM5, tape-out Q3" }],
+      facts: [{ id: "ans-fy210", label: "Keynote content (hers)", value: "Feynman FY-210, 2 TB HBM5, tape-out Q3" }],
       suspicion: 0,
       jensen: "There was no spec table. There was a word. The word was Feynman. I said it and I walked away.",
     },
@@ -91,12 +90,6 @@ export const celesteArbour: CaseDef = {
       answer: "The coat! The famous coat. The iconic leather... blazer. I have one too. Matching coats.",
       suspicion: 6,
       jensen: "The coat. She called it the coat. Nobody understands the jacket. Nobody.",
-    },
-    {
-      id: "q-photo",
-      prompt: "Who took the farewell photo?",
-      answer: "An intern friend. With a phone. A normal phone. Why are you counting the windows?",
-      suspicion: 5,
     },
     {
       id: "q-pass",
@@ -115,13 +108,6 @@ export const celesteArbour: CaseDef = {
       suspicion: 10,
       requires: ["rec:celeste-cert"],
     },
-    {
-      id: "q-tessellate",
-      prompt: "Ever heard of Tessellate Semiconductor?",
-      answer: "The startup? Vaguely. Saw their booth. Very small booth. Sad booth. I would never work for a booth like that.",
-      suspicion: -2,
-      jensen: "Nobody insults a booth that specifically unless they have stood inside it.",
-    },
   ],
   records: [
     {
@@ -129,8 +115,8 @@ export const celesteArbour: CaseDef = {
       category: "access-log",
       title: "Endeavor Photo Registry: query EPR-190823-0113",
       keywords: ["epr-190823-0113", "190823", "0113", "photo registry", "registry", "arbour", "celeste arbour"],
-      facts: [{ id: "reg-result", label: "Result", value: "No such entry. Registry holds no hashes dated before January 2, 2024." }],
-      body: "Similar malformed queries this week: 14, all with hash dates before the registry existed. Dolores has started a spreadsheet.",
+      facts: [{ id: "reg-result", label: "Result", value: "No such entry" }],
+      body: "No hashes exist before January 2, 2024. Similar queries this week: 14, all predating the registry. Dolores has started a spreadsheet.",
     },
     {
       id: "celeste-cert",
@@ -141,7 +127,7 @@ export const celesteArbour: CaseDef = {
         { id: "int-name", label: "Issued to", value: "Daniel Okafor" },
         { id: "int-office", label: "Office", value: "Santa Clara HQ, summer 2019" },
       ],
-      body: "Mr. Okafor posted a photo of this certificate on a professional networking site in 2021 with the caption 'grateful'. The image has 4,100 reactions and, as of this morning, at least one photocopier.",
+      body: "Mr. Okafor posted this certificate online in 2021, captioned 'grateful'. 4,100 reactions and, as of this morning, at least one photocopier.",
     },
     {
       id: "celeste-attendee",
@@ -152,7 +138,7 @@ export const celesteArbour: CaseDef = {
         { id: "log-purchased", label: "Purchased", value: "March 17, 2027, 07:55 PT" },
         { id: "log-sap", label: "SAP Center entry scans", value: "None" },
         { id: "log-payer", label: "Paid by", value: "TSC Holdings (procurement entity of Tessellate Semiconductor)" },
-        { id: "log-prior", label: "Earlier GTC 2027 passes under this name", value: "None, lost or otherwise" },
+        { id: "log-prior", label: "Earlier passes, this name", value: "None, lost or otherwise" },
       ],
     },
   ],
@@ -173,26 +159,12 @@ export const celesteArbour: CaseDef = {
       suspicion: 20,
     },
     {
-      id: "d-hash-rule",
-      facts: ["photo-hash", "g.d3.epr-rule"],
-      kind: "contradiction",
-      note: "Directive 3-A requires a registry-listed hash. A 2019 date in the hash means it cannot be listed.",
-      suspicion: 15,
-    },
-    {
       id: "d-fy210",
       facts: ["ans-fy210", "g.d3.feynman-secret"],
       kind: "contradiction",
       note: "No Feynman part number, memory spec or tape-out date has been made public. She recites all three.",
       suspicion: 25,
-      jensen: "FY-210. That is not public. That is barely internal. Who told her? Who is the leak? Is it me? Am I the leak?",
-    },
-    {
-      id: "d-fy210-announced",
-      facts: ["ans-fy210", "g.d3.announced"],
-      kind: "contradiction",
-      note: "The keynote announced the Feynman name only. There was no spec table to read from any row.",
-      suspicion: 15,
+      jensen: "FY-210 is not public. It is barely internal. Who is the leak? Is it me? Am I the leak?",
     },
     {
       id: "d-front-row-bought",
@@ -231,13 +203,6 @@ export const celesteArbour: CaseDef = {
       jensen: "Unaffiliated. Paid for by a rival chip startup. That is not unaffiliated. That is a sponsorship.",
     },
     {
-      id: "d-cert-office",
-      facts: ["c-intern", "int-office"],
-      kind: "contradiction",
-      note: "She claims Toronto. The certificate number she carries belongs to a Santa Clara HQ intern.",
-      suspicion: 10,
-    },
-    {
       id: "d-generated-date",
       facts: ["scan-gen", "photo-date"],
       kind: "contradiction",
@@ -272,8 +237,8 @@ export const celesteArbour: CaseDef = {
       kind: "ai-artifact",
       title: "Photo is fully generated",
       description:
-        "No camera sensor noise anywhere. Jensen's jacket has three lapels. The cake reads 'HAPPY FAREWLL INTREN'. The Toronto skyline in the window contains two CN Towers, one of them slightly behind the other, as if shy.",
-      facts: [{ id: "scan-gen", label: "Generator trace", value: "Diffusion seed 88140 embedded in metadata, created March 16, 2027, 23:41" }],
+        "Jensen's jacket has three lapels. The cake reads 'HAPPY FAREWLL INTREN'. The skyline holds two CN Towers, one behind the other, as if shy.",
+      facts: [{ id: "scan-gen", label: "Generated at", value: "March 16, 2027, 23:41" }],
       suspicion: 25,
     },
   ],
@@ -281,19 +246,19 @@ export const celesteArbour: CaseDef = {
   jensenIntro: "She is wearing a jacket. Like mine. It is not like mine. Nothing is like mine.",
   truth: "spy",
   hiddenTruth:
-    "Celeste is real, Canadian, and a performance engineer at Tessellate Semiconductor, whose procurement entity bought her pass this morning. She never interned at NVIDIA. The farewell photo was generated last night by someone who did not know the registry started in 2024, and the certificate number was copied from a real intern's 2021 post. The Feynman specs came from a leaked deck Tessellate wants confirmed: she said 'FY-210' to watch Jensen's face.",
+    "A Tessellate engineer, never an intern. The photo was generated last night. She recited a leaked Feynman spec to watch Jensen's face.",
   solution: {
     clues: ["d:d-hash-predates", "d:d-fy210", "d:d-front-row-bought", "d:d-cert-owner", "d:d-unaffiliated", "rec:celeste-attendee"],
     redHerrings: ["d:d-dates-agree", "q:q-jacket", "d:d-venue"],
     explanation:
-      "Three independent sources each break her. The document: her photo's hash encodes 2019, and Directive 3-A says the registry has existed only since January 2024, so the hash is invented (the scan confirms it, but you do not need it). The question: asked about the keynote, she recites a Feynman part number, memory spec and tape-out quarter, and Directive 3-C says none of that is public. The database: her pass was bought the morning after the keynote she 'watched from the front row', paid for by Tessellate's procurement entity, and her certificate number belongs to someone else. Calling the jacket 'the coat' is insulting but proves nothing.",
+      "Three sources each break her. The photo hash encodes 2019, but the registry began in 2024. She recites a Feynman part number, spec and tape-out that Directive 3-C says are not public. Her pass was bought the morning after the keynote she 'watched from the front row', paid for by Tessellate. Calling the jacket 'the coat' is an insult, not evidence.",
   },
   onAccept: {
     headline: "HONEYPOTTED: FEYNMAN CONFIRMED",
-    text: "Celeste gets a coffee and watches Jensen flinch at 'FY-210'. By evening Tessellate has confirmed its leaked roadmap and pulled its own tape-out forward a quarter. The farewell photo is reposted 40,000 times; nobody counts the CN Towers.",
+    text: "Celeste watches Jensen flinch at 'FY-210'. By evening Tessellate has confirmed its leaked roadmap and pulled its tape-out forward a quarter.",
   },
   onReject: {
     headline: "INTERNSHIP TERMINATED, RETROACTIVELY",
-    text: "Security escorts Celeste out and hands the FY-210 slip to the leak investigation, who finally have a starting point. The real Daniel Okafor receives a very confusing email.",
+    text: "Security escorts Celeste out and hands 'FY-210' to the leak investigation. The real Daniel Okafor receives a very confusing email.",
   },
 };

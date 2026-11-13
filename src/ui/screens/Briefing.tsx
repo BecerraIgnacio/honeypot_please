@@ -23,29 +23,31 @@ export function Briefing() {
         <Paper className="briefing-paper deal-in">
           <span className="paper-clip" aria-hidden />
           <div className="whitespace-pre-wrap font-mono text-[13px] leading-relaxed md:text-sm">
-            <Typed key={day.day} text={day.briefing} speed={10} />
+            <Typed key={day.day} text={day.briefing} />
           </div>
           <span className="stamp-ink stamp-red" style={{ rotate: "-9deg", right: "1.5rem", top: "1.2rem" }}>
             Eyes only
           </span>
         </Paper>
         <section className="panel" aria-label="New directives">
-          <h2 className="panel-title">New directives in force today</h2>
-          <ul className="flex flex-col gap-3">
+          <h2 className="panel-title">New directives today</h2>
+          <ul className="flex flex-col gap-2">
             {day.directives.map((d) => (
-              <li key={d.id} className="border-l-2 border-[var(--acid)] pl-3">
-                <p className="font-display text-sm">{d.title}</p>
-                <ul className="mt-1 flex flex-col gap-0.5 text-xs text-[var(--cream-dim)]">
-                  {d.facts.map((f) => (
-                    <li key={f.id}>
-                      <span className="text-[var(--acid)]">{f.label}:</span> {f.value}
-                    </li>
-                  ))}
-                </ul>
+              <li key={d.id}>
+                <details className="directive">
+                  <summary className="font-display text-sm">{d.title}</summary>
+                  <ul className="mt-1 flex flex-col gap-0.5 text-xs text-[var(--cream-dim)]">
+                    {d.facts.map((f) => (
+                      <li key={f.id}>
+                        <span className="text-[var(--acid)]">{f.label}:</span> {f.value}
+                      </li>
+                    ))}
+                  </ul>
+                </details>
               </li>
             ))}
           </ul>
-          {day.day > 1 && <p className="mt-3 text-xs text-[var(--cream-dim)]">Earlier directives stay in force. Search the database to reread them.</p>}
+          {day.day > 1 && <p className="mt-3 text-xs text-[var(--cream-dim)]">Earlier directives still apply.</p>}
         </section>
         <div className="flex flex-wrap items-center gap-3">
           <Btn

@@ -8,8 +8,8 @@ export const maeveDonnelly: CaseDef = {
     name: "Maeve Donnelly",
     nationality: "Irish",
     occupation: "Actuary, Pinecrest Mutual Insurance",
-    statedReason: "A coffee date. Fifteen minutes. She would like to discuss your keynotes. All of them.",
-    bio: "Moved from Cork to Sacramento in 2015. Calculates life expectancy for a living and is very calm about it. Has watched every GTC keynote live since 2016 and remembers them the way other people remember their own weddings, but with timestamps.",
+    statedReason: "A coffee date. Fifteen minutes. To discuss your keynotes. All of them.",
+    bio: "Moved from Cork to Sacramento in 2015. Has watched every GTC keynote live since 2016 and remembers each one like a wedding, but with timestamps.",
     portrait: {
       kind: "human",
       skin: 1,
@@ -69,30 +69,23 @@ export const maeveDonnelly: CaseDef = {
       id: "notebook",
       kind: "personal-note",
       title: "Notebook, Volume 9 of 9",
-      body: "GTC 2026, 1:14:07: 'The jacket is not a costume. It is a commitment.' (pause, 2.1 s) (applause, 11 s) (he adjusts left cuff)\nGTC 2026, 1:14:21: 'Okay. Okay. Okay.' (three okays, not two as in official transcript)",
-      facts: [{ id: "note.latest", label: "Latest entry", value: "GTC 2026 keynote, 1:14:21, 'three okays, not two as in official transcript'" }],
+      body: "GTC 2026, 1:14:07: 'The jacket is not a costume. It is a commitment.' (pause 2.1 s, applause 11 s)\nGTC 2026, 1:14:21: 'Okay. Okay. Okay.' (three okays; official transcript says two)",
+      facts: [{ id: "note.latest", label: "Latest entry", value: "GTC 2026 keynote, 1:14:21" }],
       footer: "Indexed. Cross-referenced. Laminated tabs.",
     },
   ],
   questions: [
     {
-      id: "about",
-      prompt: "Tell me about yourself.",
-      answer: "I'm an actuary. I price risk. For instance, the risk of you agreeing to coffee and regretting it is under four percent. I ran it twice. The second time I controlled for the jacket.",
-      suspicion: 5,
-      jensen: "Four percent. That's lower than most of my product launches.",
-    },
-    {
       id: "recall",
       prompt: "What's your favorite keynote moment?",
-      answer: "GTC 2018. March 27th, San Jose. One hour, three minutes, forty-one seconds in. You said 'the more you buy, the more you save,' paused for 1.8 seconds, and said it again, slower, for the people in the back. I was in the back. Row W. Seat 9. Aisle.",
+      answer: "GTC 2018, 1:03:41 in. You said 'the more you buy, the more you save,' paused 1.8 seconds, and said it again, slower, for the people in the back. I was in the back. Row W.",
       suspicion: 20,
-      jensen: "1.8 seconds. I didn't know it was 1.8 seconds. I want to know how she knows. I don't want to know how she knows.",
+      jensen: "1.8 seconds. I want to know how she knows. I don't want to know how she knows.",
     },
     {
       id: "deeper",
       prompt: "Fine. GTC 2024. Forty-seven minutes in.",
-      answer: "Forty-seven flat, or forty-seven and change? Flat, you were drinking water. At 47:12 you held up Blackwell next to Hopper and told the smaller chip 'it's okay, Hopper.' At 47:30 a man in section 114 sneezed and you said 'bless you.' It is not in the official transcript. I have written to them. Twice.",
+      answer: "At 47:12 you held Blackwell next to Hopper and said 'it's okay, Hopper.' At 47:30 a man in section 114 sneezed and you said 'bless you.' Not in the transcript. I've written to them. Twice.",
       suspicion: 20,
       requires: ["q:recall"],
       jensen: "I did say bless you. I remember that man. I don't remember that man. Security, find that man.",
@@ -100,7 +93,7 @@ export const maeveDonnelly: CaseDef = {
     {
       id: "why",
       prompt: "Why a date?",
-      answer: "I've spent eleven years listening to you. I'd like fifteen minutes of you listening to me. I've prepared one slide. It's a histogram of how often you say 'incredible' per keynote hour. There's a trend. You'll want to see the trend.",
+      answer: "Eleven years I've listened to you. I'd like fifteen minutes of you listening to me. I've prepared one slide: how often you say 'incredible' per keynote hour. There's a trend.",
       suspicion: 10,
     },
     {
@@ -111,15 +104,9 @@ export const maeveDonnelly: CaseDef = {
       suspicion: 0,
     },
     {
-      id: "notebook",
-      prompt: "What's in the notebook?",
-      answer: "Transcripts. Handwritten. Nine volumes. The official ones have errors and mine do not. Well. One. Volume 4, page 211. I wrote 'Volta' when you said 'Volta.' It was correct. It still feels wrong.",
-      suspicion: 10,
-    },
-    {
       id: "online",
       prompt: "The attendee history shows no in-person GTC from 2020 to 2023.",
-      answer: "Nobody was in person from 2020 to 2023. Those were the online years. I said 'live,' not 'in the building.' I watched every one as it premiered. In 2021 my stream buffered for four seconds during the Grace announcement and I have never fully recovered.",
+      answer: "Nobody was in person from 2020 to 2023. I said 'live,' not 'in the building.' I watched every one as it premiered. In 2021 my stream buffered four seconds during Grace. I've never recovered.",
       facts: [{ id: "q.online", label: "2020-2023 keynotes", value: "Watched live online as they premiered" }],
       suspicion: -10,
       requires: ["d:keynotes-history"],
@@ -135,9 +122,9 @@ export const maeveDonnelly: CaseDef = {
       facts: [
         { id: "rec.history", label: "In-person GTC attendance", value: "2016-2019, 2024-2026 (no in-person record 2020-2023)" },
         { id: "rec.pass", label: "Current pass", value: "GTC27-118204" },
-        { id: "rec.employer", label: "Employer on 2024-2026 registrations", value: "Pinecrest Mutual Insurance" },
+        { id: "rec.employer", label: "Registered employer", value: "Pinecrest Mutual Insurance" },
       ],
-      body: "Flagged once, in 2024, by an automated filter for submitting a session question that contained a timestamp. Flag cleared: the timestamp was correct. Eleven post-keynote surveys on file, all 10/10. One survey comment runs 9,000 words and is, per Events, 'mostly right.'",
+      body: "Flagged in 2024 for a session question containing a timestamp. Cleared: the timestamp was correct. One survey comment runs 9,000 words and is, per Events, 'mostly right.'",
     },
   ],
   discrepancies: [
@@ -145,7 +132,7 @@ export const maeveDonnelly: CaseDef = {
       id: "keynotes-history",
       facts: ["claim.keynotes", "rec.history"],
       kind: "explained",
-      note: "She claims every keynote since 2016. There is no in-person record for 2020 through 2023. GTC was online-only in those years. 'Live' and 'in person' are different words. Ask her.",
+      note: "Claims every keynote since 2016. No in-person record for 2020-2023, when GTC was online-only. 'Live' is not 'in person.' Ask her.",
       suspicion: 5,
     },
     {
@@ -203,7 +190,7 @@ export const maeveDonnelly: CaseDef = {
       id: "tote",
       kind: "clean",
       title: "Tote bag contents",
-      description: "Notebook volumes 1 through 9, four colour-coded highlighters, a granola bar, and a phone whose lock screen is a keynote timestamp. Nothing hidden. Security recommends never saying anything memorable near her.",
+      description: "Notebooks 1 through 9, four highlighters, a granola bar. Nothing hidden. Security recommends never saying anything memorable near her.",
       suspicion: 0,
     },
   ],
@@ -222,7 +209,7 @@ export const maeveDonnelly: CaseDef = {
   solution: {
     clues: ["d:name-license", "d:pass-record", "d:employer-record", "d:arrival", "q:online"],
     redHerrings: ["q:recall", "q:deeper", "d:keynotes-history", "d:employer-pass", "scan"],
-    explanation: "Nothing about her conflicts. Her license, GTC pass, hotel folio and attendee history agree on her name, pass number, employer and arrival date. Her pass says 'Self' because she paid for it herself and took the week as leave. The 2020-2023 gap in her attendance is the four years GTC ran online, and she says she watched them live, not in person. The recall is alarming. It is also not evidence of anything except an extremely good memory. The scan was a waste of a scan.",
+    explanation: "Nothing conflicts. License, GTC pass, hotel folio and attendee history agree on her name, pass, employer and arrival. Her pass says 'Self' because she paid and took leave. The 2020-2023 gap is the years GTC ran online. She watched live, not in person. The recall is alarming, but a very good memory is not evidence. The scan was a waste of a scan.",
   },
   onAccept: {
     headline: "COFFEE, WITH FOOTNOTES",

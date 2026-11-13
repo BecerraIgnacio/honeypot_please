@@ -1,10 +1,15 @@
 import { describe, expect, it } from "vitest";
+import { textBudgetErrors } from "../../textBudget";
 import { validateDays } from "../../validate";
 import { day1 } from "./index";
 
 describe("day 1", () => {
   it("passes structural validation", () => {
     expect(validateDays([day1])).toEqual([]);
+  });
+
+  it("fits the text budget", () => {
+    expect(textBudgetErrors([day1])).toEqual([]);
   });
 
   it("opens with the tutorial and carries the required rare case and eggs", () => {

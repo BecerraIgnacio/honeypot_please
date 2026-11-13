@@ -122,6 +122,29 @@ export function StabilityBar({ value }: { value: number }) {
   );
 }
 
+/** Text clamped to a few lines with a "more" toggle that only appears when it actually overflows. */
+export function MoreText({ text, className = "" }: { text: string; className?: string }) {
+  const [open, setOpen] = useState(false);
+  const [overflows, setOverflows] = useState(false);
+  return (
+    <div className="more-text">
+      <p
+        ref={(el) => {
+          if (el && !open) setOverflows(el.scrollHeight > el.clientHeight + 1);
+        }}
+        className={`${className} ${open ? "" : "clamp-4"}`}
+      >
+        {text}
+      </p>
+      {(overflows || open) && (
+        <button type="button" className="more-btn" aria-expanded={open} onClick={() => setOpen(!open)}>
+          {open ? "less" : "more"}
+        </button>
+      )}
+    </div>
+  );
+}
+
 export function Paper({ children, className = "", style }: { children: ReactNode; className?: string; style?: CSSProperties }) {
   return (
     <div className={`paper ${className}`} style={style}>
@@ -130,7 +153,20 @@ export function Paper({ children, className = "", style }: { children: ReactNode
   );
 }
 
-export function Modal({ label, onClose, children, wide = false }: { label: string; onClose: () => void; children: ReactNode; wide?: boolean }) {
+export function Modal({
+  label,
+  onClose,
+  children,
+  wide = false,
+  sheet = false,
+}: {
+  label: string;
+  onClose: () => void;
+  children: ReactNode;
+  wide?: boolean;
+  /** Slides up from the bottom edge instead of centering. */
+  sheet?: boolean;
+}) {
   const box = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const prev = document.activeElement as HTMLElement | null;
@@ -143,14 +179,14 @@ export function Modal({ label, onClose, children, wide = false }: { label: strin
     };
   }, [onClose]);
   return (
-    <div className="modal-back" onClick={onClose}>
+    <div className={`modal-back ${sheet ? "modal-back-sheet" : ""}`} onClick={onClose}>
       <div
         ref={box}
         role="dialog"
         aria-modal="true"
         aria-label={label}
         tabIndex={-1}
-        className={`modal ${wide ? "max-w-4xl" : "max-w-xl"}`}
+        className={`modal ${sheet ? "modal-sheet" : wide ? "max-w-4xl" : "max-w-xl"}`}
         onClick={(e) => e.stopPropagation()}
       >
         <button type="button" className="modal-x" aria-label="Close" onClick={onClose}>
@@ -189,7 +225,7 @@ export function Toasts() {
                   Achievement · {r.label}
                 </span>
                 <span className="font-display text-sm leading-tight">{a.title}</span>
-                <span className="text-[11px] opacity-70">Click to share</span>
+                <span className="text-[11px] opacity-70">Tap to share</span>
               </span>
             </button>
           );
@@ -211,22 +247,27 @@ export function Toasts() {
   );
 }
 
-export function Typed({ text, speed = 12, className = "" }: { text: string; speed?: number; className?: string }) {
+const TYPE_TICK_MS = 16;
+const TYPE_MAX_MS = 1800;
+
+/** Typewriter text that finishes within ~2s whatever its length; a tap skips to the end. */
+export function Typed({ text, className = "" }: { text: string; className?: string }) {
   const reduced = useReducedMotion();
   const [n, setN] = useState(0);
   useEffect(() => {
     if (reduced) return;
+    const step = Math.max(2, Math.ceil(text.length / (TYPE_MAX_MS / TYPE_TICK_MS)));
     let i = 0;
     const t = setInterval(() => {
-      i += 3;
-      setN(i);
+      i += step;
+      setN((shown) => Math.max(shown, i));
       if (i >= text.length) clearInterval(t);
-    }, speed);
+    }, TYPE_TICK_MS);
     return () => clearInterval(t);
-  }, [text, speed, reduced]);
+  }, [text, reduced]);
   const done = reduced || n >= text.length;
   return (
-    <span className={`typed ${className}`} aria-label={text}>
+    <span className={`typed ${className} ${done ? "" : "cursor-pointer"}`} aria-label={text} onClick={() => setN(text.length)}>
       <span aria-hidden className="typed-ghost">
         {text}
       </span>

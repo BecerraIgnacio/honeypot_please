@@ -62,6 +62,7 @@ export function useReducedMotion(): boolean {
 const EVENT_SOUND: Partial<Record<GameEvent["type"], (e: GameEvent) => Sfx | null>> = {
   discrepancyFound: (e) => (e.type === "discrepancyFound" && e.kind === "contradiction" ? "bad" : "good"),
   noConflict: () => "blip",
+  docOpened: () => "paper",
   scanUsed: () => "scan",
   eggFound: () => "chime",
   questionAsked: () => "blip",
@@ -136,6 +137,13 @@ export function GameProvider({ children }: { children: ReactNode }) {
     return () => clearTimeout(t);
   }, [s.toasts]);
 
+  const readoutN = s.readout?.n;
+  useEffect(() => {
+    if (readoutN === undefined) return;
+    const t = setTimeout(() => dispatch({ type: "dismissReadout" }), 6000);
+    return () => clearTimeout(t);
+  }, [readoutN]);
+
   useEffect(() => {
     let pos = 0;
     const onKey = (e: KeyboardEvent) => {
@@ -182,7 +190,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
       t = setTimeout(() => {
         dispatch({ type: "mutter", r: Math.random() });
         next();
-      }, 25_000 + Math.random() * 15_000);
+      }, 45_000 + Math.random() * 25_000);
     };
     next();
     return () => clearTimeout(t);

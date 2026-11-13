@@ -8,8 +8,8 @@ export const adaezeOkonkwo: CaseDef = {
     name: "Adaeze Okonkwo",
     nationality: "Nigerian",
     occupation: "Trade compliance attorney, Hollis & Wren LLP",
-    statedReason: "Dinner. She would like to discuss the future. Specifically, the export-control future.",
-    bio: "Born in Lagos, law school in Washington, spends her days explaining ECCN 3A090 to executives who wish she wouldn't. Recently divorced, recently renamed, and recently told by a friend that 'you have to put yourself out there.' She has put herself out there, with a binder.",
+    statedReason: "Dinner, to discuss the future. Specifically, the export-control future.",
+    bio: "Born in Lagos. Explains ECCN 3A090 to executives who wish she wouldn't. Recently divorced and putting herself out there, with a binder.",
     portrait: {
       kind: "human",
       skin: 6,
@@ -20,7 +20,7 @@ export const adaezeOkonkwo: CaseDef = {
       outfit: { style: "blazer", color: "#4b2e4f" },
       bg: "#1e1424",
     },
-    greeting: "Good morning. Adaeze Okonkwo. Before we begin, I should disclose that I know exactly which of your products can legally leave this building.",
+    greeting: "Adaeze Okonkwo. I should disclose that I know exactly which of your products can legally leave this building.",
   },
   claims: [
     { id: "claim.name", label: "Stated name", value: "Adaeze Okonkwo" },
@@ -43,7 +43,7 @@ export const adaezeOkonkwo: CaseDef = {
     {
       id: "decree",
       kind: "certificate",
-      title: "Decree of Dissolution and Restoration of Name",
+      title: "Decree of Divorce and Restoration of Name",
       issuer: "Superior Court of the District of Columbia, Family Division",
       facts: [
         { id: "decree.former", label: "Former name", value: "Adaeze Reyes" },
@@ -79,12 +79,6 @@ export const adaezeOkonkwo: CaseDef = {
   ],
   questions: [
     {
-      id: "job",
-      prompt: "So what do you do, exactly?",
-      answer: "I tell companies which chips they can ship where. The answer is usually 'not that one, not there.' I'm very popular at parties for about four minutes.",
-      suspicion: 0,
-    },
-    {
       id: "dinner",
       prompt: "What would we talk about at dinner?",
       answer: "Your licensing posture for the next generation. Kidding. Partly. Has anyone classified the jacket? Because if there's a chip in that jacket, it has an ECCN, and I would love to know it.",
@@ -104,7 +98,7 @@ export const adaezeOkonkwo: CaseDef = {
       id: "gtc",
       prompt: "Why are you at GTC?",
       answer: "I'm speaking Wednesday. 'Export Controls for Accelerated Computing.' Room 210. Twelve people have RSVP'd. Eleven are from your legal team. The twelfth is my mother.",
-      facts: [{ id: "q.talk", label: "Her GTC talk", value: "'Export Controls for Accelerated Computing', Wednesday, March 17, 2027" }],
+      facts: [{ id: "q.talk", label: "Her GTC talk", value: "Wednesday, March 17, 2027" }],
       suspicion: -5,
     },
     {
@@ -117,10 +111,10 @@ export const adaezeOkonkwo: CaseDef = {
     {
       id: "volta",
       prompt: "Your firm shows up on the Principality of Volta watch file.",
-      answer: "I can't discuss clients. I can discuss a former client who offered my firm a castle to file 4,000 H100s as 'decorative lighting.' The castle had a moat. The moat had a firmware dependency. I said no, and then I called your trade compliance team.",
+      answer: "I can't discuss clients. I can discuss a former client who offered my firm a castle to file 4,000 H100s as 'decorative lighting.' I said no, then called your trade compliance team.",
       suspicion: -15,
       requires: ["rec:d1-adaeze-volta"],
-      jensen: "Decorative lighting. Four thousand H100s would light a small country. Which, to be fair, was the plan.",
+      jensen: "Decorative lighting. Four thousand H100s would light a small country. Which was the plan.",
     },
   ],
   records: [
@@ -130,10 +124,10 @@ export const adaezeOkonkwo: CaseDef = {
       title: "Principality of Volta: Procurement Watch",
       keywords: ["volta", "principality of volta", "h100", "hollis & wren", "hollis and wren", "hollis", "hollis & wren llp", "export", "castle"],
       facts: [
-        { id: "volta.counsel", label: "Former U.S. counsel", value: "Hollis & Wren LLP (engagement terminated by the firm, October 2025)" },
-        { id: "volta.reporter", label: "Scheme reported by", value: "Attorney A. Reyes, Hollis & Wren LLP, to NVIDIA Trade Compliance, October 14, 2025" },
+        { id: "volta.counsel", label: "Former U.S. counsel", value: "Hollis & Wren LLP (fired Volta, October 2025)" },
+        { id: "volta.reporter", label: "Scheme reported by", value: "Attorney A. Reyes, Hollis & Wren, October 14, 2025" },
       ],
-      body: "Volta offered outside counsel 'a modest castle' to file a license application for 4,000 H100s declared as 'decorative lighting.' Counsel declined, withdrew, and reported the approach. The castle remains unclaimed. Volta continues to apply through other channels, most of them romantic.",
+      body: "Volta offered outside counsel 'a modest castle' to file 4,000 H100s as 'decorative lighting.' Counsel told NVIDIA. Volta now applies through other channels, mostly romantic.",
     },
     {
       id: "d1-adaeze-attendee",
@@ -142,7 +136,7 @@ export const adaezeOkonkwo: CaseDef = {
       keywords: ["adaeze okonkwo", "okonkwo", "adaeze", "adaeze reyes", "reyes", "gtc27-466108"],
       facts: [
         { id: "att.pass", label: "Current pass", value: "GTC27-466108 (Speaker)" },
-        { id: "att.session", label: "Speaking session", value: "'Export Controls for Accelerated Computing', Wednesday, March 17, 2027, Room 210" },
+        { id: "att.session", label: "Speaking session", value: "Wednesday, March 17, 2027, Room 210" },
         { id: "att.previous", label: "Previously registered as", value: "Adaeze Reyes (GTC 2025, GTC 2026)" },
       ],
     },
@@ -152,21 +146,21 @@ export const adaezeOkonkwo: CaseDef = {
       id: "name-license",
       facts: ["claim.name", "license.name"],
       kind: "explained",
-      note: "She states 'Adaeze Okonkwo'. Her license says 'Adaeze Reyes'. Directive 1-A allows this only with a legal name-change document. She has presented a court decree restoring her birth name.",
+      note: "Says Okonkwo, license says Reyes. Directive 1-A allows that with a name-change document. She has a court decree restoring her birth name.",
       suspicion: 10,
     },
     {
       id: "name-directive",
       facts: ["claim.name", "g.d1.id-name"],
       kind: "explained",
-      note: "Directive 1-A exception applies: the Decree of Dissolution and Restoration of Name, dated February 8, 2027, covers the gap between her stated name and her license.",
+      note: "Directive 1-A exception applies: her February 8, 2027 court decree covers the gap between her stated name and her license.",
       suspicion: 0,
     },
     {
       id: "bar-license",
       facts: ["bar.name", "license.name"],
       kind: "explained",
-      note: "Bar card says Okonkwo, license says Reyes. The bar updated its record on March 1, 2027, after the decree. The DMV is slower than the bar. The DMV is slower than everything.",
+      note: "Bar card says Okonkwo, license says Reyes. The bar updated on March 1, after the decree. The DMV is slower than everything.",
       suspicion: 5,
     },
     {
@@ -209,7 +203,7 @@ export const adaezeOkonkwo: CaseDef = {
       id: "volta-reporter",
       facts: ["license.name", "volta.reporter"],
       kind: "match",
-      note: "The attorney who reported Volta's H100 scheme to NVIDIA Trade Compliance was A. Reyes of Hollis & Wren. Adaeze Reyes is the name on her license.",
+      note: "The attorney who reported Volta's H100 scheme to NVIDIA was A. Reyes of Hollis & Wren. Adaeze Reyes is the name on her license.",
       suspicion: -20,
       jensen: "She reported Volta. To us. Before she was even single. That's loyalty with paperwork.",
     },
@@ -233,18 +227,18 @@ export const adaezeOkonkwo: CaseDef = {
       id: "briefcase",
       kind: "clean",
       title: "Briefcase contents",
-      description: "A 1,140-page Export Administration Regulations binder with 312 colour-coded tabs, two pens, a protein bar, and printed talk slides. Nothing hidden except her opinion of the de minimis rule, which is in the margins and is not polite.",
+      description: "A 1,140-page export regulations binder, 312 tabs. Nothing hidden except her opinion of the de minimis rule, in the margins. Not polite.",
       suspicion: 0,
     },
   ],
   baseSuspicion: 40,
   jensenIntro: "A lawyer. On a date. In GTC week. Either she's brave or she's billing.",
   truth: "innocent",
-  hiddenTruth: "A newly divorced export-control attorney who, as Adaeze Reyes, reported the Principality of Volta's H100 scheme to NVIDIA in 2025. Talking about export rules is the only way she knows how to flirt.",
+  hiddenTruth: "A newly divorced export-control attorney who, as Adaeze Reyes, reported Volta's H100 scheme to NVIDIA. Export rules are how she flirts.",
   solution: {
     clues: ["d:decree-license", "d:decree-claim", "d:volta-reporter", "d:previous-name", "d:talk"],
     redHerrings: ["d:name-license", "d:firm-volta", "q:dinner", "rec:d1-adaeze-volta"],
-    explanation: "This is Directive 1-A's exception. Her stated name does not match her license, but she presented a court decree that names both: former name Reyes, restored name Okonkwo. Her bar card, GTC pass and attendee history all follow the same change. The Volta watch file looks damning because her firm appears on it, but the next line shows the firm fired Volta, and the attorney who reported the scheme was A. Reyes, the name on her license. Asking about export controls on a first date is unromantic. It is not espionage.",
+    explanation: "Directive 1-A's exception. Her name doesn't match her license, but her court decree names both: former Reyes, restored Okonkwo. Bar card, GTC pass and attendee history follow the same change. The Volta file lists her firm, but the firm fired Volta, and the attorney who reported the scheme was A. Reyes. Export controls on a first date are unromantic. Not espionage.",
   },
   onAccept: {
     headline: "DINNER, FULLY LICENSED",

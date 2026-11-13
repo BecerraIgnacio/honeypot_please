@@ -1,11 +1,11 @@
 "use client";
 
-import { useRef, useState, type CSSProperties, type PointerEvent as RPointerEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type PointerEvent as RPointerEvent, type ReactNode } from "react";
 import { Pixel, Portrait } from "../../art/PixelArt";
 import { docIconSvg, sealSvg } from "../../art/props";
 import { currentCase, discovered } from "../../game/engine";
 import type { CaseDef, DocKind, GameDocument } from "../../game/types";
-import { FactList } from "../common";
+import { FactList, MoreText } from "../common";
 import { CONTENT, rng01 } from "../content";
 import { useGame, useMedia } from "../GameProvider";
 import { sfx } from "../sound";
@@ -74,10 +74,10 @@ function Stamp({ text, seed }: { text?: string; seed: string }) {
   );
 }
 
-function DocBody({ c, doc }: { c: CaseDef; doc: GameDocument }) {
+export function DocBody({ c, doc }: { c: CaseDef; doc: GameDocument }) {
   const family = FAMILY[doc.kind] ?? "plain";
   const facts = <FactList owner={c.id} facts={doc.facts} />;
-  const body = doc.body ? <p className="doc-prose">{doc.body}</p> : null;
+  const body = doc.body ? <MoreText text={doc.body} className="doc-prose" /> : null;
   const footer = doc.footer ? <p className="doc-footer">{doc.footer}</p> : null;
   const photo = (size: number) => <Portrait spec={c.applicant.portrait} size={size} className="doc-photo" label={`Photo on ${doc.title}`} />;
 
@@ -86,9 +86,9 @@ function DocBody({ c, doc }: { c: CaseDef; doc: GameDocument }) {
       <>
         <div className="doc-band">{doc.issuer ?? "Identity document"}</div>
         <p className="doc-title">{doc.title}</p>
-        <div className="flex gap-3">
+        <div className="doc-idrow flex gap-3">
           {photo(84)}
-          <div className="min-w-0 flex-1">{facts}</div>
+          <div className="doc-idfacts">{facts}</div>
         </div>
         {body}
         {footer}
@@ -115,8 +115,8 @@ function DocBody({ c, doc }: { c: CaseDef; doc: GameDocument }) {
       <>
         {doc.issuer && <p className="doc-letterhead">{doc.issuer}</p>}
         <p className="doc-title">{doc.title}</p>
-        {body && <div className="doc-ruled">{body}</div>}
         {facts}
+        {body && <div className="doc-ruled">{body}</div>}
         {footer}
       </>
     ),
@@ -129,8 +129,8 @@ function DocBody({ c, doc }: { c: CaseDef; doc: GameDocument }) {
           <b>RE:</b> {doc.title}
         </p>
         <hr className="doc-rule" />
-        {body}
         {facts}
+        {body}
         {footer}
       </>
     ),
@@ -150,8 +150,8 @@ function DocBody({ c, doc }: { c: CaseDef; doc: GameDocument }) {
       <>
         <p className="tabloid-mast">{doc.issuer ?? "THE DAILY SCALPER"}</p>
         <p className="tabloid-head">{doc.title}</p>
-        {body && <p className="doc-prose tabloid-cols">{doc.body}</p>}
         {facts}
+        {body}
         {footer}
       </>
     ),
@@ -159,8 +159,8 @@ function DocBody({ c, doc }: { c: CaseDef; doc: GameDocument }) {
       <div className="cert-frame">
         <p className="cert-issuer">{doc.issuer ?? "Certificate"}</p>
         <p className="cert-title">{doc.title}</p>
-        {body}
         {facts}
+        {body}
         <div className="mt-2 flex items-end justify-between gap-2">
           {footer ?? <span />}
           <Pixel svg={sealSvg(doc.issuer ?? doc.title, { size: 64 })} className="shrink-0" />
@@ -172,8 +172,8 @@ function DocBody({ c, doc }: { c: CaseDef; doc: GameDocument }) {
         <div className="polaroid">{photo(200)}</div>
         <p className="photo-caption">{doc.title}</p>
         {doc.issuer && <p className="doc-footer">{doc.issuer}</p>}
-        {body}
         {facts}
+        {body}
         {footer}
       </>
     ),
@@ -181,8 +181,8 @@ function DocBody({ c, doc }: { c: CaseDef; doc: GameDocument }) {
       <>
         {doc.issuer && <p className="doc-letterhead">{doc.issuer}</p>}
         <p className="doc-title">{doc.title}</p>
-        {body}
         {facts}
+        {body}
         {footer}
       </>
     ),
@@ -261,7 +261,8 @@ export function Documents() {
   const ordered = [...s.openDocs].sort((a, b) => (wide ? a.z - b.z : b.z - a.z));
 
   function open(doc: GameDocument) {
-    sfx("paper");
+    // First opens chime through the docOpened event; this covers bringing a read sheet to the front.
+    if (tokens.includes(`doc:${doc.id}`)) sfx("paper");
     const n = s.openDocs.length % 6;
     const rect = surface.current?.getBoundingClientRect();
     const w = WIDTH[FAMILY[doc.kind] ?? "plain"];
@@ -296,7 +297,7 @@ export function Documents() {
       </div>
       <div ref={surface} className={`desk-surface ${wide ? "" : "desk-surface-stack"}`}>
         {s.openDocs.length === 0 && (
-          <p className="desk-hint">Pick a document off the pile. Click any fact, on paper or on screen, to load it into a COMPARE slot.</p>
+          <p className="desk-hint">Open a document. Pick any two facts, then COMPARE.</p>
         )}
         {ordered.map((o) => {
           const doc = c.documents.find((d) => d.id === o.id);
@@ -305,6 +306,86 @@ export function Documents() {
           ) : null;
         })}
       </div>
+    </div>
+  );
+}
+
+/** Narrow layouts: one card per document in a swipe carousel. A card counts as read once it is mostly in view, or tapped. */
+export function DocCarousel() {
+  const { s, dispatch } = useGame();
+  const run = s.run!;
+  const c = currentCase(run, CONTENT)!;
+  const tokens = discovered(run);
+  const track = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const el = track.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          const seen = e.intersectionRect;
+          const box = e.boundingClientRect;
+          const id = (e.target as HTMLElement).dataset.doc;
+          if (id && seen.width >= box.width * 0.6 && seen.height >= Math.min(box.height, window.innerHeight) * 0.4) {
+            dispatch({ type: "engine", action: { type: "openDocument", docId: id } });
+          }
+        }
+      },
+      { threshold: [0, 0.2, 0.4, 0.6, 0.8, 1] },
+    );
+    el.querySelectorAll("[data-doc]").forEach((n) => io.observe(n));
+    return () => io.disconnect();
+  }, [c.id, dispatch]);
+
+  const cards = () => [...(track.current?.querySelectorAll<HTMLElement>("[data-doc]") ?? [])];
+  const onScroll = () => {
+    const el = track.current;
+    if (!el) return;
+    const left = el.scrollLeft + el.clientWidth / 2;
+    const i = cards().findIndex((n) => n.offsetLeft + n.offsetWidth > left);
+    setActive(i < 0 ? c.documents.length - 1 : i);
+  };
+  const goTo = (i: number) => {
+    const card = cards()[i];
+    if (card && track.current) track.current.scrollTo({ left: card.offsetLeft - (track.current.clientWidth - card.offsetWidth) / 2, behavior: "smooth" });
+  };
+
+  return (
+    <div className="flex flex-col gap-1">
+      <div ref={track} className="carousel" onScroll={onScroll} role="list" aria-label="Her documents">
+        {c.documents.map((doc, i) => {
+          const read = tokens.includes(`doc:${doc.id}`);
+          return (
+            <article
+              key={doc.id}
+              data-doc={doc.id}
+              role="listitem"
+              className="sheet slide"
+              aria-label={`${doc.title}, document ${i + 1} of ${c.documents.length}`}
+              onClick={() => dispatch({ type: "engine", action: { type: "openDocument", docId: doc.id } })}
+            >
+              <div className="sheet-bar">
+                <span className="hud-label truncate">
+                  {KIND_LABEL[doc.kind]} · {i + 1}/{c.documents.length}
+                </span>
+                {!read && <span className="hud-label">tap to read</span>}
+              </div>
+              <DocBody c={c} doc={doc} />
+            </article>
+          );
+        })}
+      </div>
+      {c.documents.length > 1 && (
+        <div className="dots" role="group" aria-label="Documents">
+          {c.documents.map((doc, i) => (
+            <button key={doc.id} type="button" className={`dot ${i === active ? "dot-on" : ""}`} aria-label={`Show ${doc.title}`} aria-current={i === active} onClick={() => goTo(i)}>
+              <span aria-hidden />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

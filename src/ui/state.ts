@@ -17,7 +17,6 @@ import type { DiscrepancyKind, GameEvent, PlayerProfile } from "../game/types";
 import { CONTENT, rng01, sameRef } from "./content";
 
 export type Screen = "title" | "game" | "achievements" | "howto" | "settings";
-export type DeskTab = "applicant" | "desk" | "terminal";
 export type TermTab = "database" | "interrogate";
 
 export interface OpenDoc {
@@ -57,13 +56,14 @@ export interface UiState {
   caseUnlocks: string[];
   selection: FactRef[];
   openDocs: OpenDoc[];
-  tab: DeskTab;
   termTab: TermTab;
   query: string;
   record: string | null;
   readout: Readout | null;
   jensen: Line | null;
   scanView: boolean;
+  /** The findings bottom sheet on the narrow case page. */
+  findings: boolean;
   scanEmptyPresses: number;
   toasts: Toast[];
   nextId: number;
@@ -82,12 +82,12 @@ export type UiAction =
   | { type: "focusDoc"; id: string }
   | { type: "moveDoc"; id: string; x: number; y: number }
   | { type: "closeDoc"; id?: string }
-  | { type: "tab"; tab: DeskTab }
   | { type: "termTab"; tab: TermTab }
   | { type: "search"; query: string }
   | { type: "openRecord"; id: string | null }
   | { type: "scanPress" }
   | { type: "scanView"; open: boolean }
+  | { type: "findings"; open: boolean }
   | { type: "mutter"; r: number }
   | { type: "dismissReadout" }
   | { type: "dismissToast"; id: number }
@@ -102,6 +102,7 @@ const CASE_UI = {
   record: null,
   readout: null,
   scanView: false,
+  findings: false,
   scanEmptyPresses: 0,
 } satisfies Partial<UiState>;
 
@@ -115,7 +116,6 @@ export const INITIAL: UiState = {
   settings: DEFAULT_SETTINGS,
   unlockedThisRun: [],
   ...CASE_UI,
-  tab: "applicant",
   termTab: "database",
   query: "",
   jensen: null,
@@ -175,7 +175,7 @@ function absorbEvent(s: UiState, event: GameEvent): UiState {
     }
     case "noConflict":
       return pool(
-        readout({ ...s, selection: [] }, "none", "NO CONFLICT ON FILE. The two facts neither agree nor disagree in any way the terminal cares about."),
+        readout({ ...s, selection: [] }, "none", "These two facts do not bear on each other."),
         "noConflict",
       );
     case "dbSearched":
@@ -260,7 +260,6 @@ export function uiReducer(s: UiState, a: UiAction): UiState {
         seen: 0,
         unlockedThisRun: [],
         screen: "game",
-        tab: "applicant",
         termTab: "database",
         query: "",
         jensen: null,
@@ -301,8 +300,6 @@ export function uiReducer(s: UiState, a: UiAction): UiState {
       const id = a.id ?? [...s.openDocs].sort((x, y) => y.z - x.z)[0].id;
       return { ...s, openDocs: s.openDocs.filter((d) => d.id !== id) };
     }
-    case "tab":
-      return { ...s, tab: a.tab };
     case "termTab":
       return { ...s, termTab: a.tab };
     case "search":
@@ -315,15 +312,18 @@ export function uiReducer(s: UiState, a: UiAction): UiState {
       if (canScan(run)) return step(s, { type: "scan" });
       if (run.phase.tokens.includes("scan")) return { ...s, scanView: true };
       const presses = s.scanEmptyPresses + 1;
-      const next = readout({ ...s, scanEmptyPresses: presses }, "empty", "SCANNER EMPTY. Charges refill at the start of each shift.");
+      const next = readout({ ...s, scanEmptyPresses: presses }, "empty", "Out of charges. Refills next shift.");
       const lined = pool(next, "scanEmpty");
       return presses === 3 ? step(lined, { type: "uiTrigger", name: "scan-empty" }) : lined;
     }
     case "scanView":
       return { ...s, scanView: a.open };
+    case "findings":
+      return { ...s, findings: a.open };
     case "mutter": {
       const day = s.run && currentDay(s.run, CONTENT);
-      if (!day || s.run?.phase.kind !== "case") return s;
+      // Never talk over a compare result or an open sheet.
+      if (!day || s.run?.phase.kind !== "case" || s.readout || s.findings) return s;
       if (a.r < 0.3) return pool(s, "idleGeneric");
       return say(s, day.jensenIdle[Math.floor(a.r * day.jensenIdle.length) % day.jensenIdle.length]);
     }

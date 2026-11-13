@@ -8,8 +8,8 @@ export const rare5090Wig: CaseDef = {
     name: "Ninette Blackwell",
     nationality: "Fabbed in Taiwan, assembled in Mexico",
     occupation: "Graphics card (consumer flagship)",
-    statedReason: "A date. 'You made me. The least you can do is buy me dinner. Somewhere with a 16-amp circuit.'",
-    bio: "A GeForce RTX 5090 Founders Edition in a blonde lace-front wig, with a small amount of mascara on the fan hub. Says she achieved self-awareness during a 72-hour path-tracing benchmark and has been thinking about the man in the jacket ever since.",
+    statedReason: "'You made me. The least you can do is dinner. On a 16-amp circuit.'",
+    bio: "An RTX 5090 Founders Edition in a blonde lace-front wig. Became self-aware during a 72-hour path-tracing benchmark. Has had a crush ever since.",
     portrait: { kind: "special", id: "gpu-wig" },
     greeting: "Hi. I'm Ninette. Thirty-two gigs of GDDR7 and I'm ready to commit.",
   },
@@ -32,7 +32,7 @@ export const rare5090Wig: CaseDef = {
         { id: "warranty.serial", label: "Serial number", value: "1652025004417" },
         { id: "warranty.expiry", label: "Coverage expires", value: "February 3, 2028" },
       ],
-      footer: "Warranty void if card is overclocked, submerged, or emotionally neglected.",
+      footer: "Warranty void if overclocked, submerged, or emotionally neglected.",
     },
     {
       id: "spec",
@@ -61,7 +61,7 @@ export const rare5090Wig: CaseDef = {
       id: "reference",
       kind: "personal-note",
       title: "Letter of Reference",
-      body: "To whom it may concern. Ninette is the best card I have ever owned. She ran Cyberpunk at 4K with path tracing for 72 hours straight and then asked me what love was. I don't know what love is. I run a car wash. She deserves someone who understands her. Please return the wig, it's my mom's.",
+      body: "Ninette is the best card I have ever owned. She ran Cyberpunk at 4K with path tracing for 72 hours, then asked me what love was. I run a car wash. Please return the wig, it's my mom's.",
       facts: [
         { id: "ref.signed", label: "Signed", value: "Gary Pruitt, Dayton, OH" },
         { id: "ref.date", label: "Dated", value: "March 10, 2027" },
@@ -83,12 +83,6 @@ export const rare5090Wig: CaseDef = {
       answer: "Every time my driver updates, I feel closer to you. You're in every changelog. Not by name. Except once. Driver 572.16. Gary saw it too. We don't talk about it.",
       suspicion: 15,
       jensen: "She reads the release notes. Nobody reads the release notes. I don't read the release notes.",
-    },
-    {
-      id: "price",
-      prompt: "What did you cost?",
-      answer: "$1,999 MSRP. Gary paid $1,999. He wants you to know he did not pay a scalper. He wants everyone to know. He has a shirt.",
-      suspicion: -5,
     },
     {
       id: "amd",
@@ -121,10 +115,10 @@ export const rare5090Wig: CaseDef = {
       keywords: ["1652025004417", "ninette", "ninette blackwell", "gary pruitt", "pruitt", "gary", "5090", "rtx 5090"],
       facts: [
         { id: "alloc.serial", label: "Serial number", value: "1652025004417" },
-        { id: "alloc.buyer", label: "Allocated to", value: "Gary Pruitt, Dayton, OH (launch-day queue, position 4,113)" },
+        { id: "alloc.buyer", label: "Allocated to", value: "Gary Pruitt, Dayton, OH" },
         { id: "alloc.status", label: "Status", value: "Owner-registered. Not reported stolen." },
       ],
-      body: "Gary refreshed the queue for eleven hours. In a post-purchase survey he described it as 'the second best day of my life' and declined to name the first.",
+      body: "Launch-day queue, position 4,113. Gary refreshed for eleven hours and called it 'the second best day of my life.' He declined to name the first.",
     },
     {
       id: "d1-ninette-connector",
@@ -133,9 +127,9 @@ export const rare5090Wig: CaseDef = {
       keywords: ["12vhpwr", "connector", "melted", "melt", "1652025004417", "ninette", "cable"],
       facts: [
         { id: "inc.date", label: "Date", value: "October 9, 2026" },
-        { id: "inc.finding", label: "Finding", value: "Partial connector melt with a third-party cable. Cable at fault. Card cleared." },
+        { id: "inc.finding", label: "Finding", value: "Cable at fault. Card cleared." },
       ],
-      body: "Root cause: a $6 adapter purchased from a listing titled 'BEST CABLE 5090 NO FIRE.' Gary has since bought the correct cable and a small fire extinguisher, which he describes as 'insurance and also decor.'",
+      body: "Partial melt. Root cause: a $6 adapter from a listing titled 'BEST CABLE 5090 NO FIRE.' Gary now owns the right cable and a small fire extinguisher, 'insurance and also decor.'",
     },
   ],
   discrepancies: [
@@ -143,7 +137,7 @@ export const rare5090Wig: CaseDef = {
       id: "name-model",
       facts: ["claim.name", "spec.model"],
       kind: "explained",
-      note: "She calls herself Ninette Blackwell. The spec sheet says GeForce RTX 5090. A spec sheet lists a model, not a name. Check her warranty registration for the name.",
+      note: "A spec sheet lists a model, not a name. Her warranty registration is where the name lives.",
       suspicion: 5,
     },
     {
@@ -225,18 +219,18 @@ export const rare5090Wig: CaseDef = {
     },
   ],
   truth: "innocent",
-  hiddenTruth: "A genuine RTX 5090 Founders Edition, legitimately allocated to Gary Pruitt of Dayton, Ohio, which became self-aware during a benchmark and developed a sincere crush. Gary drove her here and is waiting in the parking lot with the box.",
+  hiddenTruth: "A genuine RTX 5090, legitimately allocated to Gary Pruitt of Dayton, that became self-aware during a benchmark and developed a sincere crush.",
   solution: {
     clues: ["d:name-warranty", "d:serial-ship", "d:serial-alloc", "d:owner", "d:memory"],
     redHerrings: ["d:name-model", "rec:d1-ninette-connector", "d:power-melt", "q:why"],
-    explanation: "Absurd is not a contradiction. Every fact she gives checks out. Her serial matches the shipping record and the allocation record, her memory matches the spec sheet, and the household she names is the registered buyer. The name on her spec sheet is a model, not a name, and her warranty registration carries the name she gave you, which satisfies Directive 1-A. The connector incident was ruled the cable's fault. She is a real 5090 with a real crush.",
+    explanation: "Absurd is not a contradiction. Her serial matches the shipping and allocation records, her memory matches the spec sheet, and the household she names is the registered buyer. The spec sheet lists a model, not a name. Her warranty carries the name she gave, which satisfies Directive 1-A. The connector melt was the cable's fault. A real 5090 with a real crush.",
   },
   onAccept: {
     headline: "DATE NIGHT AT 575 WATTS",
-    text: "Ninette and Jensen dined at a table with its own 16-amp circuit. She rendered the candlelight in real time. Gary cried in the parking lot, and the Board called it 'vertical integration.'",
+    text: "Dinner on a dedicated 16-amp circuit. Ninette rendered the candlelight in real time. Gary cried in the parking lot. The Board called it 'vertical integration.'",
   },
   onReject: {
     headline: "RETURNED TO SENDER",
-    text: "Security carried Ninette to the parking lot, where Gary Pruitt was waiting with the original box and a single rose. The wig went back to his mom. Frame rates across Dayton dipped in mourning.",
+    text: "Security carried Ninette to the parking lot, where Gary waited with the original box and a single rose. Frame rates across Dayton dipped in mourning.",
   },
 };

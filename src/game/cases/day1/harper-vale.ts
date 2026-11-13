@@ -8,8 +8,8 @@ export const harperVale: CaseDef = {
     name: "Harper Vale",
     nationality: "Australian",
     occupation: "Senior Program Manager, NVIDIA Omniverse",
-    statedReason: "A quick coffee in your office. She has prepared a 'romantic roadmap review.' There are slides.",
-    bio: "Sydney native, Stanford MBA, runs ultramarathons and, by her own account, most of Omniverse. Laughs at exactly the right moments. Every moment is the right moment.",
+    statedReason: "Coffee in your office for a 'romantic roadmap review.' There are slides.",
+    bio: "Sydney native, Stanford MBA, runs ultramarathons and, by her own account, most of Omniverse. Laughs at exactly the right moments. All of them.",
     portrait: {
       kind: "human",
       skin: 4,
@@ -20,7 +20,7 @@ export const harperVale: CaseDef = {
       outfit: { style: "blazer", color: "#1f3b73" },
       bg: "#0f1d33",
     },
-    greeting: "G'day! Harper, Omniverse. We've met at the all-hands. Well. I was at the all-hands. You were on the stage. It was very intimate.",
+    greeting: "G'day! Harper, Omniverse. We've met at the all-hands. Well. I was at the all-hands. You were on stage. Very intimate.",
   },
   claims: [
     { id: "claim.name", label: "Stated name", value: "Harper Vale" },
@@ -63,7 +63,7 @@ export const harperVale: CaseDef = {
         { id: "receipt.payer", label: "Paid with", value: "Tessellate Semiconductor corporate card ending 2209" },
       ],
       body: "2x flat white (oat). 1x 'Founder's Muffin.' Memo field: 'client entertainment (J.H.)'.",
-      footer: "Thank you for choosing Grind & Gate. Please do not photograph the menu.",
+      footer: "Thank you for choosing Grind & Gate. Please don't photograph the menu.",
     },
     {
       id: "deck",
@@ -75,19 +75,6 @@ export const harperVale: CaseDef = {
     },
   ],
   questions: [
-    {
-      id: "work",
-      prompt: "What are you working on in Omniverse?",
-      answer: "Digital twins. Of factories. Of cities. Of you, a little bit. Kidding! Mostly factories. Some cities. One you.",
-      suspicion: -5,
-      jensen: "She knows digital twins. Everyone in Omniverse knows digital twins. Good sign. Probably.",
-    },
-    {
-      id: "manager",
-      prompt: "Who's your manager?",
-      answer: "I report up through the Omniverse org. It's very flat. Flat like a wafer. You'd love it. You'd want to package it.",
-      suspicion: 0,
-    },
     {
       id: "office",
       prompt: "Why coffee in my office, specifically?",
@@ -146,9 +133,9 @@ export const harperVale: CaseDef = {
       title: "Endeavor Turnstile Log: NV-40213-K",
       keywords: ["nv-40213-k", "nv-40213", "40213", "turnstile", "access log"],
       facts: [
-        { id: "log.swipes", label: "Swipes since February 26, 2027", value: "0 successful. 3 rejected on March 15, 2027, 7:58-8:01 AM, lobby turnstile B" },
+        { id: "log.swipes", label: "Swipes since Feb 26", value: "0 successful, 3 rejected March 15, 7:58-8:01 AM" },
       ],
-      body: "Turnstile B logged the three attempts as 'confident.'",
+      body: "Lobby turnstile B logged the three attempts as 'confident.'",
     },
     {
       id: "d1-harper-tessellate",
@@ -167,7 +154,7 @@ export const harperVale: CaseDef = {
       id: "issuer",
       facts: ["badge.issuer", "g.d1.badge-issuer"],
       kind: "contradiction",
-      note: "The badge says 'Endeavour Security Office'. Directive 1-C: badges are issued by Endeavor Security Office. The office has never spelled it with a 'u'. The office has a mug about it.",
+      note: "The badge says 'Endeavour'. Directive 1-C's issuer is Endeavor Security Office. No 'u', ever. The office has a mug about it.",
       suspicion: 25,
     },
     {
@@ -231,14 +218,14 @@ export const harperVale: CaseDef = {
       id: "turnstile",
       facts: ["claim.office", "log.swipes"],
       kind: "contradiction",
-      note: "She says she badges into Endeavor every morning. This badge has not opened a door since February 26, and was rejected three times at 7:58 this morning.",
+      note: "She says she badges in every morning. This badge hasn't opened a door since February 26 and was rejected three times at 7:58 today.",
       suspicion: 20,
     },
     {
       id: "payer",
       facts: ["claim.employer", "receipt.payer"],
       kind: "contradiction",
-      note: "Claims to work for NVIDIA. This morning's coffee was paid with a Tessellate Semiconductor corporate card, memo 'client entertainment (J.H.)'.",
+      note: "Claims to work for NVIDIA. This morning's coffee was paid with a Tessellate corporate card, memo 'client entertainment (J.H.)'.",
       suspicion: 25,
       jensen: "Client entertainment. I'm the client. I'm being entertained.",
     },
@@ -255,7 +242,7 @@ export const harperVale: CaseDef = {
       kind: "match",
       note: "Slide 3 of her 'romantic' deck asks for exactly what Tessellate is hunting: the Rubin Ultra tape-out schedule.",
       suspicion: 20,
-      jensen: "She wants to plan our anniversaries around my tape-out. That's either very romantic or very Tessellate.",
+      jensen: "She wants to plan our anniversaries around my tape-out. That's very romantic or very Tessellate.",
     },
     {
       id: "cloner-log",
@@ -285,18 +272,18 @@ export const harperVale: CaseDef = {
   baseSuspicion: 10,
   jensenIntro: "Omniverse. Lanyard. Great posture. That's one of mine. Probably. I have forty thousand of mine.",
   truth: "spy",
-  hiddenTruth: "Harper Vale is a competitive-intelligence analyst for Tessellate Semiconductor. Her badge is a forgery printed around a number Rafael Ortiz lost at a climbing gym. The 'romantic roadmap' is the Rubin Ultra roadmap.",
+  hiddenTruth: "A Tessellate analyst. Her forged badge carries a number Rafael Ortiz lost at a climbing gym. The 'romantic roadmap' is Rubin Ultra's.",
   solution: {
     clues: ["d:issuer", "d:holder", "d:turnstile", "d:payer", "rec:d1-harper-tessellate", "scan:lipstick"],
     redHerrings: ["q:amd", "d:format", "d:name-passport"],
-    explanation: "Everything about her manner says employee, which is the point. Check the badge against Directive 1-C: it was issued by 'Endeavour' with a u, a spelling the real office has never used. Search the badge number and it belongs to Rafael Ortiz in Thermal Engineering, reported lost in February, and the turnstile log shows it failing three times this morning. Her coffee receipt was paid with a Tessellate corporate card, and searching Tessellate lists her by name. The valid number format and the matching passport only prove she is a real person holding a real, stolen number. The AMD internship is a red herring. Plenty of honest people interned at AMD.",
+    explanation: "Her manner says employee, which is the point. Directive 1-C: the badge says 'Endeavour', a spelling the real office never uses. The number belongs to Rafael Ortiz, Thermal, reported lost in February, and it failed the turnstile three times this morning. Her coffee was paid with a Tessellate card, and Tessellate lists her by name. The AMD internship is a red herring.",
   },
   onAccept: {
     headline: "ROADMAP REVIEWED. BY TESSELLATE.",
-    text: "Harper photographed the whiteboard 'for the vibes' and left before the coffee cooled. Tessellate announced a suspiciously familiar tape-out schedule by Friday. NVDA lost $140 billion and the Jacket refused to be worn.",
+    text: "Harper photographed the whiteboard 'for the vibes.' Tessellate's new tape-out schedule looks familiar. NVDA lost $140 billion. The Jacket refused to be worn.",
   },
   onReject: {
     headline: "BADGE DENIED (WITH A U)",
-    text: "Endeavor Security Office confiscated the badge and framed the misspelling. Rafael Ortiz got his good photo back. Harper left smiling, which Dolores noted in triplicate.",
+    text: "Endeavor Security Office confiscated the badge and framed the misspelling. Rafael got his good photo back. Harper left smiling, noted in triplicate.",
   },
 };

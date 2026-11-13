@@ -69,6 +69,22 @@ describe("ui reducer on real content", () => {
     expect(s.toasts.map((t) => t.kind)).toEqual(["egg", "achievement"]);
   });
 
+  it("Jensen does not mutter over a compare readout or the findings sheet", () => {
+    let s = run(INITIAL, { type: "newRun", seed: 7 }, { type: "engine", action: { type: "advance" } });
+    const c = currentCase(s.run!, CONTENT)!;
+    const [a, b] = c.claims.map((f) => ({ owner: c.id, id: f.id }));
+    s = run(s, { type: "select", ref: a }, { type: "select", ref: b }, { type: "compare" });
+    expect(s.readout).not.toBeNull();
+    const before = s.jensen;
+    expect(uiReducer(s, { type: "mutter", r: 0.1 }).jensen).toBe(before);
+
+    s = run(s, { type: "dismissReadout" }, { type: "findings", open: true });
+    expect(uiReducer(s, { type: "mutter", r: 0.1 }).jensen).toBe(before);
+
+    s = uiReducer(s, { type: "findings", open: false });
+    expect(uiReducer(s, { type: "mutter", r: 0.1 }).jensen?.n).not.toBe(before?.n);
+  });
+
   it("three scan presses with no charges fire the scan-empty egg", () => {
     let s = run(INITIAL, { type: "newRun", seed: 9 }, { type: "engine", action: { type: "advance" } });
     s = { ...s, run: { ...s.run!, scansLeft: 0 } };

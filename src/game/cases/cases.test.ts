@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { textBudgetErrors } from "../textBudget";
 import { validateDays } from "../validate";
 import { DAYS } from "./index";
 
@@ -18,6 +19,10 @@ const REQUIRED_EGGS = [
 describe("case content", () => {
   it("passes structural validation across all five days", () => {
     expect(validateDays(DAYS)).toEqual([]);
+  });
+
+  it("stays inside the text budget", () => {
+    expect(textBudgetErrors(DAYS)).toEqual([]);
   });
 
   it("has at least 20 fully designed applicants", () => {

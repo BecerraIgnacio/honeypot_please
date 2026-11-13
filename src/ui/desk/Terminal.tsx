@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { currentCase, offeredQuestions, searchDatabase, suspicion } from "../../game/engine";
-import { findRecord } from "../../game/engine/selectors";
-import type { DbCategory } from "../../game/types";
+import { currentCase, discovered, offeredQuestions, searchDatabase, suspicion, type DbHit } from "../../game/engine";
+import type { DbCategory, Question } from "../../game/types";
 import { FactList } from "../common";
 import { CONTENT } from "../content";
 import { useGame } from "../GameProvider";
@@ -20,26 +19,51 @@ const CAT: Record<DbCategory, string> = {
   directive: "DIR",
 };
 
-function Database() {
+function Hit({ h }: { h: DbHit }) {
+  const { s, dispatch } = useGame();
+  const open = s.record === h.record.id;
+  return (
+    <li>
+      <button
+        type="button"
+        className={`term-hit ${open ? "term-hit-on" : ""}`}
+        aria-expanded={open}
+        onClick={() => {
+          sfx("blip");
+          dispatch({ type: "openRecord", id: open ? null : h.record.id });
+        }}
+      >
+        <span className={`term-tag tag-${h.record.category}`}>{CAT[h.record.category]}</span>
+        <span className="min-w-0 flex-1 truncate">{h.record.title}</span>
+        <span aria-hidden className="opacity-60">{open ? "−" : "+"}</span>
+      </button>
+      {open && (
+        <div className="term-rec">
+          {h.record.body && <p className="term-body">{h.record.body}</p>}
+          <FactList owner={h.owner} facts={h.record.facts} compact />
+        </div>
+      )}
+    </li>
+  );
+}
+
+function Hits({ hits }: { hits: DbHit[] }) {
+  return (
+    <ul className="flex flex-col gap-1">
+      {hits.map((h) => (
+        <Hit key={`${h.owner}|${h.record.id}`} h={h} />
+      ))}
+    </ul>
+  );
+}
+
+/** Search field and results; a result expands in place. With no query, the directives in force sit in a closed group. */
+export function Database() {
   const { s, dispatch } = useGame();
   const run = s.run!;
   const [draft, setDraft] = useState(s.query);
+  const q = s.query.trim();
   const hits = searchDatabase(run, CONTENT, s.query);
-  const open = s.record ? findRecord(run, CONTENT, s.record) : undefined;
-
-  if (open) {
-    return (
-      <div className="flex min-h-0 flex-col gap-2">
-        <button type="button" className="term-link self-start" onClick={() => dispatch({ type: "openRecord", id: null })}>
-          ← results
-        </button>
-        <p className="term-cat">{CAT[open.record.category]}</p>
-        <h3 className="term-h">{open.record.title}</h3>
-        {open.record.body && <p className="term-body">{open.record.body}</p>}
-        <FactList owner={open.owner} facts={open.record.facts} compact />
-      </div>
-    );
-  }
 
   return (
     <div className="flex min-h-0 flex-col gap-2">
@@ -60,56 +84,65 @@ function Database() {
             sfx("key");
             setDraft(e.target.value);
           }}
-          placeholder="name, badge no., firm, anything"
+          placeholder="name, badge, firm"
           autoComplete="off"
           spellCheck={false}
+          enterKeyHint="search"
         />
         <button type="submit" className="btn btn-primary btn-sm">
           Search
         </button>
       </form>
-      <p className="term-cat">
-        {s.query.trim() === "" ? "Directives in force" : `${hits.length} result${hits.length === 1 ? "" : "s"} for "${s.query}"`}
-      </p>
-      {hits.length === 0 && s.query.trim().length === 1 && <p className="term-body">Two characters minimum. The database has standards.</p>}
-      {hits.length === 0 && s.query.trim().length > 1 && <p className="term-body">NO RECORDS. Try a badge number, an employer, a surname.</p>}
-      <ul className="flex flex-col gap-1">
-        {hits.map((h) => (
-          <li key={`${h.owner}|${h.record.id}`}>
-            <button
-              type="button"
-              className="term-hit"
-              onClick={() => {
-                sfx("blip");
-                dispatch({ type: "openRecord", id: h.record.id });
-              }}
-            >
-              <span className={`term-tag tag-${h.record.category}`}>{CAT[h.record.category]}</span>
-              <span className="min-w-0 truncate">{h.record.title}</span>
-            </button>
-          </li>
-        ))}
-      </ul>
+      {q === "" ? (
+        <details className="term-group">
+          <summary className="term-cat">Directives in force · {hits.length}</summary>
+          <Hits hits={hits} />
+        </details>
+      ) : (
+        <>
+          <p className="term-cat">
+            {hits.length} result{hits.length === 1 ? "" : "s"} for &quot;{q}&quot;
+          </p>
+          {hits.length === 0 && <p className="term-body">{q.length === 1 ? "Two characters minimum." : "No records. Try a name, badge or firm."}</p>}
+          <Hits hits={hits} />
+        </>
+      )}
     </div>
   );
 }
 
-function Interrogate() {
+function AskedQuestion({ q, owner, latest }: { q: Question; owner: string; latest: boolean }) {
+  const [open, setOpen] = useState<boolean | null>(null);
+  const shown = open ?? latest;
+  return (
+    <li className={`q-asked ${shown ? "q-asked-open" : ""}`}>
+      <button type="button" className="q-asked-head" aria-expanded={shown} onClick={() => setOpen(!shown)}>
+        {q.prompt}
+      </button>
+      {shown && (
+        <div className="flex flex-col gap-1 pop-in">
+          <p className="term-body">“{q.answer}”</p>
+          <FactList owner={owner} facts={q.facts} compact />
+        </div>
+      )}
+    </li>
+  );
+}
+
+/** Questions to ask; an asked question shows her answer and its facts right under it, latest open. */
+export function QuestionList() {
   const { s, dispatch } = useGame();
   const run = s.run!;
   const c = currentCase(run, CONTENT)!;
   const offered = offeredQuestions(run, CONTENT);
+  const lastAsked = discovered(run)
+    .filter((t) => t.startsWith("q:"))
+    .at(-1);
   return (
     <ul className="flex flex-col gap-1.5">
       {offered.map(({ question: q, asked }) =>
         asked ? (
-          <li key={q.id}>
-            <details className="q-asked">
-              <summary>{q.prompt}</summary>
-              <p className="term-body mt-1">“{q.answer}”</p>
-              <FactList owner={c.id} facts={q.facts} compact />
-            </details>
-          </li>
+          <AskedQuestion key={q.id} q={q} owner={c.id} latest={lastAsked === `q:${q.id}`} />
         ) : (
           <li key={q.id}>
             <button
@@ -123,7 +156,7 @@ function Interrogate() {
           </li>
         ),
       )}
-      <li className="term-body mt-2 opacity-60">Some questions only make sense once you have read the right document or record.</li>
+      {offered.length < c.questions.length && <li className="term-body mt-1 opacity-60">More questions unlock as you dig.</li>}
     </ul>
   );
 }
@@ -155,7 +188,7 @@ export function Gauge({ value }: { value: number }) {
         <span className="hud-label">Suspicion</span>
         <span className="font-pixel text-2xl leading-none">{value}</span>
       </div>
-      <p className="text-[10px] leading-snug opacity-60">Calibrated by vibes. Not admissible. Spies have been known to read 12.</p>
+      <p className="text-[10px] leading-snug opacity-60">A vibe, not a verdict.</p>
     </div>
   );
 }
@@ -187,7 +220,7 @@ export function Terminal() {
           ))}
         </div>
         <div className="term-screen" role="tabpanel">
-          {s.termTab === "database" ? <Database /> : <Interrogate />}
+          {s.termTab === "database" ? <Database /> : <QuestionList />}
         </div>
       </div>
       <Gauge value={suspicion(run, CONTENT)} />

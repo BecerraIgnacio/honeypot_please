@@ -9,7 +9,7 @@ export const achiengOtieno: CaseDef = {
     nationality: "Kenyan",
     occupation: "Senior Thermal Engineer, NVIDIA Datacenter Cooling",
     statedReason: "Submitting a purchase order for one (1) dinner, net 30.",
-    bio: "Keeps rack-scale systems from melting. Describes people by their thermal resistance. Spent Thursday afternoon at the liquid-cooling booth and Friday dawn at the badge office, for related reasons.",
+    bio: "Keeps racks from melting. Rates people by thermal resistance. Thursday: liquid-cooling booth. Friday dawn: badge office. Related.",
     portrait: {
       kind: "human",
       skin: 6,
@@ -26,7 +26,7 @@ export const achiengOtieno: CaseDef = {
     { id: "ao.c.name", label: "Name", value: "Achieng Otieno" },
     { id: "ao.c.job", label: "Position", value: "Senior Thermal Engineer, NVIDIA Datacenter Cooling" },
     { id: "ao.c.badge", label: "Badge", value: "NV-31877-L" },
-    { id: "ao.c.drop", label: "Old badge lost", value: "Dropped into an LN2 dewar, Thu Mar 18 2027, about 15:30, Booth 1420" },
+    { id: "ao.c.drop", label: "Old badge lost", value: "LN2 dewar at Booth 1420, Thu Mar 18 2027, about 15:30" },
     { id: "ao.c.prior", label: "Previous employer", value: "AMD (2016-2022)" },
   ],
   documents: [
@@ -39,7 +39,7 @@ export const achiengOtieno: CaseDef = {
         { id: "ao.badge.no", label: "Badge no.", value: "NV-31877-L" },
         { id: "ao.badge.issued", label: "Issued", value: "Fri Mar 19 2027, 06:10 PDT" },
       ],
-      body: "Fresh lamination, still slightly warm from the printer, which she says is 'the correct temperature for a first impression.'",
+      body: "Still slightly warm from the printer, which she says is 'the correct temperature for a first impression.'",
       stamp: "REISSUE",
     },
     {
@@ -64,7 +64,7 @@ export const achiengOtieno: CaseDef = {
         { id: "ao.po.terms", label: "Terms", value: "Net 30" },
         { id: "ao.po.ship", label: "Ship to", value: "Any venue with adequate airflow" },
       ],
-      body: "Line 2: dessert, optional, subject to thermal budget. Line 3: conversation, sustained load, no throttling. Approved by: A. Otieno. Second approver: A. Otieno, after thinking about it.",
+      body: "Line 2: dessert, subject to thermal budget. Line 3: conversation, sustained load, no throttling. Approved: A. Otieno. Second approver: A. Otieno, after thinking about it.",
     },
   ],
   questions: [
@@ -79,14 +79,8 @@ export const achiengOtieno: CaseDef = {
       id: "ao-q-suffix",
       prompt: "Your badge ends in L. Yesterday's access log says K.",
       requires: ["d:ao-suffix"],
-      answer: "I dropped the K into a dewar of liquid nitrogen at Booth 1420. It came out at minus 196 and shattered at minus my dignity. The booth staff wrote it down. The night office reissued me at six this morning.",
+      answer: "I dropped the K into liquid nitrogen at Booth 1420. It came out at minus 196 and shattered at minus my dignity. The booth wrote it down. The night office reissued me at six.",
       suspicion: -10,
-    },
-    {
-      id: "ao-q-early",
-      prompt: "Why were you at the badge office at 05:52?",
-      answer: "Dawn is when the chillers are honest. Also, without a badge I can't get into the cold aisle, and the cold aisle is where I keep my feelings.",
-      suspicion: 5,
     },
     {
       id: "ao-q-in",
@@ -121,7 +115,7 @@ export const achiengOtieno: CaseDef = {
         { id: "ao.emp.prior", label: "Prior employer", value: "AMD (2016-2022)" },
         { id: "ao.emp.edit", label: "Last edit", value: "Fri Mar 19 2027, 06:12 PDT by ESO-NIGHT" },
       ],
-      body: "Hired May 2022. Previous badge NV-31877-K deactivated 05:54 today. Performance note: 'Reduced rack 14 delta-T by 6 degrees and would not stop talking about it. Correctly.'",
+      body: "Hired May 2022. Badge NV-31877-K deactivated 05:54 today. Performance note: 'Cut rack 14 delta-T by 6 degrees and would not stop talking about it. Correctly.'",
     },
     {
       id: "d5-ao-access",
@@ -131,9 +125,10 @@ export const achiengOtieno: CaseDef = {
       facts: [
         { id: "ao.acc.badge", label: "Badge", value: "NV-31877-K" },
         { id: "ao.acc.lobby", label: "07:58 PDT", value: "Endeavor lobby, turnstile 3" },
-        { id: "ao.acc.last", label: "Last use", value: "Thu Mar 18 2027, 14:10 PDT, SJCC Hall 2, Booth 1420. No entries after." },
+        { id: "ao.acc.last", label: "Last use", value: "Thu Mar 18 2027, 14:10 PDT, SJCC Hall 2, Booth 1420" },
         { id: "ao.acc.edit", label: "Last edit", value: "Thu Mar 18 2027, 23:00 PDT by ACCESS-SYNC" },
       ],
+      body: "No entries after 14:10 Thursday.",
     },
     {
       id: "d5-ao-booth",
@@ -141,7 +136,7 @@ export const achiengOtieno: CaseDef = {
       title: "GTC Booth 1420 'Liquid Cooling Live': incident log",
       keywords: ["booth 1420", "1420", "liquid cooling", "ln2", "liquid nitrogen", "dewar", "otieno", "nv-31877-k", "cryo"],
       facts: [
-        { id: "ao.booth.event", label: "Incident", value: "Thu Mar 18 2027, 15:32 PDT: employee badge dropped into LN2 dewar during demo" },
+        { id: "ao.booth.event", label: "Badge into LN2 dewar", value: "Thu Mar 18 2027, 15:32 PDT, during demo" },
         { id: "ao.booth.badge", label: "Badge recovered", value: "NV-31877-K (brittle, cracked)" },
         { id: "ao.booth.owner", label: "Owner", value: "A. Otieno, NVIDIA Datacenter Cooling. Advised to report to ESO." },
         { id: "ao.booth.edit", label: "Last edit", value: "Thu Mar 18 2027, 15:40 PDT by GTC-OPS" },
@@ -173,7 +168,7 @@ export const achiengOtieno: CaseDef = {
       id: "ao-cutoff",
       facts: ["ao.emp.edit", "g.d5.edit-cutoff"],
       kind: "explained",
-      note: "Her employee record was edited at 06:12 today, after the 02:00 cutoff. Suspect pending review. Suspect is not false: check who made the edit and whether anything written before 02:00 agrees.",
+      note: "Her employee record was edited at 06:12, after the cutoff. Suspect, not false: check the editor and older records.",
       suspicion: 20,
       jensen: "Edited after the cutoff! I knew it. I didn't know it. I'm going to say I knew it.",
     },
@@ -181,7 +176,7 @@ export const achiengOtieno: CaseDef = {
       id: "ao-lost-cutoff",
       facts: ["ao.lost.edit", "g.d5.edit-cutoff"],
       kind: "explained",
-      note: "The lost-badge report was also written after the cutoff, by the same editor, two minutes after the reissue it records. Look for a record from before 02:00.",
+      note: "The lost-badge report was also written after the cutoff, by the same editor. Look for a record from before 02:00.",
       suspicion: 10,
     },
     {
@@ -195,9 +190,9 @@ export const achiengOtieno: CaseDef = {
       id: "ao-drop-booth",
       facts: ["ao.c.drop", "ao.booth.event"],
       kind: "match",
-      note: "The booth logged her badge going into the dewar at 15:32 on Thursday, more than ten hours before the cutoff. Her story was on file before anyone could tamper with it.",
+      note: "The booth logged her badge into the dewar Thursday at 15:32, long before the cutoff. Her story was on file before anyone could touch it.",
       suspicion: -15,
-      jensen: "Liquid nitrogen. She sacrificed her badge to science. That is the most romantic thing I've heard all week.",
+      jensen: "Liquid nitrogen. She sacrificed her badge to science. Most romantic thing I've heard all week.",
     },
     {
       id: "ao-old-booth",
@@ -262,25 +257,25 @@ export const achiengOtieno: CaseDef = {
       id: "ao-pockets",
       kind: "clean",
       title: "Lab coat pockets",
-      description: "A K-type thermocouple, a tube of thermal paste labeled 'FOR EMERGENCIES', and a laminated phase diagram of nitrogen. No devices. The scanner reports feeling slightly cooler about her.",
+      description: "A thermocouple, thermal paste labeled 'FOR EMERGENCIES' and a laminated nitrogen phase diagram. No devices. The scanner feels cooler about her.",
       suspicion: -5,
     },
   ],
   baseSuspicion: 50,
   jensenIntro: "An employee. Employees are the most dangerous. They know where the snacks are.",
   truth: "innocent",
-  hiddenTruth: "Achieng Otieno is exactly who she says. On Thursday her badge fell into a liquid-nitrogen dewar at Booth 1420, and the booth logged it. At dawn on Friday the night security office deactivated the K and issued an L, then updated her employee record at 06:12. The post-cutoff edit is real, routine, and made by the right office on its own shift.",
+  hiddenTruth: "Exactly who she says. Her badge fell into LN2 Thursday, and the booth logged it. The 06:12 edit is a routine reissue by the right office, on shift.",
   solution: {
     clues: ["d:ao-drop-booth", "d:ao-old-booth", "d:ao-night-shift", "d:ao-deact", "d:ao-last-use"],
     redHerrings: ["d:ao-cutoff", "d:ao-suffix", "q:ao-q-amd"],
-    explanation: "Directive 5-A makes her employee record suspect, because it was edited at 06:12 today. Suspect is not false. The editor was ESO-NIGHT, which is on duty until 06:30. More importantly, records written before the cutoff back her story. The booth incident log from Thursday at 15:40 names her and the exact K badge she hands you, cracked. The access log shows that badge was never used again after the booth. The deactivation and reissue times agree across badge, sticker, and report. Her AMD years are in her HR file and mean nothing.",
+    explanation: "Her record was edited at 06:12, after the cutoff, by ESO-NIGHT, on shift until 06:30. Suspect, not false. Records from before the cutoff back her: Thursday's booth log names her and the cracked K badge she hands you, and the access log shows it unused after the booth. Badge, sticker and report agree on deactivation and reissue. Her AMD years mean nothing.",
   },
   onAccept: {
     headline: "PURCHASE ORDER APPROVED",
-    text: "Dinner is scheduled for April, net 30. She picked the restaurant for its airflow and spent dessert measuring the jacket's emissivity. Jensen called it the best design review he has had all year.",
+    text: "Dinner is set for April, net 30. She chose the restaurant for its airflow. Jensen called it the best design review he has had all year.",
   },
   onReject: {
     headline: "PO REJECTED",
-    text: "Achieng stapled a neat rejection notice to her purchase order and went back to the cold aisle. Her badge was real and her story was on file before the cutoff. The only thing that froze was your judgment.",
+    text: "Achieng went back to the cold aisle. Her badge was real and her story was on file before the cutoff. The only thing that froze was your judgment.",
   },
 };

@@ -9,7 +9,7 @@ export const luciaFerrante: CaseDef = {
     nationality: "Italian",
     occupation: "Leather conservator, Bottega Restauri Ferrante",
     statedReason: "A date with the Jacket. Mr. Huang may attend as a chaperone.",
-    bio: "Third-generation leather restorer from Florence. Has conditioned saddles for two dukes and one racehorse that later won something. Has watched the Jacket age under stage lights for a decade and believes it is crying for help.",
+    bio: "Third-generation leather restorer from Florence. Has watched the Jacket age under stage lights for a decade and believes it is crying for help.",
     portrait: {
       kind: "human",
       skin: 3,
@@ -25,7 +25,7 @@ export const luciaFerrante: CaseDef = {
   claims: [
     { id: "claim.name", label: "Stated name", value: "Lucia Ferrante" },
     { id: "claim.business", label: "Business", value: "Bottega Restauri Ferrante, Florence" },
-    { id: "claim.prior", label: "Prior contact with the Jacket", value: "None. 'We have never been formally introduced.'" },
+    { id: "claim.prior", label: "Prior Jacket contact", value: "None. 'We have never been formally introduced.'" },
     { id: "claim.arrival", label: "Flew in from Florence", value: "March 13, 2027" },
   ],
   documents: [
@@ -50,7 +50,7 @@ export const luciaFerrante: CaseDef = {
         { id: "guild.since", label: "Master since", value: "2009" },
       ],
       stamp: "MAESTRA",
-      footer: "Specialties: saddlery, bookbinding, 'garments of emotional significance.'",
+      footer: "Specialties: saddles, books, 'garments of emotional significance.'",
     },
     {
       id: "boarding",
@@ -71,9 +71,9 @@ export const luciaFerrante: CaseDef = {
       facts: [
         { id: "jcr.number", label: "Request number", value: "JCR-0042" },
         { id: "jcr.filed", label: "Filed", value: "February 2, 2027" },
-        { id: "jcr.specs", label: "Garment specifications (estimated from keynote footage)", value: "Chest 46R, sleeve 64 cm, left elbow critical" },
+        { id: "jcr.specs", label: "Garment specs", value: "Chest 46R, sleeve 64 cm, left elbow critical" },
       ],
-      body: "Requested service: one supervised conditioning, low heat, natural lanolin. Reason for request: 'Look at the elbow.'",
+      body: "Requested service: one supervised conditioning, low heat, natural lanolin. Reason for request: 'Look at the elbow.' Specs estimated from keynote footage.",
       stamp: "PENDING",
     },
   ],
@@ -93,17 +93,11 @@ export const luciaFerrante: CaseDef = {
       jensen: "A hanger. I'm worth five trillion dollars and I'm a hanger.",
     },
     {
-      id: "date",
-      prompt: "What happens on this date?",
-      answer: "Dinner. Candles, but far away. Nothing above forty degrees. A little lanolin. I talk, it listens. You sit somewhere with good ventilation and you do not lean on anything.",
-      suspicion: 5,
-    },
-    {
       id: "cuda",
       prompt: "Do you know what CUDA is?",
       answer: "A fish? No. Don't tell me. It doesn't matter. I know leather. You know CUDA. This is why the Jacket needs a third party.",
       suspicion: 0,
-      jensen: "She doesn't know CUDA. That's fine. That's honestly refreshing. Everyone else here knows CUDA too well.",
+      jensen: "She doesn't know CUDA. That's refreshing. Everyone else here knows CUDA too well.",
     },
     {
       id: "bag",
@@ -115,8 +109,8 @@ export const luciaFerrante: CaseDef = {
     {
       id: "computex",
       prompt: "Security has a report on you from Computex 2025.",
-      answer: "I walked quickly toward a jacket in distress. Your people stopped me at three meters. Three meters is not an introduction. Three meters is a longing. Afterward I filed the form, exactly as the report told me to. Nobody files the form.",
-      facts: [{ id: "q.distance", label: "Closest approach (her account)", value: "Three meters, stopped by security" }],
+      answer: "I walked quickly toward a jacket in distress. Your people stopped me at three meters. Three meters is not an introduction. Three meters is a longing. Then I filed the form.",
+      facts: [{ id: "q.distance", label: "Closest approach, per her", value: "Three meters, stopped by security" }],
       suspicion: -10,
       requires: ["rec:d1-lucia-incident"],
       jensen: "She filed paperwork afterward. Nobody files paperwork. I like her a little.",
@@ -130,10 +124,10 @@ export const luciaFerrante: CaseDef = {
       keywords: ["lucia ferrante", "ferrante", "lucia", "jacket", "leather", "lanolin", "conditioner", "computex", "bottega restauri ferrante", "ir-2025-0611"],
       facts: [
         { id: "inc.date", label: "Incident date", value: "May 20, 2025, Computex Taipei" },
-        { id: "inc.finding", label: "Finding", value: "Subject approached the stage with leather conditioner. Stopped at three meters. No contact. No hostile intent." },
-        { id: "inc.restriction", label: "Restriction", value: "May not touch the Jacket without an approved Jacket Care Request" },
+        { id: "inc.finding", label: "Finding", value: "Stopped at three meters. No contact." },
+        { id: "inc.restriction", label: "Restriction", value: "No touching the Jacket without a Jacket Care Request" },
       ],
-      body: "Subject was polite, apologized to the Jacket rather than to staff, and asked for the correct form. She was given the correct form. Not banned from any premises.",
+      body: "Subject approached the stage with leather conditioner. No hostile intent. She apologized to the Jacket rather than to staff and asked for the correct form.",
     },
     {
       id: "d1-lucia-jcr",
@@ -152,7 +146,7 @@ export const luciaFerrante: CaseDef = {
       id: "prior",
       facts: ["claim.prior", "inc.finding"],
       kind: "explained",
-      note: "She claims no prior contact, yet IR-2025-0611 has her approaching the Jacket at Computex 2025. Read the finding. She was stopped at three meters. There was no contact. Her claim is technically, and Italianly, accurate.",
+      note: "IR-2025-0611 has her rushing the Jacket in 2025. The finding: three meters, no contact. Her claim is technically, and Italianly, true.",
       suspicion: 10,
       jensen: "Three meters. That's closer than most analysts get to the roadmap.",
     },
@@ -160,7 +154,7 @@ export const luciaFerrante: CaseDef = {
       id: "prior-date",
       facts: ["claim.prior", "inc.date"],
       kind: "explained",
-      note: "An incident on May 20, 2025 involving her and the Jacket. The finding on the same record says she never reached it: stopped at three meters, no contact.",
+      note: "An incident on May 20, 2025, involving her and the Jacket. The same record says she never reached it: stopped at three meters.",
       suspicion: 5,
     },
     {
@@ -181,7 +175,7 @@ export const luciaFerrante: CaseDef = {
       id: "measurements",
       facts: ["scan.note", "jcr.specs"],
       kind: "explained",
-      note: "The 'secret' measurements sewn into her bag are printed on her own Jacket Care Request, estimated from public keynote footage. Romantic, not reconnaissance.",
+      note: "The measurements in her bag lining are on her own Jacket Care Request, estimated from keynote footage. Romantic, not reconnaissance.",
       suspicion: -5,
     },
     {
@@ -226,15 +220,15 @@ export const luciaFerrante: CaseDef = {
   baseSuspicion: 30,
   jensenIntro: "She's not looking at me. She's looking at my elbow. Nobody looks at my elbow.",
   truth: "innocent",
-  hiddenTruth: "A genuine Florentine leather conservator who is, strictly speaking, in love with a garment. She was told to file a form, and she filed the form. She is the most procedurally compliant applicant of the week.",
+  hiddenTruth: "A genuine Florentine leather conservator, in love with a garment. Told to file a form, she filed the form. The week's most compliant applicant.",
   solution: {
     clues: ["d:jcr-log", "d:restriction", "d:business", "d:arrival", "q:computex"],
     redHerrings: ["rec:d1-lucia-incident", "d:prior", "scan:lining", "d:measurements"],
-    explanation: "An incident record with her name on it looks bad until you read it. At Computex 2025 she was stopped three meters from the Jacket, made no contact, showed no hostile intent, and was told to file a Jacket Care Request. Her copy of JCR-0042 matches the Jacket Office log, so she did exactly that. Her guild certificate, boarding pass and ID all agree with what she told you. The measurements sewn into her bag look like reconnaissance, but they are the same numbers printed on her own request, estimated from keynote footage. She is strange and fully legitimate.",
+    explanation: "The incident record looks bad until you read it. At Computex 2025 she was stopped three meters from the Jacket, made no contact, and was told to file a Jacket Care Request. Her JCR-0042 matches the Jacket Office log. Guild certificate, boarding pass and ID agree with her. The measurements in her bag are the numbers on her own request. Strange, and fully legitimate.",
   },
   onAccept: {
     headline: "THE JACKET HAS A DATE",
-    text: "Dinner was held at a maximum of forty degrees. The Jacket's left elbow is described as 'markedly happier.' Jensen sat by the ventilation and called the evening 'surprisingly emotional for me, a bystander.'",
+    text: "Dinner was held below forty degrees. The Jacket's left elbow is 'markedly happier.' Jensen called it 'surprisingly emotional for me, a bystander.'",
   },
   onReject: {
     headline: "JACKET CARE DENIED",

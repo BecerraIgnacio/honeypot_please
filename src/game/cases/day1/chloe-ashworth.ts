@@ -9,7 +9,7 @@ export const chloeAshworth: CaseDef = {
     nationality: "Canadian",
     occupation: "Lifestyle influencer",
     statedReason: "A candlelit dinner. And, if the moment is right, one (1) RTX 5090 allocation.",
-    bio: "Says she has 1.2 million followers on a platform she declines to name. Brought her own ring light to a security checkpoint. Has already filmed the lobby twice.",
+    bio: "Claims 1.2 million followers on a platform she won't name. Brought her own ring light to a security checkpoint. Has filmed the lobby twice.",
     portrait: {
       kind: "human",
       skin: 2,
@@ -67,12 +67,6 @@ export const chloeAshworth: CaseDef = {
   ],
   questions: [
     {
-      id: "name",
-      prompt: "What's your name again?",
-      answer: "Chloe Ashworth! Like it says on... me. On my face. That's my face name.",
-      suspicion: 5,
-    },
-    {
       id: "work",
       prompt: "What kind of content do you make?",
       answer: "Unboxing, mostly. Graphics cards, mostly. I unbox them, I film them, and then I box them again. Very carefully. With the plastic back on.",
@@ -85,13 +79,6 @@ export const chloeAshworth: CaseDef = {
       prompt: "Why do you want a date with me?",
       answer: "You have kind eyes and a 5090 allocation. A jacket! You have a jacket. I meant the jacket.",
       suspicion: 10,
-    },
-    {
-      id: "count",
-      prompt: "How many GPUs would make this a good date?",
-      answer: "Just one! For me. Personally. I game. I play the games. All of them. The shooting one, the farming one.",
-      suspicion: 5,
-      jensen: "The shooting one and the farming one. That's every game. She's right.",
     },
     {
       id: "gwendolyn",
@@ -129,7 +116,7 @@ export const chloeAshworth: CaseDef = {
         { id: "rec.base", label: "Base of operations", value: "Vancouver, BC" },
         { id: "rec.role", label: "Role", value: "Allocation acquisition, romantic channel" },
       ],
-      body: "Subject has obtained 212 graphics cards across 31 first dates. Victims describe her as 'delightful' and 'gone before dessert.' Cards resurface on resale sites within 48 hours, still in the plastic.",
+      body: "Has obtained 212 graphics cards across 31 first dates. Victims call her 'delightful' and 'gone before dessert.' Cards hit resale sites within 48 hours, still in the plastic.",
     },
   ],
   discrepancies: [
@@ -204,26 +191,26 @@ export const chloeAshworth: CaseDef = {
       id: "purse",
       kind: "bag-contents",
       title: "Purse contents",
-      description: "One ring light, a label maker, and 40 pre-printed resale listings titled 'RTX 5090 SEALED, SIGNED BY JENSEN (DATE NIGHT EDITION)'. The listings already have prices. The prices are high.",
-      facts: [{ id: "scan.listings", label: "Pre-printed listings", value: "40 resale listings, 'SIGNED BY JENSEN (DATE NIGHT EDITION)'" }],
+      description: "A ring light, a label maker, and 40 pre-printed listings: 'RTX 5090 SEALED, SIGNED BY JENSEN (DATE NIGHT EDITION)'. Already priced. High.",
+      facts: [{ id: "scan.listings", label: "Pre-printed listings", value: "40 resale listings" }],
       suspicion: 25,
     },
   ],
   baseSuspicion: 25,
   jensenIntro: "A fan. I can tell. She's looking at the jacket the way I look at a CoWoS allocation.",
   truth: "spy",
-  hiddenTruth: "Gwendolyn Marsh, allocation-acquisition lead for the Gray Market Sisters scalper ring. She dates for GPUs. 'Chloe Ashworth' exists only on her index card and in her ring light.",
+  hiddenTruth: "Gwendolyn Marsh of the Gray Market Sisters scalper ring. She dates for GPUs. 'Chloe Ashworth' exists only on an index card and in a ring light.",
   solution: {
     clues: ["d:name-licence", "d:name-pass", "d:allocation", "rec:d1-chloe-gms", "d:watchlist-name", "scan:purse"],
     redHerrings: ["d:licence-expiry", "d:pass-format"],
-    explanation: "Directive 1-A: the name she states must match her ID. She said Chloe Ashworth. Her licence and her GTC pass both say Gwendolyn Marsh, and she had no name-change document. That alone is a rejection. Searching 'Gwendolyn Marsh' pulls up the Gray Market Sisters watchlist, alias 'Chloe' included, and her own index card asks for 40 allocations right after she claimed she wanted one. The valid licence and the valid pass look reassuring, but all they prove is that Gwendolyn Marsh is a real person with real paperwork.",
+    explanation: "Directive 1-A: the stated name must match the ID. She said Chloe Ashworth. Her licence and GTC pass both say Gwendolyn Marsh, with no name-change document. That alone rejects her. Searching 'Gwendolyn Marsh' finds the Gray Market Sisters watchlist, alias 'Chloe', and her index card asks for 40 units after she claimed one. The valid licence and pass only prove Gwendolyn is real.",
   },
   onAccept: {
     headline: "HONEYPOTTED BY A RING LIGHT",
-    text: "Gwendolyn Marsh left dinner with 40 RTX 5090 allocations, the centerpiece, and a signed napkin now listed at $9,000. The Board called it 'a teachable moment' and scheduled a meeting about the moment.",
+    text: "Gwendolyn left with 40 RTX 5090 allocations and a napkin now listed at $9,000. The Board called it 'a teachable moment' and booked a meeting about the moment.",
   },
   onReject: {
     headline: "TWO NAMES, ZERO DATES",
-    text: "Security escorted Gwendolyn Marsh out. Her livestream of the escort got 400,000 views and was unboxed twice. Dolores Vance initialed the form without looking up.",
+    text: "Security escorted Gwendolyn Marsh out. Her livestream of the escort got 400,000 views. Dolores Vance initialed the form without looking up.",
   },
 };

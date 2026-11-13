@@ -8,9 +8,8 @@ export const maricelDizon: CaseDef = {
     name: "Maricel Dizon",
     nationality: "Filipino",
     occupation: "ICU night-shift nurse",
-    statedReason:
-      "Wants Jensen to sign the print of their 2025 selfie, then have one (1) coffee. Decaf. He looks tired.",
-    bio: "Twelve years in intensive care, the last four at Santa Teresa Regional in San Jose. Met Jensen for nine seconds in the GTC 2025 selfie line. Has been quietly worried about his sleep schedule ever since.",
+    statedReason: "A signature on their 2025 selfie, then one (1) decaf. He looks tired.",
+    bio: "Twelve years in intensive care. Met Jensen for nine seconds in the GTC 2025 selfie line and has worried about his sleep ever since.",
     portrait: {
       kind: "human",
       skin: 3,
@@ -61,19 +60,19 @@ export const maricelDizon: CaseDef = {
       title: "Selfie with Jensen (4x6 print)",
       facts: [
         { id: "photo-hash", label: "Provenance hash", value: "EPR-250318-2207" },
-        { id: "photo-fingers", label: "Fingers on her left hand (in photo)", value: "6" },
+        { id: "photo-fingers", label: "Left-hand fingers (photo)", value: "6" },
         { id: "photo-caption", label: "Caption on back", value: "GTC 2025!! he smelled like a new GPU" },
       ],
-      body: "Jensen mid-thumbs-up. Maricel beside him in a teal cardigan, flashing a peace sign. Her skin is luminous. Her left hand has one finger more than the usual allotment.",
+      body: "Jensen mid-thumbs-up. Maricel beside him, peace sign, skin luminous. Her left hand has one finger more than the usual allotment.",
     },
     {
       id: "gtc25-pass",
       kind: "conference-pass",
-      title: "GTC 2025 Exhibit Hall Pass (expired, kept in a ziplock bag)",
+      title: "GTC 2025 Day Pass (kept in a ziplock)",
       issuer: "NVIDIA GTC Registration",
       facts: [
         { id: "gtc25-num", label: "Pass number", value: "GTC25-118034" },
-        { id: "gtc25-date", label: "Valid", value: "March 18, 2025 only (Exhibit Hall day pass)" },
+        { id: "gtc25-date", label: "Valid", value: "March 18, 2025 only" },
         { id: "gtc25-name", label: "Name", value: "Maricel Dizon" },
       ],
       stamp: "EXPIRED",
@@ -84,26 +83,19 @@ export const maricelDizon: CaseDef = {
       id: "q-fingers",
       prompt: "Count the fingers in this photo.",
       answer:
-        "Six? Oh no. That's Lumina Glow. I ran it to fix the under-eye situation after a 14-hour shift. It fixed the eyes and gave me a bonus finger. I have five. Look. Five. I count them every shift, it's a nurse thing.",
+        "Six? Oh no. Lumina Glow. I ran it to fix my under-eyes after a 14-hour shift and it gave me a bonus finger. I have five. Look.",
       facts: [
-        { id: "ans-fingers", label: "Her actual left hand (shown at the window)", value: "5 fingers" },
-        { id: "ans-filter", label: "Editing she admits to", value: "Lumina Glow beauty filter, applied after the fact" },
+        { id: "ans-fingers", label: "Her left hand (at window)", value: "5 fingers" },
+        { id: "ans-filter", label: "Editing she admits to", value: "Lumina Glow beauty filter" },
       ],
       suspicion: -5,
       jensen: "Five on the hand. Six on the photo. I trust the hand. I think. Security, count again.",
     },
     {
-      id: "q-coffee",
-      prompt: "Why coffee?",
-      answer:
-        "You blink eleven times a minute on stage. Normal is fifteen to twenty. You're dry-eyed and running on espresso and shareholder value. I want to sit you down for twenty minutes and watch you drink something without a ticker on the wall.",
-      jensen: "She tracked my blink rate. Romance or a medical chart. I cannot tell the difference anymore.",
-    },
-    {
       id: "q-gtc25",
       prompt: "Why were you at GTC 2025?",
       answer:
-        "A coworker won a day pass in a raffle and got scheduled for nights. I went to the exhibit hall, ate a nineteen-dollar sandwich, and waited two hours in your selfie line. Worth it. You, not the sandwich.",
+        "A coworker won a day pass in a raffle and got put on nights. I ate a nineteen-dollar sandwich and waited two hours in your selfie line. Worth it. You, not the sandwich.",
       facts: [{ id: "ans-gtc-day", label: "GTC 2025 attendance", value: "One day, Exhibit Hall only" }],
       suspicion: -3,
     },
@@ -111,23 +103,23 @@ export const maricelDizon: CaseDef = {
       id: "q-gpu",
       prompt: "What's your favorite GPU?",
       answer:
-        "The one inside our MRI reconstruction box. I don't know the name. It made scans come back in four minutes instead of forty. A kid with a head injury got a surgeon an hour sooner. That one's my favorite.",
-      jensen: "She does not know the model number. She knows what it did. Nobody has said anything more romantic to me this week.",
+        "The one in our MRI reconstruction box. I don't know its name. Scans come back in four minutes instead of forty. A kid with a head injury got a surgeon an hour sooner.",
+      jensen: "She knows what it did, not what it is called. Nobody has said anything more romantic to me.",
     },
     {
       id: "q-keynote",
       prompt: "Did you watch yesterday's keynote?",
       answer:
-        "I was asleep. Night shift. I saw the clip where you held the wafer. You held it like a newborn that costs thirty thousand dollars.",
+        "I was asleep. Night shift. I saw the clip where you held the wafer like a newborn that costs thirty thousand dollars.",
       facts: [{ id: "ans-asleep", label: "During the keynote", value: "Asleep after a night shift" }],
       suspicion: -3,
     },
     {
       id: "q-original",
-      prompt: "The registry has the checksum of the original capture. Do you have the unedited file?",
+      prompt: "Do you have the unedited original file?",
       answer:
-        "On my phone. Unfiltered. I look like a person who just did a fourteen-hour shift, which I was. Here. Five fingers. Same peace sign. Same jacket on him, obviously, I don't think the jacket changes.",
-      facts: [{ id: "ans-original", label: "Checksum of the phone original", value: "7F3A-09C2" }],
+        "On my phone. Unfiltered. I look like someone who just did a fourteen-hour shift. Five fingers. Same jacket on him, obviously. I don't think the jacket changes.",
+      facts: [{ id: "ans-original", label: "Phone original checksum", value: "7F3A-09C2" }],
       suspicion: -8,
       requires: ["rec:maricel-registry"],
       jensen: "The jacket does not change. The jacket is the one constant. Thank you for noticing.",
@@ -141,11 +133,11 @@ export const maricelDizon: CaseDef = {
       keywords: ["epr-250318-2207", "250318", "2207", "photo registry", "registry", "maricel", "dizon", "maricel dizon"],
       facts: [
         { id: "reg-capture", label: "Capture", value: "March 18, 2025, 15:02 PT" },
-        { id: "reg-location", label: "Location", value: "San Jose McEnery Convention Center, GTC 2025 selfie line" },
+        { id: "reg-location", label: "Location", value: "GTC 2025 selfie line, San Jose" },
         { id: "reg-subject", label: "Subject tagged", value: "Attendee, pass GTC25-118034" },
         { id: "reg-checksum", label: "Original capture checksum", value: "7F3A-09C2" },
       ],
-      body: "Registered by the GTC 2025 event photography team. Selfie line throughput that hour: 240 attendees. Note appended this morning: copies of this photo submitted to RPC-7 must match the original checksum or be explained.",
+      body: "Registered by the GTC 2025 event photographers. Selfie line throughput that hour: 240 attendees.",
     },
     {
       id: "maricel-attendee25",
@@ -155,7 +147,7 @@ export const maricelDizon: CaseDef = {
       facts: [
         { id: "att-name", label: "Registered name", value: "Maricel Dizon" },
         { id: "att-affil", label: "Affiliation", value: "Santa Teresa Regional Medical Center" },
-        { id: "att-type", label: "Pass type", value: "Exhibit Hall day pass, March 18, 2025 (raffle transfer)" },
+        { id: "att-type", label: "Pass type", value: "Day pass, March 18, 2025 (raffle transfer)" },
       ],
     },
   ],
@@ -172,7 +164,7 @@ export const maricelDizon: CaseDef = {
       id: "d-checksum",
       facts: ["reg-checksum", "scan-print-checksum"],
       kind: "explained",
-      note: "The print was edited after capture, so its checksum differs from the original. Directive 3-A: the hash certifies the capture event, not the pixels.",
+      note: "The print was edited after capture, so its checksum differs. Directive 3-A: the hash certifies the capture, not the pixels.",
       suspicion: 0,
     },
     {
@@ -187,7 +179,7 @@ export const maricelDizon: CaseDef = {
       id: "d-print-vs-phone",
       facts: ["scan-print-checksum", "ans-original"],
       kind: "explained",
-      note: "Two different checksums: the printed copy is the filtered edit, the phone file is the untouched original. Only the original has to match the registry, and it does.",
+      note: "The print is the filtered edit, the phone file is the original. Only the original must match the registry, and it does.",
       suspicion: -2,
     },
     {
@@ -260,8 +252,8 @@ export const maricelDizon: CaseDef = {
       kind: "ai-artifact",
       title: "Generative edit detected on the print",
       description:
-        "Skin retouching and a sixth finger on the subject's left hand, both from the Lumina Glow v8.2 'Radiance' preset. Jensen's face and jacket are untouched. The background crowd is untouched. Whoever edited this cared only about her under-eyes.",
-      facts: [{ id: "scan-print-checksum", label: "Print checksum", value: "0B44-E1D7 (does not match original)" }],
+        "Lumina Glow 'Radiance' preset: smoothed skin and a sixth finger on her left hand. Jensen is untouched. The editor cared only about her under-eyes.",
+      facts: [{ id: "scan-print-checksum", label: "Print checksum", value: "0B44-E1D7" }],
       suspicion: 15,
     },
   ],
@@ -269,16 +261,16 @@ export const maricelDizon: CaseDef = {
   jensenIntro: "She is looking at me like a chart. Not a stock chart. A medical chart.",
   truth: "innocent",
   hiddenTruth:
-    "Exactly who she says she is. Maricel met Jensen for nine seconds in 2025, the event photographer registered the shot, and two years later she ran the photo through a beauty app before printing it. The app smoothed her skin and gave her a sixth finger. She did not notice because she was post-shift and the finger is very well blended.",
+    "Exactly who she says. The 2025 selfie is real and registered. A beauty app added the sixth finger, and she was too post-shift to notice.",
   solution: {
     clues: ["rec:maricel-registry", "d:d-original", "d:d-subject", "d:d-date", "d:d-hash-rule"],
     redHerrings: ["scan:sixth-finger", "d:d-fingers", "d:d-checksum"],
     explanation:
-      "The print is edited, and the scan proves it, but Directive 3-A says the hash certifies the capture, not the pixels. Search the hash: the registry entry exists, is tagged to pass GTC25-118034 (her pass), and is dated March 18, 2025, the only day that pass was valid. Ask for the original and its checksum matches the registry exactly. The sixth finger is a beauty filter, not a forgery: a fake would need a registry entry, and hers has one.",
+      "The scan proves the print is edited, but Directive 3-A certifies the capture, not the pixels. The hash is in the registry, tagged to her own pass, on the only day that pass was valid. Her phone original matches the registry checksum. A forgery would have no registry entry. Hers does.",
   },
   onAccept: {
     headline: "DECAF ACHIEVED",
-    text: "Maricel gets her signature and takes Jensen's blood pressure on the way to the coffee cart: 141 over 92. She schedules a follow-up for Friday and circles the sixth finger in Sharpie with the note 'not real, unlike your hypertension'.",
+    text: "Maricel gets her signature and takes Jensen's blood pressure at the coffee cart. She circles the sixth finger: 'not real, unlike your hypertension.'",
   },
   onReject: {
     headline: "PATIENT REFUSED TREATMENT",

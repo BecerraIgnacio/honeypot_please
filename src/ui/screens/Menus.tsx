@@ -78,13 +78,13 @@ export function Achievements() {
   );
 }
 
-const STEPS: [string, string][] = [
-  ["Read her papers.", "Click a document on the pile to open it. On a big screen you can drag the sheets around the desk. Every label and value on paper is a fact."],
-  ["Compare two facts.", "Click any two facts, from her claims, a document, an answer, a database record or a directive. Hit COMPARE. The terminal tells you if they contradict, match, or have an innocent explanation. Findings land in the notebook."],
-  ["Interrogate.", "Ask questions from the terminal. Some only unlock after you have read the right document or pulled the right record. They pulse when they do."],
-  ["Search the database.", "Names, badge numbers, firms, phone numbers. An empty search lists every directive in force. Dolores adds new ones every morning and the old ones never go away."],
-  ["Scan, sparingly.", "Two advanced scans per shift. The x-ray sees what she did not declare."],
-  ["Stamp it.", "Press and hold ACCEPT or REJECT. Accept one spy and the run ends: HONEYPOTTED. Reject too many innocents and Romantic Stability hits zero: romantically bankrupt."],
+const STEPS = [
+  "Read her claims and papers. Every label and value is a fact.",
+  "Pick any two facts and COMPARE. Contradictions are evidence.",
+  "Ask questions. Some unlock after the right document or record.",
+  "Search the database. Directives pile up and never expire.",
+  "Scan sparingly: two x-rays per shift.",
+  "Hold ACCEPT or REJECT. Let one spy in and it is over.",
 ];
 
 export function HowTo() {
@@ -92,25 +92,14 @@ export function HowTo() {
     <Shell title="How to play" kicker="Orientation pack · RPC-7">
       <div className="grid gap-5 md:grid-cols-[1fr_220px]">
         <Paper>
-          <p className="font-mono text-sm leading-relaxed">
-            You are the last line between the world&apos;s most valuable man and everyone who wants five minutes of his time. Most of them want coffee. Some of them want the Rubin roadmap. They all have a lanyard.
-          </p>
-          <ol className="mt-4 flex flex-col gap-3">
-            {STEPS.map(([h, t], i) => (
-              <li key={h} className="flex gap-3">
+          <ol className="flex flex-col gap-3">
+            {STEPS.map((t, i) => (
+              <li key={t} className="flex gap-3">
                 <span className="font-display text-2xl leading-none text-[var(--red)]">{i + 1}</span>
-                <span className="text-sm leading-relaxed">
-                  <b>{h}</b> {t}
-                </span>
+                <span className="text-sm leading-relaxed">{t}</span>
               </li>
             ))}
           </ol>
-          <p className="mt-4 font-mono text-sm leading-relaxed">
-            Nervous, foreign, gorgeous or brilliant proves nothing. The suspicion meter is a vibe, not a verdict. Contradictions are evidence. Everything else is a mood.
-          </p>
-          <p className="mt-3 text-xs opacity-70">
-            Keys: Tab to move, Enter or Space to press, hold Space on a stamp to decide, Esc to put a sheet back, 1 2 3 to switch sections on small screens.
-          </p>
         </Paper>
         <div className="flex flex-col items-center gap-2">
           <JensenFace mood="wary" size={160} />

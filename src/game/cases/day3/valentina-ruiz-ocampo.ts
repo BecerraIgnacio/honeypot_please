@@ -8,9 +8,8 @@ export const valentinaRuizOcampo: CaseDef = {
     name: "Valentina Ruiz Ocampo",
     nationality: "Argentine",
     occupation: "Firmware engineer, Pampa Microcontroladores",
-    statedReason:
-      "Wants to show Jensen that her GTC pass now runs Doom, then take him to a parrilla 'with real fire, not ray-traced fire'.",
-    bio: "Writes firmware for soil-moisture sensors in Córdoba. Got bored in the keynote overflow line and ported Doom to the e-ink display on her GTC smart pass. Reported the hole at 07:58 this morning. Extremely proud of the frame rate: 2 fps.",
+    statedReason: "Show Jensen her pass runs Doom. Then a parrilla, 'real fire, not ray-traced'.",
+    bio: "Writes soil-sensor firmware in Córdoba. Bored in the keynote overflow line, she ported Doom to her smart pass. Very proud of the 2 fps.",
     portrait: {
       kind: "human",
       skin: 3,
@@ -26,14 +25,14 @@ export const valentinaRuizOcampo: CaseDef = {
   claims: [
     { id: "c-name", label: "Name", value: "Valentina Ruiz Ocampo" },
     { id: "c-employer", label: "Employer", value: "Pampa Microcontroladores, Córdoba" },
-    { id: "c-reported", label: "Disclosure", value: "Reported the pass vulnerability to GTC Security at 07:58 PT today" },
+    { id: "c-reported", label: "Reported pass bug at", value: "March 17, 2027, 07:58 PT" },
     { id: "c-request", label: "Request", value: "Dinner at a parrilla. She pays. He brings the jacket." },
   ],
   documents: [
     {
       id: "smart-pass",
       kind: "conference-pass",
-      title: "GTC 2027 Smart Pass (e-ink, currently running Doom)",
+      title: "GTC 2027 Smart Pass (now running Doom)",
       issuer: "NVIDIA GTC Registration",
       facts: [
         { id: "pass-front", label: "E-ink front", value: "Pass number covered by Doom HUD ('HEALTH 100%  AMMO 50')" },
@@ -41,7 +40,7 @@ export const valentinaRuizOcampo: CaseDef = {
         { id: "pass-name", label: "Name (back)", value: "Valentina Ruiz Ocampo" },
         { id: "pass-firmware", label: "Firmware", value: "v2.1-doomguy (factory: v2.1)" },
       ],
-      body: "The front panel refreshes every half second with a satisfying crunch. An imp is visible where her photo used to be. She has taped a tiny D-pad made of tactile switches to the lanyard clip.",
+      body: "An imp is visible where her photo used to be. A tiny D-pad of tactile switches is taped to the lanyard clip.",
       stamp: "MODIFIED",
     },
     {
@@ -69,12 +68,12 @@ export const valentinaRuizOcampo: CaseDef = {
     {
       id: "disclosure",
       kind: "personal-note",
-      title: "Printed email: 'Responsible disclosure: your badges run Doom'",
+      title: "Printed email: 'Your badges run Doom'",
       facts: [
         { id: "note-ticket", label: "Ticket number in reply", value: "GTCSEC-0317-004" },
         { id: "note-time", label: "Sent", value: "March 17, 2027, 07:58 PT" },
       ],
-      body: "'Hi! Your smart pass debug pads are labeled in the public FCC photos and the password is gtc2027. I changed only the display. I did NOT touch NFC (bold, two languages: NO TOQUÉ EL NFC). Attached: video at 2 fps. Please do not arrest me, I have a dinner to plan.'",
+      body: "'Hi! Your pass debug pads are labeled in the public FCC photos and the password is gtc2027. I changed only the display. I did NOT touch NFC. Please do not arrest me, I have a dinner to plan.'",
     },
   ],
   questions: [
@@ -82,16 +81,16 @@ export const valentinaRuizOcampo: CaseDef = {
       id: "q-doom",
       prompt: "Why is your pass running Doom?",
       answer:
-        "Because it could. It has a 48 MHz microcontroller and an e-ink panel that refreshes if you ask nicely. I spent three hours in the overflow line yesterday. A person has to do something with her hands.",
+        "Because it could. 48 MHz microcontroller, an e-ink panel that refreshes if you ask nicely, three hours in the overflow line. A person has to do something with her hands.",
       suspicion: 5,
-      jensen: "It runs Doom. On a badge. At two frames per second. I have built AI factories and I have never been this jealous.",
+      jensen: "It runs Doom. On a badge. I have built AI factories and I have never been this jealous.",
     },
     {
       id: "q-access",
       prompt: "Can it open doors now?",
       answer:
         "No. I changed the display only. The NFC chip is a separate part and I didn't go near it. I wrote that in the report in bold, in two languages, in case one of them was busy.",
-      facts: [{ id: "ans-scope", label: "What she modified (her account)", value: "Display only. NFC access chip untouched." }],
+      facts: [{ id: "ans-scope", label: "What she changed (hers)", value: "Display only. NFC access chip untouched." }],
       suspicion: -5,
     },
     {
@@ -110,13 +109,6 @@ export const valentinaRuizOcampo: CaseDef = {
         "At work? Our chips have 256 kilobytes of RAM. We dream of VRAM. At home, a 3060. It's fine. It's family. It's the cousin who always shows up.",
       suspicion: -3,
       jensen: "A 3060. Humble. Honest. Reliable. A golden retriever with tensor cores.",
-    },
-    {
-      id: "q-why",
-      prompt: "Why Jensen?",
-      answer:
-        "Because he'll understand that two frames per second on an e-ink badge is a miracle. My mother thinks it's a broken calculator. My ex thought it was a cry for help. It's a cry for dinner.",
-      suspicion: -2,
     },
     {
       id: "q-bounty",
@@ -142,7 +134,7 @@ export const valentinaRuizOcampo: CaseDef = {
     {
       id: "valentina-incident",
       category: "incident",
-      title: "GTCSEC-0317-004: Responsible disclosure, smart pass firmware",
+      title: "GTCSEC-0317-004: Smart pass disclosure",
       keywords: ["gtcsec-0317-004", "0317-004", "doom", "smart pass", "e-ink", "disclosure", "ruiz", "ruiz ocampo", "gtc2027"],
       facts: [
         { id: "inc-ticket", label: "Ticket", value: "GTCSEC-0317-004" },
@@ -166,7 +158,7 @@ export const valentinaRuizOcampo: CaseDef = {
       id: "d-pass-front",
       facts: ["pass-front", "att-num"],
       kind: "explained",
-      note: "The e-ink front no longer shows a pass number because a Doom HUD is drawn over it. The printed number on the back is intact and registered.",
+      note: "A Doom HUD covers the e-ink pass number. The printed number on the back is intact and registered.",
       suspicion: -2,
     },
     {
@@ -233,7 +225,7 @@ export const valentinaRuizOcampo: CaseDef = {
       kind: "clean",
       title: "Scan complete: one (1) Doom WAD",
       description:
-        "The pass contains the Doom shareware episode (2.1 MB) and nothing else. No transmitters, no hidden storage, no exfiltration. The scanner operator reached E1M3 before anyone noticed. Recommend not spending the scan budget like that again.",
+        "The Doom shareware episode (2.1 MB) and nothing else. No transmitters, no hidden storage. The operator reached E1M3 before anyone noticed.",
       suspicion: -5,
     },
   ],
@@ -249,12 +241,12 @@ export const valentinaRuizOcampo: CaseDef = {
   ],
   truth: "innocent",
   hiddenTruth:
-    "A bored firmware engineer with a soldering habit and excellent manners. She found the debug password in public FCC photos, swapped the display firmware for Doom, left the access chip alone, and reported it all before breakfast. Her bounty was one t-shirt. She considers this a fair price.",
+    "A bored firmware engineer with manners. She swapped the display for Doom, left the access chip alone, and reported it before breakfast.",
   solution: {
     clues: ["rec:valentina-incident", "d:d-ticket", "d:d-scope", "d:d-firmware", "d:d-pass-number"],
     redHerrings: ["doc:smart-pass", "q:q-debug", "scan:wad"],
     explanation:
-      "A tampered security document and an applicant who knows an internal password look terrible. Then the records take over: the printed number on her pass matches her registration, and her disclosure email carries ticket GTCSEC-0317-004, which GTC Security logged at 07:58 and verified as display-only with the NFC access chip untouched. The password was legible in public FCC photos. The scan finds Doom and only Doom: a spent scan.",
+      "A tampered security document and an applicant who knows a password look terrible. Then the records take over: her pass number matches her registration, and ticket GTCSEC-0317-004 was logged at 07:58 and verified display-only, NFC untouched. The password was in public FCC photos. The scan finds Doom and only Doom.",
   },
   onAccept: {
     headline: "E1M1: DINNER",
